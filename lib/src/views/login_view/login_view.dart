@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/common/styles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/views/login_view/login_controller.dart';
 
 class LoginView extends StatefulWidget {
@@ -23,7 +24,7 @@ class _LoginViewState extends State<LoginView> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Login'),
+            title: Text(AppLocalizations.of(context)!.login),
             centerTitle: true,
             automaticallyImplyLeading: false,
           ),
@@ -61,7 +62,7 @@ class _LoginViewState extends State<LoginView> {
                           borderSide: const BorderSide(color: red)
                         ), 
                         filled: true,
-                        hintText: 'Email',
+                        hintText: AppLocalizations.of(context)!.email,
                         hintStyle: const TextStyle(color: grey),
                         contentPadding: const EdgeInsets.only(
                           bottom: 10.0, 
@@ -101,7 +102,7 @@ class _LoginViewState extends State<LoginView> {
                           borderSide: const BorderSide(color: red)
                         ), 
                         filled: true,
-                        hintText: 'Password',
+                        hintText: AppLocalizations.of(context)!.password,
                         hintStyle: const TextStyle(color: grey),
                         contentPadding: const EdgeInsets.only(
                           bottom: 10.0, 
