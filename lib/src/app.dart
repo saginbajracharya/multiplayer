@@ -50,8 +50,8 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
+          theme: ThemeData(useMaterial3:true),
+          darkTheme: ThemeData.dark(useMaterial3:true),
           themeMode: settingsController.themeMode,
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.

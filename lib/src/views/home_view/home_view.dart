@@ -48,6 +48,7 @@ class _HomeViewState extends State<HomeView> {
             :ListView.builder(
               itemCount: homeCon.userList.length,
               shrinkWrap:  true,
+              padding: const EdgeInsets.all(10.0),
               itemBuilder: (context, index) {
                 final user = homeCon.userList[index];
                 return ListTile(

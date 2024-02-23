@@ -29,7 +29,7 @@ class _LoginViewState extends State<LoginView> {
           ),
           body: Center(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(10.0),
               child: Form(
                 key: loginCon.formKey,
                 child: Column(
@@ -61,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
                           borderSide: const BorderSide(color: red)
                         ), 
                         filled: true,
-                        hintText: 'Username/Email',
+                        hintText: 'Email',
                         hintStyle: const TextStyle(color: grey),
                         contentPadding: const EdgeInsets.only(
                           bottom: 10.0, 
