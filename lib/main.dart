@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:get_storage/get_storage.dart';
 import 'src/app.dart';
 import 'src/views/settings/settings_controller.dart';
 import 'src/views/settings/settings_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await GetStorage.init();
   // Put game into full screen mode on mobile devices.
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   // Lock the game to portrait mode on mobile devices.
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

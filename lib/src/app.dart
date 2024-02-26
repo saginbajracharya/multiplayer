@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
 import 'package:multiplayer/src/views/login_view/login_view.dart';
+import 'package:multiplayer/src/views/splash_view/splash_view.dart';
 
 import 'views/sample_feature/sample_item_details_view.dart';
 import 'views/sample_feature/sample_item_list_view.dart';
@@ -55,8 +56,10 @@ class MyApp extends StatelessWidget {
                   case HomeView.routeName:
                     return const HomeView();
                   case LoginView.routeName:
-                  default:
                     return const LoginView();
+                  case SplashView.routeName:
+                  default:
+                    return const SplashView();
                 }
               },
             );

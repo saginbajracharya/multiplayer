@@ -1,2 +1,13 @@
 Fb 
 - Realtime
+
+
+
+i want to make a app in flutter 
+- i have created a login api with user table and can do (CRUD) opration
+- i have set up the login par now inside i want to make something a simple multiplayer type game 
+-my friend is making the api part ,but he is a beginner so simple apis only
+-how can i make like a game where 2 player or more plays togather
+- when both player is logged in then they will appear in home page as a character something like this
+-how can i show the movent of player 1 and player two for both player i dont know how this works in flutter
+ 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "594742519958",
+    "project_id": "multiplayer-50f58",
+    "storage_bucket": "multiplayer-50f58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594742519958:android:62bb71ef4dbcb6cdc4fab7",
+        "android_client_info": {
+          "package_name": "com.dlofistudio.multiplayer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgJqchyjleg3AsydhgokAIAHmhrFxYZME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

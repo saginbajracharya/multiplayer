@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
-import 'package:multiplayer/src/views/login_view/login_view.dart';
+import 'package:multiplayer/src/views/login_view/loginout_controller.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -15,6 +15,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final HomeController homeCon = Get.put(HomeController());
+  final LoginoutController loginoutCon = Get.put(LoginoutController());
 
   @override
   void initState() {
@@ -27,6 +28,8 @@ class _HomeViewState extends State<HomeView> {
     return PopScope(
       canPop: false,
       child: Scaffold(
+        extendBody: false,
+        extendBodyBehindAppBar: false,
         appBar: AppBar(
           title: const Text('Home'),
           centerTitle: true,
@@ -34,7 +37,7 @@ class _HomeViewState extends State<HomeView> {
           actions: [
             IconButton(
               onPressed: (){
-                Get.toNamed(LoginView.routeName);
+                loginoutCon.logout();
               }, 
               icon: const Icon(Icons.logout_sharp),
             )

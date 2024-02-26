@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:multiplayer/src/views/login_view/login_controller.dart';
+import 'package:multiplayer/src/views/login_view/loginout_controller.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
-  static const routeName = '/';
+  static const routeName = '/login';
 
   @override
   State<LoginView> createState() => _LoginViewState();
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginController loginCon = Get.put(LoginController());
+  final LoginoutController loginCon = Get.put(LoginoutController());
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +28,8 @@ class _LoginViewState extends State<LoginView> {
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
+          extendBody: false,
+          extendBodyBehindAppBar: false,
           appBar: AppBar(
             title: Text(AppLocalizations.of(context)!.login),
             centerTitle: true,
@@ -136,7 +143,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     const SizedBox(height: 16.0),
                     GetBuilder(
-                      init: LoginController(),
+                      init: LoginoutController(),
                       builder: (context) {
                         return SizedBox(
                           width: double.infinity,

@@ -22,6 +22,14 @@ dependencies:
   get_storage: ^2.1.1
   # flutter toast
   fluttertoast: ^8.2.4
+  #Firebase
+  firebase_core: ^2.25.4
+  firebase_auth: ^4.17.4
+  cloud_firestore: ^4.15.5
+  firebase_storage: ^11.1.0
+  firebase_messaging: ^14.7.16
+  firebase_analytics: ^10.8.6
+
   # UI Design
 
 dev_dependencies:
