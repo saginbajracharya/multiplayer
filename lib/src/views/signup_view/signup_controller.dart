@@ -12,7 +12,7 @@ class SignUpController extends GetxController{
   final email               = TextEditingController();
   final password            = TextEditingController();
   bool showPassword         = true;
-  RxBool isProcessingSignup  = false.obs;
+  RxBool isProcessingSignup = false.obs;
 
   signup()async{
     if(isProcessingSignup.value) {
@@ -46,5 +46,4 @@ class SignUpController extends GetxController{
       }
     }
   }
-  
 }

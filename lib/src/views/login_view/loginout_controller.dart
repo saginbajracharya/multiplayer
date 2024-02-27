@@ -10,7 +10,7 @@ import 'package:multiplayer/src/widgets/toast_message_widget.dart';
 
 class LoginoutController extends GetxController{
   final apiendpoint         = ApiCalls();
-  final formKey             = GlobalKey<FormState>();
+  final loginformKey        = GlobalKey<FormState>();
   final email               = TextEditingController();
   final password            = TextEditingController();
   bool showPassword         = true;
@@ -32,7 +32,7 @@ class LoginoutController extends GetxController{
           }
         );
         if(response!=null){
-          FirestoreServices.updateUserStatus(true,email.text.trim());
+          FirestoreServices.updateUserStatus(true,email.text.trim(),false);
           await write(StorageKeys.email, response['user']['email']);
           await write(StorageKeys.apiToken, response['token']);
           Get.toNamed(HomeView.routeName);
@@ -52,7 +52,7 @@ class LoginoutController extends GetxController{
   }
 
   logout()async{
-    FirestoreServices.updateUserStatus(false,email.text.trim());
+    FirestoreServices.updateUserStatus(false,email.text.trim(),false);
     write(StorageKeys.email, '');
     write(StorageKeys.apiToken, '');
     Get.toNamed(LoginView.routeName);

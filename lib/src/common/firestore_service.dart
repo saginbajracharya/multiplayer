@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
+import '../models/user_model.dart';
+
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class FirestoreServices {
@@ -24,8 +26,17 @@ class FirestoreServices {
     }
   }
 
+  //List All Online Users
+  static Stream<List<UserFireBase>> getAllOnlineUsers() {
+    return FirebaseFirestore.instance
+    .collection('users')
+    .where('isOnline', isEqualTo: true)
+    .snapshots()
+    .map((snapshot) => snapshot.docs.map((doc) => UserFireBase.fromSnapshot(doc)).toList());
+  }
+
   // Update user's online status and add user if not present
-  static Future<void> updateUserStatus(bool isOnline, String email) async {
+  static Future<void> updateUserStatus(bool isOnline, String email,isReady) async {
     try {
       if (email != '') {
         var userDoc = firestore.collection('users').doc(email);
@@ -34,10 +45,12 @@ class FirestoreServices {
           await userDoc.set({
             'isOnline': isOnline,
             'email': email,
+            'isReady': isReady,
           });
         } else {
           await userDoc.update({
             'isOnline': isOnline,
+            'isReady': isReady,
           });
         }
       }
@@ -47,6 +60,4 @@ class FirestoreServices {
       }
     }
   }
-
-  
 }

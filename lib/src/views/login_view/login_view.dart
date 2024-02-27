@@ -50,7 +50,7 @@ class _LoginViewState extends State<LoginView> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Form(
-                  key: loginCon.formKey,
+                  key: loginCon.loginformKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -182,7 +182,7 @@ class _LoginViewState extends State<LoginView> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                if(loginCon.formKey.currentState!.validate()){
+                                if(loginCon.loginformKey.currentState!.validate()){
                                   loginCon.login();
                                 }
                               },

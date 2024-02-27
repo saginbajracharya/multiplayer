@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 List<UserModel> userModelFromJson(String str) => List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
@@ -42,17 +41,37 @@ class UserModel {
   };
 }
 
-class User {
-  final String name;
+class UserFb {
   final String email;
+  final bool isOnline;
+  final bool isReady;
 
-  User({required this.name, required this.email});
+  UserFb({required this.email, required this.isOnline,required this.isReady});
 
-  factory User.fromFirestore(DocumentSnapshot doc) {
+  factory UserFb.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    return User(
-      name: data['name'] ?? '',
+    return UserFb(
       email: data['email'] ?? '',
+      isOnline: data['isOnline'] ?? false,
+      isReady: data['isReady'] ?? false,
     );
   }
 }
+
+class UserFireBase {
+  final String email;
+  final bool isOnline;
+  final bool isReady;
+
+  UserFireBase({required this.email, required this.isOnline, required this.isReady});
+
+  factory UserFireBase.fromSnapshot(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    return UserFireBase(
+      email: data['email'] ?? '', 
+      isOnline: data['isOnline'] ?? false,
+      isReady: data['isReady'] ?? false,
+    );
+  }
+}
+
