@@ -27,9 +27,8 @@ class FirestoreServices {
   // Update user's online status and add user if not present
   static Future<void> updateUserStatus(bool isOnline, String email) async {
     try {
-      var user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        var userDoc = firestore.collection('users').doc(user.uid);
+      if (email != '') {
+        var userDoc = firestore.collection('users').doc(email);
         var docSnapshot = await userDoc.get();
         if (!docSnapshot.exists) {
           await userDoc.set({
@@ -48,4 +47,6 @@ class FirestoreServices {
       }
     }
   }
+
+  
 }

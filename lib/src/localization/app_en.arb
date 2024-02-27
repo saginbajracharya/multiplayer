@@ -1,6 +1,8 @@
 {
   "appTitle": "MULTI\nPLAYER",
-  "login"   : "Login",
+  "name"    : "Name",
   "email"   : "Email",
-  "password": "Password"
+  "password": "Password",
+  "login"   : "Login",
+  "home"    : "HOME"
 }

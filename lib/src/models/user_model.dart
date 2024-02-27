@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 List<UserModel> userModelFromJson(String str) => List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
 
 String userModelToJson(List<UserModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -38,4 +40,19 @@ class UserModel {
     "created_at": createdAt,
     "updated_at": updatedAt,
   };
+}
+
+class User {
+  final String name;
+  final String email;
+
+  User({required this.name, required this.email});
+
+  factory User.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return User(
+      name: data['name'] ?? '',
+      email: data['email'] ?? '',
+    );
+  }
 }
