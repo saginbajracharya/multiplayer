@@ -10,7 +10,6 @@ import 'package:multiplayer/src/widgets/toast_message_widget.dart';
 
 class LoginoutController extends GetxController{
   final apiendpoint         = ApiCalls();
-  final loginformKey        = GlobalKey<FormState>();
   final email               = TextEditingController();
   final password            = TextEditingController();
   bool showPassword         = true;

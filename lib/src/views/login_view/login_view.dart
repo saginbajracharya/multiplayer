@@ -16,7 +16,8 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final LoginoutController loginCon = Get.put(LoginoutController());
-  double opacity = 0.0;
+  final loginformKey                = GlobalKey<FormState>();
+  double opacity                    = 0.0;
   
   @override
   void initState() {
@@ -50,7 +51,7 @@ class _LoginViewState extends State<LoginView> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Form(
-                  key: loginCon.loginformKey,
+                  key: loginformKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -182,7 +183,7 @@ class _LoginViewState extends State<LoginView> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                if(loginCon.loginformKey.currentState!.validate()){
+                                if(loginformKey.currentState!.validate()){
                                   loginCon.login();
                                 }
                               },
