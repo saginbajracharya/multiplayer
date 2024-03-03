@@ -24,47 +24,49 @@ class MyApp extends StatelessWidget {
     return ListenableBuilder(
       listenable: settingsController,
       builder: (BuildContext context, Widget? child) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en', ''), // English, no country code
-            Locale('ne', ''), // Nepali, no country code
-          ],
-          fallbackLocale: const Locale('en', ''),
-          onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
-          theme: ThemeData(useMaterial3:true),
-          darkTheme: ThemeData.dark(useMaterial3:true),
-          themeMode: settingsController.themeMode,
-          onGenerateRoute: (RouteSettings routeSettings) {
-            return MaterialPageRoute<void>(
-              settings: routeSettings,
-              builder: (BuildContext context) {
-                switch (routeSettings.name) {
-                  case SettingsView.routeName:
-                    return SettingsView(controller: settingsController);
-                  case HomeView.routeName:
-                    return const HomeView();
-                  case LobbyView.routeName:
-                    return const LobbyView();
-                  case LoginView.routeName:
-                    return const LoginView();
-                  case SignUpView.routeName:
-                    return const SignUpView();
-                  case Level1.routeName:
-                    return const Level1();
-                  case SplashView.routeName:
-                  default:
-                    return const SplashView();
-                }
-              },
-            );
-          },
+        return SafeArea(
+          child: GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en', ''), // English, no country code
+              Locale('ne', ''), // Nepali, no country code
+            ],
+            fallbackLocale: const Locale('en', ''),
+            onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
+            theme: ThemeData(useMaterial3:true),
+            darkTheme: ThemeData.dark(useMaterial3:true),
+            themeMode: settingsController.themeMode,
+            onGenerateRoute: (RouteSettings routeSettings) {
+              return MaterialPageRoute<void>(
+                settings: routeSettings,
+                builder: (BuildContext context) {
+                  switch (routeSettings.name) {
+                    case SettingsView.routeName:
+                      return SettingsView(controller: settingsController);
+                    case HomeView.routeName:
+                      return const HomeView();
+                    case LobbyView.routeName:
+                      return const LobbyView();
+                    case LoginView.routeName:
+                      return const LoginView();
+                    case SignUpView.routeName:
+                      return const SignUpView();
+                    case Level1.routeName:
+                      return const Level1();
+                    case SplashView.routeName:
+                    default:
+                      return const SplashView();
+                  }
+                },
+              );
+            },
+          ),
         );
       },
     );

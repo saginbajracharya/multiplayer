@@ -39,6 +39,7 @@ class _LoginViewState extends State<LoginView> {
             centerTitle: true,
             automaticallyImplyLeading: true,
             elevation: 0,
+            surfaceTintColor: transparent
           ),
           body: SingleChildScrollView(
             child: Center(

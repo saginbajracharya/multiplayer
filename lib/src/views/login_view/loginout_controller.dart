@@ -54,8 +54,10 @@ class LoginoutController extends GetxController{
   logout()async{
     final HomeController homeCon = Get.find();
     FirestoreServices.updateUserStatus(false,email.text.trim(),false);
+    write(StorageKeys.usernameKey, '');
     write(StorageKeys.emailKey, '');
     write(StorageKeys.apiTokenKey, '');
+    homeCon.username.value="";
     homeCon.checkLoginToken();
     Get.toNamed(HomeView.routeName);
   }
