@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/common/audio_manager.dart';
+import 'package:multiplayer/src/common/read_write_storage.dart';
 import 'package:multiplayer/src/views/splash_view/splash_controller.dart';
 
 class SplashView extends StatefulWidget {
@@ -20,7 +21,10 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    AudioManager().play('assets/audio/theme_song.mp3');
+    dynamic audioOn = read(StorageKeys.audioOnKey)==""?true:read(StorageKeys.audioOnKey);
+    if(audioOn){
+      AudioManager().play('assets/audio/theme_song.mp3');
+    }
     // Start the animation
     Future.delayed(const Duration(seconds: 1), () {
       setState(() {

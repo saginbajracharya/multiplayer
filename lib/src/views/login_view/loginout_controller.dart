@@ -32,8 +32,9 @@ class LoginoutController extends GetxController{
         );
         if(response!=null){
           FirestoreServices.updateUserStatus(true,email.text.trim(),false);
-          await write(StorageKeys.email, response['user']['email']);
-          await write(StorageKeys.apiToken, response['token']);
+          await write(StorageKeys.usernameKey, response['user']['email']);
+          await write(StorageKeys.emailKey, response['user']['email']);
+          await write(StorageKeys.apiTokenKey, response['token']);
           Get.toNamed(HomeView.routeName);
         }
         else{
@@ -53,8 +54,8 @@ class LoginoutController extends GetxController{
   logout()async{
     final HomeController homeCon = Get.find();
     FirestoreServices.updateUserStatus(false,email.text.trim(),false);
-    write(StorageKeys.email, '');
-    write(StorageKeys.apiToken, '');
+    write(StorageKeys.emailKey, '');
+    write(StorageKeys.apiTokenKey, '');
     homeCon.checkLoginToken();
     Get.toNamed(HomeView.routeName);
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multiplayer/src/common/audio_manager.dart';
 import 'package:multiplayer/src/common/constant.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
@@ -18,7 +19,6 @@ class HomeView extends StatefulWidget {
   @override
   State<HomeView> createState() => _HomeViewState();
 }
-
 class _HomeViewState extends State<HomeView> {
   final HomeController homeCon = Get.put(HomeController());
   final LoginoutController loginoutCon = Get.put(LoginoutController());
@@ -27,6 +27,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
+    homeCon.getUserName();
     // Start the animation
     homeCon.checkLoginToken();
     Future.delayed(const Duration(seconds: 1), () {
@@ -54,9 +55,9 @@ class _HomeViewState extends State<HomeView> {
             const LogoWidget(),
             const SizedBox(width: double.infinity),
             // Profile
-            const Column(
+            Column(
               children: [
-                Center(
+                const Center(
                   child: CircleAvatar(
                     radius: 50.0,
                     backgroundColor: gold,
@@ -68,19 +69,21 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical:10),
-                  child: Text(
-                    'PLAYER 1',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16
+                  padding: const EdgeInsets.symmetric(vertical:10),
+                  child: Obx(()=>
+                    Text(
+                      homeCon.username.value!=""?homeCon.username.value:'PLAYER 1',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16
+                      ),
                     ),
                   ),
                 )
               ],
             ),
             const SizedBox(width: double.infinity),
-            // Play Buttons
+            // Play/Login Buttons
             Obx(()=> 
               homeCon.isUserLoggedIn.value
               ? Column(
@@ -229,6 +232,23 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             const SizedBox(width: double.infinity),
+            Obx(()=>
+              IconButton(
+                onPressed: (){
+                  if(AudioManager().isPlaying.value){
+                    AudioManager().pause();
+                  }
+                  else{
+                    AudioManager().play('assets/audio/theme_song.mp3');
+                  }
+                },
+                icon: Icon(
+                AudioManager().isPlaying.value
+                ?Icons.music_note_outlined
+                :Icons.music_off
+                ),
+              ),
+            )
           ],
         )
       ),

@@ -6,7 +6,7 @@ import 'package:multiplayer/src/views/home_view/home_view.dart';
 class SplashController extends GetxController{
   
   checkAndNavigate()async{
-    String apiToken = await read(StorageKeys.apiToken.toString());
+    String apiToken = await read(StorageKeys.apiTokenKey.toString());
     log(apiToken);
     Get.toNamed(HomeView.routeName);
     // if(apiToken!= ''){

@@ -40,170 +40,172 @@ class _LobbyViewState extends State<LobbyView> {
           centerTitle: true,
           automaticallyImplyLeading: true,
         ),
-        body: GetBuilder(
-          init: LobbyController(),
-          builder: (context) {
-            return lobbyCon.isProcessingAllUsers.value
-            ?const Center(child: CircularProgressIndicator())
-            :StreamBuilder<List<UserFireBase>>(
-              stream: FirestoreServices.getAllOnlineUsers(), 
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SizedBox();
-                }
-                if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                }
-                else{
-                  final onlineUsers = snapshot.data;
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      //Players List
-                      GridView.builder(
-                        itemCount: onlineUsers.length,
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(10.0),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10.0,
-                          mainAxisSpacing: 10.0,
-                        ),
-                        itemBuilder: (context, index) {
-                          final user = onlineUsers[index];
-                          return Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  //Player Image
-                                  Image.network(
-                                    'https://picsum.photos/200?random=${100}',
-                                    fit: BoxFit.fill,
-                                  ),
-                                  //Email
-                                  Container(
-                                    padding: const EdgeInsets.all(5.0),
-                                    alignment: Alignment.bottomCenter,
-                                    decoration: BoxDecoration(
-                                      color: transparent.withOpacity(0.5),
-                                    ),
-                                    child: Text(user.email),
-                                  ),
-                                  //Ready Indicator
-                                  Positioned(
-                                    top: 10,
-                                    left: 10,
-                                    child: Container(
-                                      padding: const EdgeInsets.all(5.0),
-                                      decoration: BoxDecoration(
-                                        color: user.isReady?green:red,
-                                        borderRadius: BorderRadius.circular(5.0),
-                                      ),
-                                      child: Text(
-                                        user.isReady?'Ready':'Not Ready',
-                                        style: const TextStyle(color: white),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      Column(
-                        children: [
-                          //Ready Button
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
-                            child: ElevatedButton(
-                              onPressed: () async{
-                                currentUserEmail = await read(StorageKeys.email);
-                                currentUserDetails = onlineUsers.firstWhere(
-                                  (user) => user.email == currentUserEmail,
-                                );
-                                if (currentUserDetails.isReady) {
-                                  lobbyCon.updateUserReadyStatus(currentUserEmail, false);
-                                }
-                                else{
-                                  lobbyCon.updateUserReadyStatus(currentUserEmail, true);
-                                }
-                              },
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    side: const BorderSide(color: white),
-                                  ),
-                                ),
-                                backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                    if (states.contains(MaterialState.disabled)) {
-                                      return green.withOpacity(0.8); // Disabled color
-                                    }
-                                    return green.withOpacity(0.8); // Regular color
-                                  },
-                                ),
-                              ),
-                              child: lobbyCon.isUpdatingReady.value 
-                              ?const Center(
-                                child: SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator()
-                                )
-                              )
-                              :const Text('Ready'),
-                            ),
+        body: SafeArea(
+          child: GetBuilder(
+            init: LobbyController(),
+            builder: (context) {
+              return lobbyCon.isProcessingAllUsers.value
+              ?const Center(child: CircularProgressIndicator())
+              :StreamBuilder<List<UserFireBase>>(
+                stream: FirestoreServices.getAllOnlineUsers(), 
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox();
+                  }
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  }
+                  else{
+                    final onlineUsers = snapshot.data;
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        //Players List
+                        GridView.builder(
+                          itemCount: onlineUsers.length,
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(10.0),
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10.0,
+                            mainAxisSpacing: 10.0,
                           ),
-                          //Play Button
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
-                            child: ElevatedButton(
-                              onPressed: () async{
-                                Get.to(const Level1());
-                              },
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    side: const BorderSide(color: white),
-                                  ),
-                                ),
-                                backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                    if (states.contains(MaterialState.disabled)) {
-                                      return green.withOpacity(0.8); // Disabled color
-                                    }
-                                    return green.withOpacity(0.8); // Regular color
-                                  },
+                          itemBuilder: (context, index) {
+                            final user = onlineUsers[index];
+                            return Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    //Player Image
+                                    Image.network(
+                                      'https://picsum.photos/200?random=${100}',
+                                      fit: BoxFit.fill,
+                                    ),
+                                    //Email
+                                    Container(
+                                      padding: const EdgeInsets.all(5.0),
+                                      alignment: Alignment.bottomCenter,
+                                      decoration: BoxDecoration(
+                                        color: transparent.withOpacity(0.5),
+                                      ),
+                                      child: Text(user.email),
+                                    ),
+                                    //Ready Indicator
+                                    Positioned(
+                                      top: 10,
+                                      left: 10,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(5.0),
+                                        decoration: BoxDecoration(
+                                          color: user.isReady?green:red,
+                                          borderRadius: BorderRadius.circular(5.0),
+                                        ),
+                                        child: Text(
+                                          user.isReady?'Ready':'Not Ready',
+                                          style: const TextStyle(color: white),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              child: lobbyCon.isUpdatingReady.value 
-                              ?const Center(
-                                child: SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator()
+                            );
+                          },
+                        ),
+                        Column(
+                          children: [
+                            //Ready Button
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
+                              child: ElevatedButton(
+                                onPressed: () async{
+                                  currentUserEmail = await read(StorageKeys.emailKey);
+                                  currentUserDetails = onlineUsers.firstWhere(
+                                    (user) => user.email == currentUserEmail,
+                                  );
+                                  if (currentUserDetails.isReady) {
+                                    lobbyCon.updateUserReadyStatus(currentUserEmail, false);
+                                  }
+                                  else{
+                                    lobbyCon.updateUserReadyStatus(currentUserEmail, true);
+                                  }
+                                },
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      side: const BorderSide(color: white),
+                                    ),
+                                  ),
+                                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                      if (states.contains(MaterialState.disabled)) {
+                                        return green.withOpacity(0.8); // Disabled color
+                                      }
+                                      return green.withOpacity(0.8); // Regular color
+                                    },
+                                  ),
+                                ),
+                                child: lobbyCon.isUpdatingReady.value 
+                                ?const Center(
+                                  child: SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator()
+                                  )
                                 )
-                              )
-                              :const Text('Play'),
+                                :const Text('Ready'),
+                              ),
                             ),
-                          )
-                        ],
-                      )
-                    ],
-                  );
+                            //Play Button
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
+                              child: ElevatedButton(
+                                onPressed: () async{
+                                  Get.to(const Level1());
+                                },
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      side: const BorderSide(color: white),
+                                    ),
+                                  ),
+                                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                      if (states.contains(MaterialState.disabled)) {
+                                        return green.withOpacity(0.8); // Disabled color
+                                      }
+                                      return green.withOpacity(0.8); // Regular color
+                                    },
+                                  ),
+                                ),
+                                child: lobbyCon.isUpdatingReady.value 
+                                ?const Center(
+                                  child: SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator()
+                                  )
+                                )
+                                :const Text('Play'),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    );
+                  }
                 }
-              }
-            );
-          }
+              );
+            }
+          ),
         ),
       ),
     );

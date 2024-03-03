@@ -3,10 +3,11 @@ import 'package:get_storage/get_storage.dart';
 final box = GetStorage();
 
 class StorageKeys {
-  static const String username     = 'username';
-  static const String email        = 'email';
-  static const String isLoggedIn   = 'isLoggedIn';
-  static const String apiToken     = 'apiToken';
+  static const String usernameKey     = 'username';
+  static const String emailKey        = 'email';
+  static const String isLoggedInKey   = 'isLoggedIn';
+  static const String apiTokenKey     = 'apiToken';
+  static const String audioOnKey      = 'audioOn';
 }
 
 read(String storageName){
