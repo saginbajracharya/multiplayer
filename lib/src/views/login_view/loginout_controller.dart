@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:multiplayer/src/common/api_calls.dart';
 import 'package:multiplayer/src/common/firestore_service.dart';
 import 'package:multiplayer/src/common/read_write_storage.dart';
+import 'package:multiplayer/src/views/home_view/home_controller.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
-import 'package:multiplayer/src/views/login_view/login_view.dart';
 import 'package:multiplayer/src/widgets/toast_message_widget.dart';
 
 class LoginoutController extends GetxController{
@@ -24,7 +24,7 @@ class LoginoutController extends GetxController{
         isProcessingLogin.value = true;
         update();
         var response = await ApiCalls.apiPost(
-          '/api/login',
+          'api/login',
           {
             "email": email.text.trim(),
             "password": password.text.trim(),
@@ -51,9 +51,11 @@ class LoginoutController extends GetxController{
   }
 
   logout()async{
+    final HomeController homeCon = Get.find();
     FirestoreServices.updateUserStatus(false,email.text.trim(),false);
     write(StorageKeys.email, '');
     write(StorageKeys.apiToken, '');
-    Get.toNamed(LoginView.routeName);
+    homeCon.checkLoginToken();
+    Get.toNamed(HomeView.routeName);
   }
 }

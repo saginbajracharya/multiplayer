@@ -6,6 +6,55 @@ import 'package:multiplayer/src/widgets/toast_message_widget.dart';
 
 class ApiCalls{
 
+  static apiPostLeftToManage(apiPath,params) async {
+    try {
+      var response = await dio.post(apiPath, data: params);
+      // if (response.statusCode == 200|| response!=null) {
+      //   if (kDebugMode) {
+      //   }
+      //   return response;
+      // } else {
+      //   return null;
+      // }
+      return response;
+    } on DioException catch (e) {
+      if(e.response!=null){
+        if(apiPath == "api/check-login") { 
+          showToastMessage(e.response!.data['message'].toString());
+        }
+        else if(apiPath == "api/change-password") { 
+          showToastMessage(e.response!.data['message'].toString());
+        } 
+        else if(apiPath == "api/shipping") { 
+          if(e.response!.data['errors']!=null){
+            e.response!.data['errors'].forEach((key, value){
+              showToastMessage(e.response!.data['errors'][key][0]);
+            });
+          }
+        } 
+        else if(apiPath == "api/order"){
+          if(e.response!.data['errors']!=null){
+            e.response!.data['errors'].forEach((key, value){
+              showToastMessage(e.response!.data['errors'][key][0]);
+            });
+          }
+          else{
+            showToastMessage(e.response!.data['message'].toString());
+          }
+        } 
+        else if(e.response!.data.containsKey('errors')){
+          log(e.response!.data['errors'].toString());
+        }
+        else{
+          showToastMessage(e.response!.data['message'].toString());
+          log(e.response!.data['message'].toString());
+        }
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+  
   static apiPost(apiPath,params) async {
     try {
       var response = await dio.post(apiPath, data: params);

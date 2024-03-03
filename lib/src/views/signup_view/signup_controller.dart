@@ -22,12 +22,12 @@ class SignUpController extends GetxController{
       try{
         isProcessingSignup.value = true;
         update();
-        var response = await ApiCalls.apiPost(
-          '/api/users',
+        var response = await ApiCalls.apiPostLeftToManage(
+          'api/users',
           {
-            "name" : name.text.trim(),
-            "email": email.text.trim(),
-            "password": password.text.trim(),
+            "name" : name.text,
+            "email": email.text,
+            "password": password.text,
           }
         );
         if(response!=null){

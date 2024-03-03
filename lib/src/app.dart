@@ -1,18 +1,16 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get/get.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
+import 'package:multiplayer/src/views/level_view/level_1.dart';
+import 'package:multiplayer/src/views/lobby_view/lobby_view.dart';
 import 'package:multiplayer/src/views/login_view/login_view.dart';
+import 'package:multiplayer/src/views/settings/settings_view.dart';
 import 'package:multiplayer/src/views/signup_view/signup_view.dart';
 import 'package:multiplayer/src/views/splash_view/splash_view.dart';
+import 'package:multiplayer/src/views/settings/settings_controller.dart';
 
-import 'views/sample_feature/sample_item_details_view.dart';
-import 'views/sample_feature/sample_item_list_view.dart';
-import 'views/settings/settings_controller.dart';
-import 'views/settings/settings_view.dart';
-
-/// The Widget that configures your application.
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
@@ -50,16 +48,16 @@ class MyApp extends StatelessWidget {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
-                  case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
-                  case SampleItemListView.routeName:
-                    return const SampleItemListView();
                   case HomeView.routeName:
                     return const HomeView();
+                  case LobbyView.routeName:
+                    return const LobbyView();
                   case LoginView.routeName:
                     return const LoginView();
                   case SignUpView.routeName:
                     return const SignUpView();
+                  case Level1.routeName:
+                    return const Level1();
                   case SplashView.routeName:
                   default:
                     return const SplashView();

@@ -4,6 +4,7 @@ import 'package:multiplayer/src/common/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/views/login_view/loginout_controller.dart';
 import 'package:multiplayer/src/views/signup_view/signup_view.dart';
+import 'package:multiplayer/src/widgets/logo_widget.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -17,23 +18,16 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final LoginoutController loginCon = Get.put(LoginoutController());
   final loginformKey                = GlobalKey<FormState>();
-  double opacity                    = 0.0;
   
   @override
   void initState() {
     super.initState();
-    // Start the animation
-    Future.delayed(const Duration(seconds: 1), () {
-      setState(() {
-        opacity = 1.0;
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false,
+      canPop: true,
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
@@ -43,7 +37,7 @@ class _LoginViewState extends State<LoginView> {
           appBar: AppBar(
             // title: Text(AppLocalizations.of(context)!.login),
             centerTitle: true,
-            automaticallyImplyLeading: false,
+            automaticallyImplyLeading: true,
             elevation: 0,
           ),
           body: SingleChildScrollView(
@@ -58,26 +52,7 @@ class _LoginViewState extends State<LoginView> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       SizedBox(height: MediaQuery.of(context).size.width/5),
-                      AnimatedOpacity(
-                        opacity: opacity,
-                        duration: const Duration(seconds: 2),
-                        child: Text(
-                          AppLocalizations.of(context)!.appTitle,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 30.0, // Adjust the font size as needed
-                            fontWeight: FontWeight.bold, // Make the text bold
-                            letterSpacing: 5,
-                            wordSpacing: 5,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 4.0,
-                                offset: Offset(2.0, 2.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      const LogoWidget(seconds: 0),
                       const SizedBox(height: 100.0),
                       TextFormField(
                         controller: loginCon.email,

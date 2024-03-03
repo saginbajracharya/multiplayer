@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/views/signup_view/signup_controller.dart';
+import 'package:multiplayer/src/widgets/logo_widget.dart';
 import '../../common/styles.dart';
 
 class SignUpView extends StatefulWidget {
@@ -15,17 +16,10 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> {
   final SignUpController signUpCon = Get.put(SignUpController());
-  double opacity = 0.0;
 
   @override
   void initState() {
     super.initState();
-    // Start the animation
-    Future.delayed(const Duration(seconds: 1), () {
-      setState(() {
-        opacity = 1.0;
-      });
-    });
   }
 
   @override
@@ -56,26 +50,7 @@ class _SignUpViewState extends State<SignUpView> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       SizedBox(height: MediaQuery.of(context).size.width/5),
-                      AnimatedOpacity(
-                        opacity: opacity,
-                        duration: const Duration(seconds: 2),
-                        child: Text(
-                          AppLocalizations.of(context)!.appTitle,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 30.0, // Adjust the font size as needed
-                            fontWeight: FontWeight.bold, // Make the text bold
-                            letterSpacing: 5,
-                            wordSpacing: 5,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 4.0,
-                                offset: Offset(2.0, 2.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      const LogoWidget(seconds: 0),
                       const SizedBox(height: 50.0),
                       //name
                       TextFormField(
