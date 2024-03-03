@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/views/signup_view/signup_controller.dart';
+import 'package:multiplayer/src/widgets/a_button_widget.dart';
 import 'package:multiplayer/src/widgets/logo_widget.dart';
 import '../../common/styles.dart';
 
@@ -195,40 +196,22 @@ class _SignUpViewState extends State<SignUpView> {
                       GetBuilder(
                         init: SignUpController(),
                         builder: (context) {
-                          return SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if(signUpCon.signupformKey.currentState!.validate()){
-                                  signUpCon.signup();
-                                }
-                              },
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    side: const BorderSide(color: white),
-                                  ),
-                                ),
-                                backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                    if (states.contains(MaterialState.disabled)) {
-                                      return green.withOpacity(0.8); // Disabled color
-                                    }
-                                    return green.withOpacity(0.8); // Regular color
-                                  },
-                                ),
-                              ),
-                              child: signUpCon.isProcessingSignup.value 
-                              ?const Center(
-                                child: SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator()
-                                )
+                          return AButtonWidget(
+                            btnText: 'Register', 
+                            onPressed: (){
+                              if(signUpCon.signupformKey.currentState!.validate()){
+                                signUpCon.signup();
+                              }
+                            },
+                            child: signUpCon.isProcessingSignup.value 
+                            ?const Center(
+                              child: SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator()
                               )
-                              :const Text('Register'),
-                            ),
+                            )
+                            :const Text('REGISTER'),
                           );
                         }
                       )

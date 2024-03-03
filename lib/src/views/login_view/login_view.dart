@@ -4,6 +4,7 @@ import 'package:multiplayer/src/common/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/views/login_view/loginout_controller.dart';
 import 'package:multiplayer/src/views/signup_view/signup_view.dart';
+import 'package:multiplayer/src/widgets/a_button_widget.dart';
 import 'package:multiplayer/src/widgets/logo_widget.dart';
 
 class LoginView extends StatefulWidget {
@@ -155,40 +156,22 @@ class _LoginViewState extends State<LoginView> {
                       GetBuilder(
                         init: LoginoutController(),
                         builder: (context) {
-                          return SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if(loginformKey.currentState!.validate()){
-                                  loginCon.login();
-                                }
-                              },
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    side: const BorderSide(color: white),
-                                  ),
-                                ),
-                                backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                    if (states.contains(MaterialState.disabled)) {
-                                      return green.withOpacity(0.8); // Disabled color
-                                    }
-                                    return green.withOpacity(0.8); // Regular color
-                                  },
-                                ),
-                              ),
-                              child: loginCon.isProcessingLogin.value 
-                              ?const Center(
-                                child: SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator()
-                                )
+                          return AButtonWidget(
+                            btnText: 'Login', 
+                            onPressed:() {
+                              if(loginformKey.currentState!.validate()){
+                                loginCon.login();
+                              }
+                            },
+                            child: loginCon.isProcessingLogin.value 
+                            ?const Center(
+                              child: SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator()
                               )
-                              :const Text('Login'),
-                            ),
+                            )
+                            :const Text('Login'),
                           );
                         }
                       ),

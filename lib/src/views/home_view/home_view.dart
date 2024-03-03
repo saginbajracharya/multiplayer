@@ -9,6 +9,7 @@ import 'package:multiplayer/src/views/lobby_view/lobby_view.dart';
 import 'package:multiplayer/src/views/login_view/login_view.dart';
 import 'package:multiplayer/src/views/login_view/loginout_controller.dart';
 import 'package:multiplayer/src/views/signup_view/signup_view.dart';
+import 'package:multiplayer/src/widgets/a_button_widget.dart';
 import 'package:multiplayer/src/widgets/logo_widget.dart';
 
 class HomeView extends StatefulWidget {
@@ -52,7 +53,7 @@ class _HomeViewState extends State<HomeView> {
             const SizedBox(width: double.infinity),
             const SizedBox(width: double.infinity),
             // Title
-            const LogoWidget(),
+            const LogoWidget(seconds: 1),
             const SizedBox(width: double.infinity),
             // Profile
             Column(
@@ -92,146 +93,47 @@ class _HomeViewState extends State<HomeView> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   //MULTIPLAYER Play Button
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
-                    child: ElevatedButton(
-                      onPressed: () async{
-                        Get.to(const LobbyView());
-                      },
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: const BorderSide(color: white),
-                          ),
-                        ),
-                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.disabled)) {
-                              return green.withOpacity(0.8); // Disabled color
-                            }
-                            return green.withOpacity(0.8); // Regular color
-                          },
-                        ),
-                      ),
-                      child: const Text('MULTIPLAYER'),
-                    ),
+                  AButtonWidget(
+                    btnText: 'MULTIPLAYER', 
+                    onPressed:() async{
+                      Get.to(const LobbyView());
+                    },
                   ),
                   //SOLO Play Button
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
-                    child: ElevatedButton(
-                      onPressed: () async{
-                        Get.to(const Level1());
-                      },
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: const BorderSide(color: white),
-                          ),
-                        ),
-                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.disabled)) {
-                              return green.withOpacity(0.8); // Disabled color
-                            }
-                            return green.withOpacity(0.8); // Regular color
-                          },
-                        ),
-                      ),
-                      child: const Text('SOLO PLAY'),
-                    ),
+                  AButtonWidget(
+                    btnText: 'SOLO PLAY', 
+                    onPressed:() async{
+                      Get.to(const Level1());
+                    },
                   ),
                   // LOGOUT
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
-                    child: ElevatedButton(
-                      onPressed: () async{
-                        loginoutCon.logout();
-                      },
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: const BorderSide(color: white),
-                          ),
-                        ),
-                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.disabled)) {
-                              return green.withOpacity(0.8); // Disabled color
-                            }
-                            return green.withOpacity(0.8); // Regular color
-                          },
-                        ),
-                      ),
-                      child: const Text('LOGOUT'),
-                    ),
+                  AButtonWidget(
+                    btnText: 'LOGOUT', 
+                    onPressed:() async{
+                      loginoutCon.logout();
+                    },
                   ),
                 ],
               )
               : Column(
                 children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
-                    child: ElevatedButton(
-                      onPressed: () async{
-                        Get.to(const LoginView());
-                      },
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: const BorderSide(color: white),
-                          ),
-                        ),
-                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.disabled)) {
-                              return green.withOpacity(0.8); // Disabled color
-                            }
-                            return green.withOpacity(0.8); // Regular color
-                          },
-                        ),
-                      ),
-                      child: const Text('LOGIN'),
-                    ),
+                  AButtonWidget(
+                    btnText: 'LOGIN', 
+                    onPressed:() async{
+                      Get.to(const LoginView());
+                    },
                   ),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
-                    child: ElevatedButton(
-                      onPressed: () async{
-                        Get.to(const SignUpView());
-                      },
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: const BorderSide(color: white),
-                          ),
-                        ),
-                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.disabled)) {
-                              return green.withOpacity(0.8); // Disabled color
-                            }
-                            return green.withOpacity(0.8); // Regular color
-                          },
-                        ),
-                      ),
-                      child: const Text('REGISTER'),
-                    ),
+                  AButtonWidget(
+                    btnText: 'REGISTER', 
+                    onPressed:() async{
+                      Get.to(const SignUpView());
+                    },
                   ),
                 ],
               ),
             ),
             const SizedBox(width: double.infinity),
+            //Audio On/Off Icon_Button
             Obx(()=>
               IconButton(
                 onPressed: (){

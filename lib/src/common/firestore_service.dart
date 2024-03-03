@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:multiplayer/src/models/lobby_model.dart';
 
 import '../models/user_model.dart';
 
@@ -59,5 +60,50 @@ class FirestoreServices {
         print(error.toString());
       }
     }
+  }
+
+  static Future<void> createLobby(String lobbyName, int totalPlayers, String creatorEmail) async {
+    try {
+      var lobbyDocRef = firestore.collection('lobby').doc(lobbyName);
+      await lobbyDocRef.set({
+        'name': lobbyName,
+        'players': [
+          {
+            'email': creatorEmail,
+            'playerType': 'host',
+            'readyStatus': false
+          }
+        ],
+        'maxPlayers': totalPlayers,
+        'currentPlayers': 1,
+        'createdAt': DateTime.now(),
+        'timeStamp': FieldValue.serverTimestamp(), // Use server timestamp
+        'gameMode': 'Team Deathmatch',
+        'gameMap': 'Map Name',
+        'gameSettings': {
+          'timeLimit': 10,
+          'scoreLimit': 100,
+          'respawnEnabled': true,
+        },
+        'region': 'US East',
+        'privacy': 'public',
+        'voiceChat': true,
+        'spectatorEnabled': true,
+        'lobbyStatus': 'waiting',
+      });
+    } catch (error) {
+      if (kDebugMode) {
+        print(error.toString());
+      }
+    }
+  }
+
+  static Stream<List<Lobby>> streamLobbies() {
+    return firestore.collection('lobby')
+      .snapshots()
+      .map((snapshot) =>
+      snapshot.docs.map((doc) => 
+      Lobby.fromSnapshot(doc)).toList()
+    );
   }
 }

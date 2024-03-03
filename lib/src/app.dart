@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
 import 'package:multiplayer/src/views/level_view/level_1.dart';
+import 'package:multiplayer/src/views/lobby_view/lobby_detail_view/lobby_detail_view.dart';
 import 'package:multiplayer/src/views/lobby_view/lobby_view.dart';
 import 'package:multiplayer/src/views/login_view/login_view.dart';
 import 'package:multiplayer/src/views/settings/settings_view.dart';
@@ -53,6 +54,8 @@ class MyApp extends StatelessWidget {
                       return const HomeView();
                     case LobbyView.routeName:
                       return const LobbyView();
+                    case LobbyDetailView.routeName:
+                      return const LobbyDetailView();
                     case LoginView.routeName:
                       return const LoginView();
                     case SignUpView.routeName:
