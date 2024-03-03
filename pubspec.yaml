@@ -30,6 +30,9 @@ dependencies:
   firebase_messaging: ^14.7.16
   firebase_analytics: ^10.8.6
 
+  #audio
+  assets_audio_player: ^3.1.1
+
   # UI Design
 
 dev_dependencies:
@@ -47,3 +50,4 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/audio/

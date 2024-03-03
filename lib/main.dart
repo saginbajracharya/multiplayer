@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:multiplayer/src/common/audio_manager.dart';
 import 'src/app.dart';
 import 'src/views/settings/settings_controller.dart';
 import 'src/views/settings/settings_service.dart';
@@ -17,6 +18,8 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  //Initialize Audio
+  AudioManager().init();
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
