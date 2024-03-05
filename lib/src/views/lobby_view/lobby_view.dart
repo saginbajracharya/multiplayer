@@ -64,8 +64,8 @@ class _LobbyViewState extends State<LobbyView> {
                           var lobby = lobbies[index];
                           var gradientColors = getRandomGradientColors();
                           return GestureDetector(
-                            onTap: (){
-                              Get.to(()=>const LobbyDetailView());
+                            onTap: () {
+                              Get.to(() => LobbyDetailView(lobbyData: lobby));
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -75,23 +75,40 @@ class _LobbyViewState extends State<LobbyView> {
                                   end: Alignment.bottomRight,
                                 ),
                                 borderRadius: BorderRadius.circular(12),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: grey.withOpacity(0.5),
-                                    spreadRadius: 5,
-                                    blurRadius: 7,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
+                                border: Border.all(color: white, width: 1),
                               ),
                               margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                              child: ListTile(
-                                title: Text(lobby.name, style: const TextStyle(color: white)),
-                                subtitle: Text(
-                                  'Players: ${lobby.currentPlayers}/${lobby.maxPlayers}',
-                                  style: const TextStyle(color: white),
-                                ),
-                                // Add other UI elements as needed
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            lobby.name,
+                                            style: const TextStyle(color: white, fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            'Players: ${lobby.currentPlayers}/${lobby.maxPlayers}',
+                                            style: const TextStyle(color: white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  AButtonWidget(
+                                    btnText: 'Join',
+                                    width: MediaQuery.of(context).size.width * 0.25,
+                                    height: 100,
+                                    padding: EdgeInsets.zero,
+                                    onPressed: () {
+                                      Get.to(() => LobbyDetailView(lobbyData: lobby));
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
                           );

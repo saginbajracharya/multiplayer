@@ -41,36 +41,27 @@ class UserModel {
   };
 }
 
-class UserFb {
-  final String email;
-  final bool isOnline;
-  final bool isReady;
-
-  UserFb({required this.email, required this.isOnline,required this.isReady});
-
-  factory UserFb.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
-    return UserFb(
-      email: data['email'] ?? '',
-      isOnline: data['isOnline'] ?? false,
-      isReady: data['isReady'] ?? false,
-    );
-  }
-}
-
 class UserFireBase {
   final String email;
-  final bool isOnline;
-  final bool isReady;
+  final String playerType;
+  final bool readyStatus;
 
-  UserFireBase({required this.email, required this.isOnline, required this.isReady});
+  UserFireBase({required this.email, required this.playerType, required this.readyStatus});
 
   factory UserFireBase.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     return UserFireBase(
       email: data['email'] ?? '', 
-      isOnline: data['isOnline'] ?? false,
-      isReady: data['isReady'] ?? false,
+      playerType: data['playerType'] ?? 'player',
+      readyStatus: data['readyStatus'] ?? false,
+    );
+  }
+
+  factory UserFireBase.fromMap(Map<String, dynamic> data) {
+    return UserFireBase(
+      email: data['email'] ?? '', 
+      playerType: data['playerType'] ?? 'player',
+      readyStatus: data['readyStatus'] ?? false,
     );
   }
 }

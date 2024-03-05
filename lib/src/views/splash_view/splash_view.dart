@@ -21,6 +21,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
+    // splashCon.checkInitialConnectivity();
     dynamic audioOn = read(StorageKeys.audioOnKey)==""?true:read(StorageKeys.audioOnKey);
     if(audioOn){
       AudioManager().play('assets/audio/theme_song.mp3');

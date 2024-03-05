@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return SafeArea(
           child: GetMaterialApp(
+            popGesture: true,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [
               AppLocalizations.delegate,
@@ -40,9 +41,17 @@ class MyApp extends StatelessWidget {
             ],
             fallbackLocale: const Locale('en', ''),
             onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
-            theme: ThemeData(useMaterial3:true),
-            darkTheme: ThemeData.dark(useMaterial3:true),
+            defaultTransition: Transition.fadeIn,
+            theme: ThemeData(
+              useMaterial3:true,
+              applyElevationOverlayColor: false
+            ),
+            darkTheme: ThemeData.dark(
+              useMaterial3:true,
+            ),
             themeMode: settingsController.themeMode,
+            home: child,
+            useInheritedMediaQuery: true,
             onGenerateRoute: (RouteSettings routeSettings) {
               return MaterialPageRoute<void>(
                 settings: routeSettings,

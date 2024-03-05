@@ -43,7 +43,7 @@ class _HomeViewState extends State<HomeView> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        extendBody: false,
+        extendBody: true,
         extendBodyBehindAppBar: true,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,8 +63,8 @@ class _HomeViewState extends State<HomeView> {
                     radius: 50.0,
                     backgroundColor: gold,
                     child: CircleAvatar(
-                      radius: 40.0,
-                      backgroundColor: transparent,
+                      radius: 46.0,
+                      backgroundColor: grey,
                       backgroundImage: NetworkImage(profilePlaceHolder),
                     ),
                   ),

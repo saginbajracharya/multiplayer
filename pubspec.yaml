@@ -33,8 +33,11 @@ dependencies:
   #audio
   assets_audio_player: ^3.1.1
 
-  # UI Design
+  #UI Design
   flutter_gradient_colors: ^2.1.1
+
+  #Internet
+  # connectivity_plus: ^5.0.0
 
 dev_dependencies:
   flutter_test:
