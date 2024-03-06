@@ -12,6 +12,8 @@ import 'package:multiplayer/src/views/signup_view/signup_view.dart';
 import 'package:multiplayer/src/views/splash_view/splash_view.dart';
 import 'package:multiplayer/src/views/settings/settings_controller.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
@@ -27,8 +29,16 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return SafeArea(
           child: GetMaterialApp(
+            home: child,
             popGesture: true,
+            navigatorKey: navigatorKey,
+            useInheritedMediaQuery: false,
             debugShowCheckedModeBanner: false,
+            title: AppLocalizations.of(context)!.appTitle,
+            onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
+            transitionDuration: const Duration(milliseconds: 500),
+            defaultTransition: Transition.rightToLeft,
+            themeMode: settingsController.themeMode,
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -40,18 +50,16 @@ class MyApp extends StatelessWidget {
               Locale('ne', ''), // Nepali, no country code
             ],
             fallbackLocale: const Locale('en', ''),
-            onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
-            defaultTransition: Transition.fadeIn,
             theme: ThemeData(
               useMaterial3:true,
-              applyElevationOverlayColor: false
+              applyElevationOverlayColor: false,
+              appBarTheme: const AppBarTheme(
+                scrolledUnderElevation: 0.0
+              )
             ),
             darkTheme: ThemeData.dark(
               useMaterial3:true,
             ),
-            themeMode: settingsController.themeMode,
-            home: child,
-            useInheritedMediaQuery: true,
             onGenerateRoute: (RouteSettings routeSettings) {
               return MaterialPageRoute<void>(
                 settings: routeSettings,
