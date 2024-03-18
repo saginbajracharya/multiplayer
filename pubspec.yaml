@@ -1,5 +1,5 @@
 name: multiplayer
-description: "A new Flutter project."
+description: "Flutter SDK 3.16.2 || Dart SDK 3.2.2"
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
@@ -22,7 +22,7 @@ dependencies:
   get_storage: ^2.1.1
   # flutter toast
   fluttertoast: ^8.2.4
-  #Firebase
+  # Firebase
   firebase_core: ^2.25.4
   firebase_auth: ^4.17.4
   cloud_firestore: ^4.15.5
@@ -30,14 +30,18 @@ dependencies:
   firebase_messaging: ^14.7.16
   firebase_analytics: ^10.8.6
 
-  #audio
+  # Audio
   assets_audio_player: ^3.1.1
 
-  #UI Design
+  # UI Design
   flutter_gradient_colors: ^2.1.1
 
-  #Internet
-  # connectivity_plus: ^5.0.0
+  # In App Purchase
+  in_app_purchase: ^3.1.13
+
+  # App Update
+  upgrader: ^9.0.0
+
 
 dev_dependencies:
   flutter_test:
@@ -53,5 +57,6 @@ flutter:
 
   assets:
     # Add assets from the images directory to the application.
+    - assets/
     - assets/images/
     - assets/audio/

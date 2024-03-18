@@ -11,6 +11,7 @@ import 'package:multiplayer/src/views/settings/settings_view.dart';
 import 'package:multiplayer/src/views/signup_view/signup_view.dart';
 import 'package:multiplayer/src/views/splash_view/splash_view.dart';
 import 'package:multiplayer/src/views/settings/settings_controller.dart';
+import 'package:multiplayer/src/views/store_view/store_view.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -34,7 +35,6 @@ class MyApp extends StatelessWidget {
             navigatorKey: navigatorKey,
             useInheritedMediaQuery: false,
             debugShowCheckedModeBanner: false,
-            title: AppLocalizations.of(context)!.appTitle,
             onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
             transitionDuration: const Duration(milliseconds: 500),
             defaultTransition: Transition.rightToLeft,
@@ -79,6 +79,8 @@ class MyApp extends StatelessWidget {
                       return const SignUpView();
                     case Level1.routeName:
                       return const Level1();
+                    case StoreView.routeName:
+                      return const StoreView();
                     case SplashView.routeName:
                     default:
                       return const SplashView();

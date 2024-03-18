@@ -179,7 +179,7 @@ class _LobbyDetailViewState extends State<LobbyDetailView> {
                               padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
                               child: ElevatedButton(
                                 onPressed: () async{
-                                  Get.to(const Level1());
+                                  Get.to(()=>const Level1());
                                 },
                                 style: ButtonStyle(
                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
