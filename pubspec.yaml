@@ -1,10 +1,10 @@
 name: multiplayer
-description: "Flutter SDK 3.16.2 || Dart SDK 3.2.2"
+description: "multiplayer Flutter SDK 3.16.2 || Dart SDK 3.2.2"
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: '>=3.2.2 <4.0.0'
