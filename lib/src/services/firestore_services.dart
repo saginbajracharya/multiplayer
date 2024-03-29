@@ -13,7 +13,7 @@ class FirestoreServices {
   double uploadProgress = 0;
 
   // Sign In Anonymously
-  static Future<bool> logInAnonymously(String username, String email) async {
+  static Future<bool> logInAnonymously() async {
     try {
       var success = await FirebaseAuth.instance.signInAnonymously();
       if (kDebugMode) {

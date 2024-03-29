@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:multiplayer/src/common/audio_manager.dart';
+import 'package:multiplayer/src/services/firestore_services.dart';
 import 'package:multiplayer/src/services/notification_services.dart';
 import 'src/app.dart';
 import 'src/views/settings/settings_controller.dart';
@@ -36,6 +37,8 @@ void main() async {
   String? token = await firebaseMessaging.getToken();
   log('FCM Token: $token');
 
+  //Sign In to Firebase Anonymously
+  FirestoreServices.logInAnonymously();
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());

@@ -37,8 +37,8 @@ Future<void> setupFlutterNotifications() async {
     return;
   }
   channel = const AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notifications', // title
+    'multiplayer', // id
+    'multiplayer', // title
     description: 'This channel is used for important notifications.', // description
     importance: Importance.high,
   );
@@ -53,7 +53,7 @@ Future<void> setupFlutterNotifications() async {
   isFlutterLocalNotificationsInitialized = true;
   //Initialize Notification settings
   var initializationSettings = const InitializationSettings(
-    android: AndroidInitializationSettings('@mipmap/ic_notification'), 
+    android: AndroidInitializationSettings('@mipmap/ic_launcher'), 
   );
   await flutterLocalNotificationsPlugin.initialize(
     initializationSettings,
