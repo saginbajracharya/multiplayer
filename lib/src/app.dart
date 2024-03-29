@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:multiplayer/src/services/notification_services.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
 import 'package:multiplayer/src/views/level_view/level_1.dart';
 import 'package:multiplayer/src/views/lobby_view/lobby_detail_view/lobby_detail_view.dart';
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
     return ListenableBuilder(
       listenable: settingsController,
       builder: (BuildContext context, Widget? child) {
+        // Handle notifications when the app is in the foreground
+        getPushedNotification(context);
         return SafeArea(
           child: GetMaterialApp(
             home: child,

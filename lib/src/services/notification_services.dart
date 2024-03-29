@@ -23,7 +23,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 /// Create a [AndroidNotificationChannel] for heads up notifications
 late AndroidNotificationChannel channel;
-
+FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 bool isFlutterLocalNotificationsInitialized = false;
 /// Initialize the [FlutterLocalNotificationsPlugin] package.
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -33,6 +33,9 @@ requestPerm() async {
 }
 
 Future<void> setupFlutterNotifications() async {
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  String? token = await firebaseMessaging.getToken();
+  log('FCM Token: $token');
   if (isFlutterLocalNotificationsInitialized) {
     return;
   }
@@ -84,7 +87,7 @@ void showForegroundNotification(RemoteMessage message) {
           channel.id,
           channel.name,
           channelDescription: channel.description,
-          icon: '@mipmap/ic_notification',
+          icon: '@mipmap/ic_launcher',
         ),
       ),
       payload: jsonEncode(message.data)

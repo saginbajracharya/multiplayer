@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +14,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(); // Initilize Firebase
   await GetStorage.init();
+  //Sign In to Firebase Anonymously
+  FirestoreServices.logInAnonymously();
+  // Notification Permission and Setups
+  await requestPerm();
+  if (!kIsWeb) {
+    await setupFlutterNotifications();
+  }
   // Put game into full screen mode on mobile devices.
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   // Lock the game to portrait mode on mobile devices.
@@ -25,19 +30,6 @@ void main() async {
   ]);
   // Initialize Audio
   AudioManager().init();
-
-  // Notification Permission and Setups
-  await requestPerm();
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  if (!kIsWeb) {
-    await setupFlutterNotifications();
-  }
-  FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-  String? token = await firebaseMessaging.getToken();
-  log('FCM Token: $token');
-
-  //Sign In to Firebase Anonymously
-  FirestoreServices.logInAnonymously();
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
