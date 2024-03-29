@@ -1,15 +1,15 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multiplayer/src/common/api_calls.dart';
-import 'package:multiplayer/src/common/firestore_service.dart';
+import 'package:multiplayer/src/services/api_services.dart';
+import 'package:multiplayer/src/services/firestore_services.dart';
 import 'package:multiplayer/src/common/read_write_storage.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
 import 'package:multiplayer/src/widgets/toast_message_widget.dart';
 
 class LoginoutController extends GetxController{
-  final apiendpoint         = ApiCalls();
+  final apiendpoint         = ApiServices();
   final email               = TextEditingController();
   final password            = TextEditingController();
   bool showPassword         = true;
@@ -23,7 +23,7 @@ class LoginoutController extends GetxController{
       try{
         isProcessingLogin.value = true;
         update();
-        var response = await ApiCalls.apiPost(
+        var response = await ApiServices.apiPost(
           'api/login',
           {
             "email": email.text.trim(),

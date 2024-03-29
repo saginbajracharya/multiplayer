@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:multiplayer/src/common/api_calls.dart';
-import 'package:multiplayer/src/common/firestore_service.dart';
+import 'package:multiplayer/src/services/api_services.dart';
+import 'package:multiplayer/src/services/firestore_services.dart';
 import 'package:multiplayer/src/models/user_model.dart';
 
 class LobbyController extends GetxController{
@@ -15,7 +15,7 @@ class LobbyController extends GetxController{
     else{
       try{
         isProcessingAllUsers.value = true;
-        var response = await ApiCalls.apiGet('api/users','');
+        var response = await ApiServices.apiGet('api/users','');
         if(response != null){
           userList = response.map((userData) => UserModel.fromJson(userData)).toList();
           return true;

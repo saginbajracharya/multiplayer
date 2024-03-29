@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multiplayer/src/common/firestore_service.dart';
+import 'package:multiplayer/src/services/firestore_services.dart';
 import 'package:multiplayer/src/common/read_write_storage.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/models/lobby_model.dart';

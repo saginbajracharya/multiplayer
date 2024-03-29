@@ -1,7 +1,12 @@
+import 'dart:developer';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:multiplayer/src/common/audio_manager.dart';
+import 'package:multiplayer/src/services/notification_services.dart';
 import 'src/app.dart';
 import 'src/views/settings/settings_controller.dart';
 import 'src/views/settings/settings_service.dart';
@@ -18,8 +23,19 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  //Initialize Audio
+  // Initialize Audio
   AudioManager().init();
+
+  // Notification Permission and Setups
+  await requestPerm();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  if (!kIsWeb) {
+    await setupFlutterNotifications();
+  }
+  FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+  String? token = await firebaseMessaging.getToken();
+  log('FCM Token: $token');
+
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());

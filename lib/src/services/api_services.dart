@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:multiplayer/src/common/dio/dio_client.dart';
 import 'package:multiplayer/src/widgets/toast_message_widget.dart';
 
-class ApiCalls{
+class ApiServices{
 
   static apiPostLeftToManage(apiPath,params) async {
     try {

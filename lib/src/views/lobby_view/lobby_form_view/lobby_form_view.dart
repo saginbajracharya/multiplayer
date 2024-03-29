@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multiplayer/src/common/firestore_service.dart';
+import 'package:multiplayer/src/services/firestore_services.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
 import 'package:multiplayer/src/widgets/a_button_widget.dart';
 

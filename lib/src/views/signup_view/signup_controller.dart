@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multiplayer/src/common/api_calls.dart';
+import 'package:multiplayer/src/services/api_services.dart';
 import 'package:multiplayer/src/views/login_view/login_view.dart';
 import 'package:multiplayer/src/widgets/toast_message_widget.dart';
 
@@ -22,7 +22,7 @@ class SignUpController extends GetxController{
       try{
         isProcessingSignup.value = true;
         update();
-        var response = await ApiCalls.apiPostLeftToManage(
+        var response = await ApiServices.apiPostLeftToManage(
           'api/users',
           {
             "name" : name.text,
