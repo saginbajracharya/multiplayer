@@ -84,7 +84,7 @@ class _BackgroundScaffoldState extends State<BackgroundScaffold> with TickerProv
               minOpacity : 0.1,
               maxOpacity : 1,
               opacityChangeRate : 0.25,
-              particleCount : 50,
+              particleCount : 30,
             )
           ),
           vsync: this,
