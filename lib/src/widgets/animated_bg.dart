@@ -89,7 +89,7 @@ class _BackgroundScaffoldState extends State<BackgroundScaffold> with TickerProv
           ),
           vsync: this,
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5), // Adjust the sigmaX and sigmaY values as needed
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), // Adjust the sigmaX and sigmaY values as needed
             child: Container(
               color: black.withOpacity(0.5), // Adjust the opacity as needed
               child: widget.child,

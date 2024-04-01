@@ -8,6 +8,7 @@ import 'package:multiplayer/src/views/level_view/level_1.dart';
 import 'package:multiplayer/src/views/lobby_view/lobby_view.dart';
 import 'package:multiplayer/src/views/login_view/login_view.dart';
 import 'package:multiplayer/src/views/login_view/loginout_controller.dart';
+import 'package:multiplayer/src/views/settings/settings_view.dart';
 import 'package:multiplayer/src/views/signup_view/signup_view.dart';
 import 'package:multiplayer/src/views/store_view/store_view.dart';
 import 'package:multiplayer/src/widgets/a_button_widget.dart';
@@ -91,7 +92,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                           homeCon.username.value!=""?homeCon.username.value:'PLAYER 1',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16
+                            fontSize: 16,
+                            color: white
                           ),
                         ),
                       ),
@@ -111,21 +113,21 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                       AButtonWidget(
                         btnText: 'MULTIPLAYER', 
                         onPressed:() async{
-                          Get.to(()=>const LobbyView());
+                          Get.toNamed(LobbyView.routeName);
                         },
                       ),
                       //SOLO Play Button
                       AButtonWidget(
                         btnText: 'SOLO PLAY', 
                         onPressed:() async{
-                          Get.to(()=>const Level1());
+                          Get.toNamed(Level1.routeName);
                         },
                       ),
                       //Shop Button
                       AButtonWidget(
                         btnText: 'STORE', 
                         onPressed:() async{
-                          Get.to(()=>const StoreView());
+                          Get.toNamed(StoreView.routeName);
                         },
                       ),
                       // LOGOUT
@@ -142,13 +144,13 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                       AButtonWidget(
                         btnText: 'LOGIN', 
                         onPressed:() async{
-                          Get.to(()=>const LoginView());
+                          Get.toNamed(LoginView.routeName);
                         },
                       ),
                       AButtonWidget(
                         btnText: 'REGISTER', 
                         onPressed:() async{
-                          Get.to(()=>const SignUpView());
+                          Get.toNamed(SignUpView.routeName);
                         },
                       ),
                     ],
@@ -156,23 +158,39 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                 ),
                 const SizedBox(width: double.infinity),
                 //Audio On/Off Icon_Button
-                Obx(()=>
-                  IconButton(
-                    onPressed: (){
-                      if(AudioManager().isPlaying.value){
-                        AudioManager().pause();
-                      }
-                      else{
-                        AudioManager().play('assets/audio/theme_song.mp3');
-                      }
-                    },
-                    icon: Icon(
-                    AudioManager().isPlaying.value
-                    ?Icons.music_note_outlined
-                    :Icons.music_off
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Obx(()=>
+                      IconButton(
+                        onPressed: (){
+                          if(AudioManager().isPlaying.value){
+                            AudioManager().pause();
+                          }
+                          else{
+                            AudioManager().play('assets/audio/theme_song.mp3');
+                          }
+                        },
+                        icon: Icon(
+                          AudioManager().isPlaying.value
+                          ?Icons.music_note_outlined
+                          :Icons.music_off,
+                          color: white
+                        ),
+                      ),
                     ),
-                  ),
-                )
+                    IconButton(
+                      onPressed: (){
+                        Get.toNamed(SettingsView.routeName);
+                      },
+                      icon: const Icon(
+                        Icons.settings,
+                        color: white
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

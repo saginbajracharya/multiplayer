@@ -53,6 +53,8 @@ class _LoginViewState extends State<LoginView> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
+                          fillColor: black.withOpacity(0.8),
+                          filled: true,
                           errorStyle: const TextStyle(fontSize: 0.01),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -69,8 +71,7 @@ class _LoginViewState extends State<LoginView> {
                           focusedErrorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(color: red)
-                          ), 
-                          filled: true,
+                          ),
                           hintText: AppLocalizations.of(context)!.email,
                           hintStyle: const TextStyle(color: grey),
                           contentPadding: const EdgeInsets.only(
@@ -93,6 +94,8 @@ class _LoginViewState extends State<LoginView> {
                         textAlign: TextAlign.start,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
+                          fillColor: black.withOpacity(0.8),
+                          filled: true,
                           errorStyle: const TextStyle(fontSize: 0.01),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -109,8 +112,7 @@ class _LoginViewState extends State<LoginView> {
                           focusedErrorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(color: red)
-                          ), 
-                          filled: true,
+                          ),
                           hintText: AppLocalizations.of(context)!.password,
                           hintStyle: const TextStyle(color: grey),
                           contentPadding: const EdgeInsets.only(

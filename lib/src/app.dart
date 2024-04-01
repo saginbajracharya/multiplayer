@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
           transitionDuration: const Duration(milliseconds: 200),
           defaultTransition: Transition.zoom,
           themeMode: settingsController.themeMode,
+          locale: settingsController.currentLocale,
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,

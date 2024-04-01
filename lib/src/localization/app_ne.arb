@@ -1,8 +1,20 @@
 {
-  "appTitle": "MULTI\nPLAYER",
-  "name"    : "Name",
-  "email"   : "Email",
-  "password": "Password",
-  "login"   : "Login",
-  "home"    : "HOME"
+  "appTitle"              : "MULTI\nPLAYER",
+  "name"                  : "Name",
+  "email"                 : "Email",
+  "password"              : "Password",
+  "login"                 : "Login",
+  "home"                  : "HOME",
+  "theme"                 : "विषयवस्तु",
+  "language"              : "भाषा",
+  "lightTheme"            : "प्रकाश विषयवस्तु",
+  "darkTheme"             : "अँध्यारो विषयवस्तु",
+  "systemTheme"           : "प्रणाली विषयवस्तु",
+  "en"                    : "अङ्ग्रेजी",
+  "es"                    : "स्पेनी",
+  "hi"                    : "हिन्दी",
+  "ne"                    : "नेपाली",
+  "rateus"                : "हामीलाई दर",
+  "shareApp"              : "शेयर अनुप्रयोग",
+  "version"               : "संस्करण"
 }
