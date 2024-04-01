@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/services/notification_services.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
 import 'package:multiplayer/src/views/level_view/level_1.dart';
@@ -31,67 +32,57 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         // Handle notifications when the app is in the foreground
         getPushedNotification(context);
-        return SafeArea(
-          child: GetMaterialApp(
-            home: child,
-            popGesture: true,
-            navigatorKey: navigatorKey,
-            useInheritedMediaQuery: false,
-            debugShowCheckedModeBanner: false,
-            onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
-            transitionDuration: const Duration(milliseconds: 500),
-            defaultTransition: Transition.rightToLeft,
-            themeMode: settingsController.themeMode,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en', ''), // English, no country code
-              Locale('ne', ''), // Nepali, no country code
-            ],
-            fallbackLocale: const Locale('en', ''),
-            theme: ThemeData(
-              useMaterial3:true,
-              applyElevationOverlayColor: false,
-              appBarTheme: const AppBarTheme(
-                scrolledUnderElevation: 0.0
-              )
-            ),
-            darkTheme: ThemeData.dark(
-              useMaterial3:true,
-            ),
-            onGenerateRoute: (RouteSettings routeSettings) {
-              return MaterialPageRoute<void>(
-                settings: routeSettings,
-                builder: (BuildContext context) {
-                  switch (routeSettings.name) {
-                    case SettingsView.routeName:
-                      return SettingsView(controller: settingsController);
-                    case HomeView.routeName:
-                      return const HomeView();
-                    case LobbyView.routeName:
-                      return const LobbyView();
-                    case LobbyDetailView.routeName:
-                      return const LobbyDetailView();
-                    case LoginView.routeName:
-                      return const LoginView();
-                    case SignUpView.routeName:
-                      return const SignUpView();
-                    case Level1.routeName:
-                      return const Level1();
-                    case StoreView.routeName:
-                      return const StoreView();
-                    case SplashView.routeName:
-                    default:
-                      return const SplashView();
-                  }
-                },
-              );
-            },
-          ),
+        return GetMaterialApp(
+          home: child,
+          popGesture: true,
+          navigatorKey: navigatorKey,
+          useInheritedMediaQuery: false,
+          debugShowCheckedModeBanner: false,
+          onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
+          transitionDuration: const Duration(milliseconds: 200),
+          defaultTransition: Transition.zoom,
+          themeMode: settingsController.themeMode,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', ''), // English, no country code
+            Locale('ne', ''), // Nepali, no country code
+          ],
+          fallbackLocale: const Locale('en', ''),
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          onGenerateRoute: (RouteSettings routeSettings) {
+            return MaterialPageRoute<void>(
+              settings: routeSettings,
+              builder: (BuildContext context) {
+                switch (routeSettings.name) {
+                  case SettingsView.routeName:
+                    return SettingsView(controller: settingsController);
+                  case HomeView.routeName:
+                    return const HomeView();
+                  case LobbyView.routeName:
+                    return const LobbyView();
+                  case LobbyDetailView.routeName:
+                    return const LobbyDetailView();
+                  case LoginView.routeName:
+                    return const LoginView();
+                  case SignUpView.routeName:
+                    return const SignUpView();
+                  case Level1.routeName:
+                    return const Level1();
+                  case StoreView.routeName:
+                    return const StoreView();
+                  case SplashView.routeName:
+                  default:
+                    return const SplashView();
+                }
+              },
+            );
+          },
         );
       },
     );

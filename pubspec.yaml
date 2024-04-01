@@ -44,6 +44,9 @@ dependencies:
 
   # App Update
   upgrader: ^10.0.0
+  
+  # Design
+  animated_background: ^2.0.0
 
 
 dev_dependencies:

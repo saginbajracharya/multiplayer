@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/views/signup_view/signup_controller.dart';
 import 'package:multiplayer/src/widgets/a_button_widget.dart';
+import 'package:multiplayer/src/widgets/animated_bg.dart';
 import 'package:multiplayer/src/widgets/logo_widget.dart';
 import '../../common/styles.dart';
 
@@ -29,17 +30,8 @@ class _SignUpViewState extends State<SignUpView> {
       canPop: true,
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Scaffold(
-          extendBody: false,
-          extendBodyBehindAppBar: false,
-          resizeToAvoidBottomInset:true,
-          appBar: AppBar(
-            // title: Text(AppLocalizations.of(context)!.login),
-            centerTitle: true,
-            automaticallyImplyLeading: true,
-            elevation: 0,
-          ),
-          body: SingleChildScrollView(
+        child: BackgroundScaffold(
+          child: SingleChildScrollView(
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -211,7 +203,7 @@ class _SignUpViewState extends State<SignUpView> {
                                 child: CircularProgressIndicator()
                               )
                             )
-                            :const Text('REGISTER'),
+                            :const Text('REGISTER',style: TextStyle(color: white)),
                           );
                         }
                       )

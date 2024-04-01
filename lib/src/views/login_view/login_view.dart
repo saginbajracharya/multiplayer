@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/views/login_view/loginout_controller.dart';
 import 'package:multiplayer/src/views/signup_view/signup_view.dart';
 import 'package:multiplayer/src/widgets/a_button_widget.dart';
+import 'package:multiplayer/src/widgets/animated_bg.dart';
 import 'package:multiplayer/src/widgets/logo_widget.dart';
 
 class LoginView extends StatefulWidget {
@@ -31,18 +32,8 @@ class _LoginViewState extends State<LoginView> {
       canPop: true,
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Scaffold(
-          extendBody: false,
-          extendBodyBehindAppBar: false,
-          resizeToAvoidBottomInset:true,
-          appBar: AppBar(
-            // title: Text(AppLocalizations.of(context)!.login),
-            centerTitle: true,
-            automaticallyImplyLeading: true,
-            elevation: 0,
-            surfaceTintColor: transparent
-          ),
-          body: SingleChildScrollView(
+        child: BackgroundScaffold(
+          child: SingleChildScrollView(
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -171,7 +162,7 @@ class _LoginViewState extends State<LoginView> {
                                 child: CircularProgressIndicator()
                               )
                             )
-                            :const Text('Login'),
+                            :const Text('Login',style: TextStyle(color: white)),
                           );
                         }
                       ),
@@ -180,7 +171,7 @@ class _LoginViewState extends State<LoginView> {
                         onTap: (){
                           Get.toNamed(SignUpView.routeName);
                         },
-                        child: const Text('Register')
+                        child: const Text('Register',style: TextStyle(color: white))
                       )
                     ],
                   ),

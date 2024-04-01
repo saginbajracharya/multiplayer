@@ -11,6 +11,7 @@ import 'package:multiplayer/src/views/login_view/loginout_controller.dart';
 import 'package:multiplayer/src/views/signup_view/signup_view.dart';
 import 'package:multiplayer/src/views/store_view/store_view.dart';
 import 'package:multiplayer/src/widgets/a_button_widget.dart';
+import 'package:multiplayer/src/widgets/animated_bg.dart';
 import 'package:multiplayer/src/widgets/logo_widget.dart';
 import 'package:upgrader/upgrader.dart';
 
@@ -22,7 +23,7 @@ class HomeView extends StatefulWidget {
   @override
   State<HomeView> createState() => _HomeViewState();
 }
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
   final HomeController homeCon = Get.put(HomeController());
   final LoginoutController loginoutCon = Get.put(LoginoutController());
   double opacity = 0.0;
@@ -53,10 +54,8 @@ class _HomeViewState extends State<HomeView> {
           durationUntilAlertAgain: Duration.zero,
           minAppVersion          : '0.0.0'
         ),
-        child: Scaffold(
-          extendBody: true,
-          extendBodyBehindAppBar: true,
-          body: UpgradeAlert(
+        child: BackgroundScaffold( 
+          child: UpgradeAlert(
             upgrader: Upgrader(
               debugDisplayAlways     : false,
               durationUntilAlertAgain: Duration.zero,
@@ -176,8 +175,8 @@ class _HomeViewState extends State<HomeView> {
                 )
               ],
             ),
-          )
-        ),
+          ),
+        )
       ),
     );
   }

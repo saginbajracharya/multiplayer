@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:multiplayer/src/common/styles.dart';
 
 class LogoWidget extends StatefulWidget {
   const LogoWidget({super.key, this.seconds});
@@ -32,6 +33,7 @@ class _LogoWidgetState extends State<LogoWidget> {
         AppLocalizations.of(context)!.appTitle,
         textAlign: TextAlign.center,
         style: const TextStyle(
+          color: white,
           fontSize: 30.0, // Adjust the font size as needed
           fontWeight: FontWeight.bold, // Make the text bold
           letterSpacing: 5,
