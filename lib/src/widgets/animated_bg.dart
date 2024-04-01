@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:multiplayer/src/common/styles.dart';
@@ -54,7 +56,7 @@ class BackgroundScaffold extends StatefulWidget {
   State<BackgroundScaffold> createState() => _BackgroundScaffoldState();
 }
 
-class _BackgroundScaffoldState extends State<BackgroundScaffold> {
+class _BackgroundScaffoldState extends State<BackgroundScaffold> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +72,30 @@ class _BackgroundScaffoldState extends State<BackgroundScaffold> {
             fit: BoxFit.cover, // Optional: You can set the fit as needed
           ),
         ),
-        child: widget.child,
+        child: AnimatedBackground(
+          behaviour: RandomParticleBehaviour(
+            options: const ParticleOptions(
+              baseColor : gold,
+              spawnMinRadius : 1.0,
+              spawnMaxRadius : 2.0,
+              spawnMinSpeed : 8.0,
+              spawnMaxSpeed : 20.0,
+              spawnOpacity : 0.5,
+              minOpacity : 0.1,
+              maxOpacity : 1,
+              opacityChangeRate : 0.25,
+              particleCount : 50,
+            )
+          ),
+          vsync: this,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5), // Adjust the sigmaX and sigmaY values as needed
+            child: Container(
+              color: black.withOpacity(0.5), // Adjust the opacity as needed
+              child: widget.child,
+            ),
+          ),
+        ),
       )
     );
   }

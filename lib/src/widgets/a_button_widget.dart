@@ -34,9 +34,9 @@ class _AButtonWidgetState extends State<AButtonWidget> {
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return green.withOpacity(0.7); // Disabled color
+                return green.withOpacity(1); // Disabled color
               }
-              return green.withOpacity(0.7); // Regular color
+              return green.withOpacity(1); // Regular color
             },
           ),
         ),
