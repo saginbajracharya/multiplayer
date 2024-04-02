@@ -33,8 +33,8 @@ class _LoginViewState extends State<LoginView> {
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: BackgroundScaffold(
-          child: SingleChildScrollView(
-            child: Center(
+          child: Center(
+            child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Form(
@@ -50,6 +50,7 @@ class _LoginViewState extends State<LoginView> {
                       TextFormField(
                         controller: loginCon.email,
                         textAlign: TextAlign.start,
+                        style: const TextStyle(color: white),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
@@ -92,6 +93,7 @@ class _LoginViewState extends State<LoginView> {
                         obscureText: loginCon.showPassword,
                         controller: loginCon.password,
                         textAlign: TextAlign.start,
+                        style: const TextStyle(color: white),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           fillColor: black.withOpacity(0.8),
