@@ -77,6 +77,7 @@ class _SettingsViewState extends State<SettingsView> {
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton(
+                  style: normalTextStyle,
                   alignment : AlignmentDirectional.center,
                   isExpanded: true,
                   isDense : true,
@@ -90,18 +91,18 @@ class _SettingsViewState extends State<SettingsView> {
                   value: widget.controller.themeMode,
                   // Call the updateThemeMode method any time the user selects a theme.
                   onChanged: widget.controller.updateThemeMode,
-                  items: const [
+                  items: [
                     DropdownMenuItem(
                       value: ThemeMode.system,
-                      child: Text('System Theme',style:TextStyle(color:white)),
+                      child: Text('System Theme',style:normalTextStyle),
                     ),
                     DropdownMenuItem(
                       value: ThemeMode.light,
-                      child: Text('Light Theme',style:TextStyle(color:white)),
+                      child: Text('Light Theme',style:normalTextStyle),
                     ),
                     DropdownMenuItem(
                       value: ThemeMode.dark,
-                      child: Text('Dark Theme',style:TextStyle(color:white)),
+                      child: Text('Dark Theme',style:normalTextStyle),
                     )
                   ],
                 ),
@@ -144,6 +145,7 @@ class _SettingsViewState extends State<SettingsView> {
                 isExpanded: true,
                 isDense: true,
                 underline: const SizedBox(),
+                style: normalTextStyle,
                 dropdownColor: black.withOpacity(0.9),
                 icon: const Icon(
                   Icons.keyboard_arrow_down,
@@ -152,7 +154,10 @@ class _SettingsViewState extends State<SettingsView> {
                 items: AppLocalizations.supportedLocales.map((locale) {
                   return DropdownMenuItem<Locale>(
                     value: locale,
-                    child: Text(languageCodeToLocalization(locale.languageCode.toUpperCase(),context),style:const TextStyle(color:white)),
+                    child: Text(
+                      languageCodeToLocalization(locale.languageCode.toUpperCase(),context),
+                      style:normalTextStyle
+                    ),
                   );
                 }).toList(),
                 onChanged: (locale) {
@@ -178,8 +183,11 @@ class _SettingsViewState extends State<SettingsView> {
                   ),
                 ),
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 18.0),
-                child: Text(AppLocalizations.of(context)!.rateus,style: const TextStyle(color: white)),
+                padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 14.0),
+                child: Text(
+                  AppLocalizations.of(context)!.rateus,
+                  style: normalTextStyle
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -199,8 +207,11 @@ class _SettingsViewState extends State<SettingsView> {
                   ),
                 ),
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 18.0),
-                child: Text(AppLocalizations.of(context)!.shareApp,style: const TextStyle(color: white)),
+                padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 14.0),
+                child: Text(
+                  AppLocalizations.of(context)!.shareApp,
+                  style: normalTextStyle
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -234,13 +245,16 @@ class _SettingsViewState extends State<SettingsView> {
                   ),
                 ),
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 18.0),
+                padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 14.0),
                 child: FutureBuilder<String>(
                   future: getVersionNumber(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       versionText = snapshot.data!;
-                      return Text('${AppLocalizations.of(context)!.version} ${snapshot.data!}',style: const TextStyle(color: white));
+                      return Text(
+                        '${AppLocalizations.of(context)!.version} ${snapshot.data!}',
+                        style: normalTextStyle
+                      );
                     } else {
                       return const Text('',style: TextStyle(color: white));
                     }

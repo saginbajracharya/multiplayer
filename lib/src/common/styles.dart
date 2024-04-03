@@ -25,6 +25,11 @@ Color? grey700           = Colors.grey[700];
 Color? grey800           = Colors.grey[800];
 Color? grey900           = Colors.grey[900];
 
+TextStyle normalTextStyle = const TextStyle(
+  color: white,
+  fontSize: 16.0,
+);
+
 ThemeData lightTheme = ThemeData(
   useMaterial3:true,
   applyElevationOverlayColor: false,
