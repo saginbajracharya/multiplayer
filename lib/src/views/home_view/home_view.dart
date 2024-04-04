@@ -12,6 +12,7 @@ import 'package:multiplayer/src/views/settings/settings_view.dart';
 import 'package:multiplayer/src/views/signup_view/signup_view.dart';
 import 'package:multiplayer/src/views/store_view/store_view.dart';
 import 'package:multiplayer/src/widgets/a_button_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/widgets/animated_bg.dart';
 import 'package:multiplayer/src/widgets/logo_widget.dart';
 import 'package:upgrader/upgrader.dart';
@@ -89,7 +90,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                       padding: const EdgeInsets.symmetric(vertical:10),
                       child: Obx(()=>
                         Text(
-                          homeCon.username.value!=""?homeCon.username.value:'PLAYER 1',
+                          homeCon.username.value!=""?homeCon.username.value:AppLocalizations.of(context)!.player1,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -111,28 +112,28 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                     children: [
                       //MULTIPLAYER Play Button
                       AButtonWidget(
-                        btnText: 'MULTIPLAYER', 
+                        btnText: AppLocalizations.of(context)!.multiplayerMode, 
                         onPressed:() async{
                           Get.toNamed(LobbyView.routeName);
                         },
                       ),
                       //SOLO Play Button
                       AButtonWidget(
-                        btnText: 'SOLO PLAY', 
+                        btnText: AppLocalizations.of(context)!.soloMode, 
                         onPressed:() async{
                           Get.toNamed(Level1.routeName);
                         },
                       ),
                       //Shop Button
                       AButtonWidget(
-                        btnText: 'STORE', 
+                        btnText: AppLocalizations.of(context)!.store, 
                         onPressed:() async{
                           Get.toNamed(StoreView.routeName);
                         },
                       ),
                       // LOGOUT
                       AButtonWidget(
-                        btnText: 'LOGOUT', 
+                        btnText: AppLocalizations.of(context)!.logout, 
                         onPressed:() async{
                           loginoutCon.logout();
                         },
@@ -141,14 +142,16 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                   )
                   : Column(
                     children: [
+                      // Login
                       AButtonWidget(
-                        btnText: 'LOGIN', 
+                        btnText: AppLocalizations.of(context)!.login, 
                         onPressed:() async{
                           Get.toNamed(LoginView.routeName);
                         },
                       ),
+                      // Signup / Register
                       AButtonWidget(
-                        btnText: 'REGISTER', 
+                        btnText: AppLocalizations.of(context)!.signup, 
                         onPressed:() async{
                           Get.toNamed(SignUpView.routeName);
                         },
@@ -162,6 +165,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // Audio On/Off
                     Obx(()=>
                       IconButton(
                         onPressed: (){
@@ -180,6 +184,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                         ),
                       ),
                     ),
+                    // Settings View
                     IconButton(
                       onPressed: (){
                         Get.toNamed(SettingsView.routeName);
