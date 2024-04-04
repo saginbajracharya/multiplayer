@@ -2,34 +2,38 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 
-const white              = Colors.white;
-const black              = Colors.black;
-const blue               = Colors.blue;
-const red                = Colors.red;
-const yellow             = Colors.yellow;
-const green              = Colors.green;
-const transparent        = Colors.transparent;
-const gold               = Color(0xFFD4AF37);
-const backgroundColor    = Colors.black;
-const Color orange       = Colors.orange;
-const Color teal         = Colors.teal;
-const Color indigo       = Colors.indigo;
-const grey               = Colors.grey;
+// App Colors //
 
-Color? grey200           = Colors.grey[200];
-Color? grey300           = Colors.grey[300];
-Color? grey400           = Colors.grey[400];
-Color? grey500           = Colors.grey[500];
-Color? grey600           = Colors.grey[600];
-Color? grey700           = Colors.grey[700];
-Color? grey800           = Colors.grey[800];
-Color? grey900           = Colors.grey[900];
+const Color white              = Colors.white;
+const Color black              = Colors.black;
+const Color blue               = Colors.blue;
+const Color red                = Colors.red;
+const Color yellow             = Colors.yellow;
+const Color green              = Colors.green;
+const Color transparent        = Colors.transparent;
+const Color gold               = Color(0xFFD4AF37);
+const Color orange             = Colors.orange;
+const Color teal               = Colors.teal;
+const Color indigo             = Colors.indigo;
+const Color grey               = Colors.grey;
+Color? grey200                 = Colors.grey[200];
+Color? grey300                 = Colors.grey[300];
+Color? grey400                 = Colors.grey[400];
+Color? grey500                 = Colors.grey[500];
+Color? grey600                 = Colors.grey[600];
+Color? grey700                 = Colors.grey[700];
+Color? grey800                 = Colors.grey[800];
+Color? grey900                 = Colors.grey[900];
 
+const backgroundColor          = Colors.black;
+
+// App Styles //
 TextStyle normalTextStyle = const TextStyle(
   color: white,
   fontSize: 16.0,
 );
 
+// App Themes //
 ThemeData lightTheme = ThemeData(
   useMaterial3:true,
   applyElevationOverlayColor: false,
@@ -55,6 +59,7 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   canvasColor: transparent,
 );
 
+// App Gradients //
 Gradient skyGradient = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
