@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:multiplayer/src/common/read_write_storage.dart';
 import 'package:multiplayer/src/views/signup_view/signup_view.dart';
 
 enum NotificationState {
@@ -35,6 +36,7 @@ requestPerm() async {
 Future<void> setupFlutterNotifications() async {
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   String? token = await firebaseMessaging.getToken();
+  write(StorageKeys.fcmTokenKey, token);
   log('FCM Token: $token');
   if (isFlutterLocalNotificationsInitialized) {
     return;

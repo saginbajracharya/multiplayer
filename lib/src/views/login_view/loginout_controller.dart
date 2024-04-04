@@ -14,12 +14,14 @@ class LoginoutController extends GetxController{
   final password            = TextEditingController();
   bool showPassword         = true;
   RxBool isProcessingLogin  = false.obs;
+  RxBool isProcessingLogout = false.obs;
 
   login()async{
     if(isProcessingLogin.value) {
       return;
     }
     else{
+      String? currentFcmtoken = await read(StorageKeys.fcmTokenKey);
       try{
         isProcessingLogin.value = true;
         update();
@@ -28,13 +30,14 @@ class LoginoutController extends GetxController{
           {
             "email": email.text.trim(),
             "password": password.text.trim(),
+            "fcm_token": currentFcmtoken
           }
         );
         if(response!=null){
           FirestoreServices.updateUserStatus(true,email.text.trim(),false);
           await write(StorageKeys.usernameKey, response['user']['email']);
           await write(StorageKeys.emailKey, response['user']['email']);
-          await write(StorageKeys.apiTokenKey, response['token']);
+          await write(StorageKeys.currentApiToken, response['token']); // API TOkEN Save 
           Get.toNamed(HomeView.routeName);
         }
         else{
@@ -52,13 +55,33 @@ class LoginoutController extends GetxController{
   }
 
   logout()async{
-    final HomeController homeCon = Get.find();
-    FirestoreServices.updateUserStatus(false,email.text.trim(),false);
-    write(StorageKeys.usernameKey, '');
-    write(StorageKeys.emailKey, '');
-    write(StorageKeys.apiTokenKey, '');
-    homeCon.username.value="";
-    homeCon.checkLoginToken();
-    Get.toNamed(HomeView.routeName);
+    try{
+      isProcessingLogout.value = true;
+      update();
+      var response = await ApiServices.apiPost(
+        'api/logout',{}
+      );
+      if(response!=null){
+        //Reset All on Logout
+        final HomeController homeCon = Get.find();
+        FirestoreServices.updateUserStatus(false,email.text.trim(),false);
+        write(StorageKeys.usernameKey, '');
+        write(StorageKeys.emailKey, '');
+        write(StorageKeys.currentApiToken, '');
+        homeCon.username.value="";
+        homeCon.checkLoginToken();
+        Get.toNamed(HomeView.routeName);
+      }
+      else{
+        showToastMessage('Logout failed');
+      }
+    }
+    catch(e){
+      log(e.toString());
+    }
+    finally{
+      isProcessingLogout.value = false;
+      update();
+    }
   }
 }

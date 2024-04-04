@@ -15,7 +15,7 @@ class HomeController extends GetxController{
   // Checks if user is already logged in
   // Checks for token received after login
   checkLoginToken()async{
-    String loginToken = await read(StorageKeys.apiTokenKey.toString());
+    String loginToken = await read(StorageKeys.currentApiToken.toString());
     log(loginToken);
     if(loginToken!= ''){
       isUserLoggedIn.value = true;

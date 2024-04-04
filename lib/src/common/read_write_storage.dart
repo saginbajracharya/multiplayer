@@ -6,10 +6,11 @@ class StorageKeys {
   static const String usernameKey        = 'username';
   static const String emailKey           = 'email';
   static const String isLoggedInKey      = 'isLoggedIn';
-  static const String apiTokenKey        = 'apiToken';
   static const String audioOnKey         = 'audioOn';
   static const String currentLanguageKey = 'currentLanguage';
   static const String currentThemeKey    = 'currentTheme';
+  static const String currentApiToken    = 'currentApiToken';
+  static const String fcmTokenKey        = 'fcmToken';
 }
 
 read(String storageName){

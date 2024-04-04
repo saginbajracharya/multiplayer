@@ -10,7 +10,7 @@ class SplashController extends GetxController{
   RxBool online = true.obs;
   
   checkAndNavigate()async{
-    String apiToken = await read(StorageKeys.apiTokenKey.toString());
+    String apiToken = await read(StorageKeys.currentApiToken.toString());
     log(apiToken);
     Get.toNamed(HomeView.routeName);
   }
