@@ -13,29 +13,24 @@ import 'settings_controller.dart';
 ///
 /// When a user changes a setting, the SettingsController is updated and
 /// Widgets that listen to the SettingsController are rebuilt.
-class SettingsView extends StatefulWidget {
+class SettingsView extends StatelessWidget {
   const SettingsView({super.key, required this.controller});
 
   static const routeName = '/settings';
 
   final SettingsController controller;
 
-  @override
-  State<SettingsView> createState() => _SettingsViewState();
-}
-
-class _SettingsViewState extends State<SettingsView> {
-  final InAppReview inAppReview = InAppReview.instance;
-  String versionText = '';
-  int tapCount = 1;
 
   Future<String> getVersionNumber() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.version;
   }
-  
+
   @override
   Widget build(BuildContext context) {
+    final InAppReview inAppReview = InAppReview.instance;
+    String versionText = '';
+    int tapCount = 1;
     return BackgroundScaffold(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal:20.0),
@@ -88,9 +83,11 @@ class _SettingsViewState extends State<SettingsView> {
                     color: white,
                   ),
                   // Read the selected themeMode from the controller
-                  value: widget.controller.themeMode,
+                  value: controller.themeMode,
                   // Call the updateThemeMode method any time the user selects a theme.
-                  onChanged: widget.controller.updateThemeMode,
+                  onChanged: (value)async{
+                    controller.updateThemeMode(value!);
+                  },
                   items: [
                     DropdownMenuItem(
                       value: ThemeMode.system,
@@ -141,7 +138,7 @@ class _SettingsViewState extends State<SettingsView> {
                 ),
               ),
               child: DropdownButton<Locale>(
-                value: widget.controller.currentLocale,
+                value: controller.currentLocale,
                 isExpanded: true,
                 isDense: true,
                 underline: const SizedBox(),
@@ -162,7 +159,7 @@ class _SettingsViewState extends State<SettingsView> {
                 }).toList(),
                 onChanged: (locale) {
                   if (locale != null) {
-                    widget.controller.changeLocale(locale);
+                    controller.changeLocale(locale);
                   }
                 },
               ),

@@ -160,7 +160,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                   ),
                 ),
                 const SizedBox(width: double.infinity),
-                //Audio On/Off Icon_Button
+                //Audio On/Off Icon_Button && settings
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -184,10 +184,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                         ),
                       ),
                     ),
-                    // Settings View
+                    // Settings Btn
                     IconButton(
                       onPressed: (){
-                        Get.toNamed(SettingsView.routeName);
+                        Navigator.restorablePushNamed(context, SettingsView.routeName);
+                        // Get.toNamed(SettingsView.routeName);
                       },
                       icon: const Icon(
                         Icons.settings,
