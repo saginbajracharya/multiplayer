@@ -4,9 +4,9 @@ import 'package:multiplayer/src/common/read_write_storage.dart';
 class DioInterceptor extends Interceptor {
   
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    var token = read("apiToken");
-    options.headers['Authorization'] = 'Bearer $token';
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async{
+    String? currentApitoken = await read(StorageKeys.currentApiToken);
+    options.headers['Authorization'] = 'Bearer $currentApitoken';
     return super.onRequest(options, handler);
   }
 

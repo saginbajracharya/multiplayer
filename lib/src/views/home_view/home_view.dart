@@ -132,11 +132,25 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                         },
                       ),
                       // LOGOUT
-                      AButtonWidget(
-                        btnText: AppLocalizations.of(context)!.logout, 
-                        onPressed:() async{
-                          loginoutCon.logout();
-                        },
+                      GetBuilder(
+                        init: LoginoutController(),
+                        builder: (_) {
+                          return AButtonWidget(
+                            btnText: AppLocalizations.of(context)!.logout, 
+                            onPressed:() async{
+                              if(loginoutCon.isProcessingLogout.value==false){
+                                loginoutCon.logout();
+                              }
+                            },
+                            child: loginoutCon.isProcessingLogout.value 
+                            ?const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator()
+                            )
+                            :Text(AppLocalizations.of(context)!.logout,style: const TextStyle(color: white)),
+                          );
+                        }
                       ),
                     ],
                   )

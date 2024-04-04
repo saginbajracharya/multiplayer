@@ -45,8 +45,10 @@ class _LoginViewState extends State<LoginView> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       SizedBox(height: MediaQuery.of(context).size.width/5),
+                      //Logo
                       const LogoWidget(seconds: 0),
                       const SizedBox(height: 100.0),
+                      //Email
                       TextFormField(
                         controller: loginCon.email,
                         textAlign: TextAlign.start,
@@ -89,6 +91,7 @@ class _LoginViewState extends State<LoginView> {
                         },
                       ),
                       const SizedBox(height: 16.0),
+                      //Password
                       TextFormField(
                         obscureText: loginCon.showPassword,
                         controller: loginCon.password,
@@ -148,34 +151,34 @@ class _LoginViewState extends State<LoginView> {
                         },
                       ),
                       const SizedBox(height: 30.0),
+                      //Login button
                       GetBuilder(
                         init: LoginoutController(),
-                        builder: (context) {
+                        builder: (_) {
                           return AButtonWidget(
-                            btnText: 'Login', 
+                            btnText: AppLocalizations.of(context)!.login, 
                             onPressed:() {
-                              if(loginformKey.currentState!.validate()){
+                              if(loginformKey.currentState!.validate() && loginCon.isProcessingLogin.value==false){
                                 loginCon.login();
                               }
                             },
                             child: loginCon.isProcessingLogin.value 
-                            ?const Center(
-                              child: SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator()
-                              )
+                            ?const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator()
                             )
-                            :const Text('Login',style: TextStyle(color: white)),
+                            :Text(AppLocalizations.of(context)!.login,style: const TextStyle(color: white)),
                           );
                         }
                       ),
                       const SizedBox(height: 30.0),
+                      //Signup button
                       GestureDetector(
                         onTap: (){
                           Get.toNamed(SignUpView.routeName);
                         },
-                        child: const Text('Register',style: TextStyle(color: white))
+                        child: Text(AppLocalizations.of(context)!.signup,style: const TextStyle(color: white))
                       )
                     ],
                   ),

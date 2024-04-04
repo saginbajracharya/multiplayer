@@ -8,7 +8,6 @@ import 'package:multiplayer/src/views/login_view/login_view.dart';
 import 'package:multiplayer/src/widgets/toast_message_widget.dart';
 
 class SignUpController extends GetxController{
-  final signupformKey       = GlobalKey<FormState>();
   final name                = TextEditingController();
   final email               = TextEditingController();
   final password            = TextEditingController();

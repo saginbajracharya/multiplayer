@@ -91,15 +91,15 @@ class SettingsView extends StatelessWidget {
                   items: [
                     DropdownMenuItem(
                       value: ThemeMode.system,
-                      child: Text('System Theme',style:normalTextStyle),
+                      child: Text(AppLocalizations.of(context)!.systemTheme,style:normalTextStyle),
                     ),
                     DropdownMenuItem(
                       value: ThemeMode.light,
-                      child: Text('Light Theme',style:normalTextStyle),
+                      child: Text(AppLocalizations.of(context)!.lightTheme,style:normalTextStyle),
                     ),
                     DropdownMenuItem(
                       value: ThemeMode.dark,
-                      child: Text('Dark Theme',style:normalTextStyle),
+                      child: Text(AppLocalizations.of(context)!.darkTheme,style:normalTextStyle),
                     )
                   ],
                 ),

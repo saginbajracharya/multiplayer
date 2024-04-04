@@ -18,6 +18,7 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> {
   final SignUpController signUpCon = Get.put(SignUpController());
+  final signupformKey       = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -34,7 +35,7 @@ class _SignUpViewState extends State<SignUpView> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
-              key: signUpCon.signupformKey,
+              key: signupformKey,
               child: Center(
                 child: SingleChildScrollView(
                   child: Column(
@@ -191,25 +192,24 @@ class _SignUpViewState extends State<SignUpView> {
                         },
                       ),
                       const SizedBox(height: 30.0),
+                      //Signup Button
                       GetBuilder(
                         init: SignUpController(),
-                        builder: (context) {
+                        builder: (_) {
                           return AButtonWidget(
-                            btnText: 'Register', 
+                            btnText: AppLocalizations.of(context)!.signup, 
                             onPressed: (){
-                              if(signUpCon.signupformKey.currentState!.validate()){
+                              if(signupformKey.currentState!.validate()){
                                 signUpCon.signup();
                               }
                             },
                             child: signUpCon.isProcessingSignup.value 
-                            ?const Center(
-                              child: SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator()
-                              )
+                            ?const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator()
                             )
-                            :const Text('REGISTER',style: TextStyle(color: white)),
+                            :Text(AppLocalizations.of(context)!.signup,style: const TextStyle(color: white)),
                           );
                         }
                       )
