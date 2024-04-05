@@ -36,14 +36,13 @@ class _LobbyViewState extends State<LobbyView> {
       child: Scaffold(
         extendBody: false,
         extendBodyBehindAppBar: false,
-        appBar: AppBar(
-          title: const Text('Lobby'),
-          centerTitle: true,
-          automaticallyImplyLeading: true,
-        ),
         body: SafeArea(
           child: SingleChildScrollView(
+            clipBehavior: Clip.none,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
               children: [
                 AButtonWidget(
                   btnText: 'CREATE', 
@@ -117,7 +116,13 @@ class _LobbyViewState extends State<LobbyView> {
                     } else if (snapshot.hasError) {
                       return Text('Error: ${snapshot.error}');
                     } else {
-                      return const CircularProgressIndicator();
+                      return const Center(
+                        child: SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: CircularProgressIndicator()
+                        ),
+                      );
                     }
                   },
                 )

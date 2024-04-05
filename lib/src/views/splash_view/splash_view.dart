@@ -23,7 +23,7 @@ class _SplashViewState extends State<SplashView> {
     // splashCon.checkInitialConnectivity();
     dynamic audioOn = read(StorageKeys.audioOnKey)==""?true:read(StorageKeys.audioOnKey);
     if(audioOn){
-      AudioServices().play('assets/audio/theme_song.mp3');
+      AudioServices().play(AudioFiles.themeSong);
     }
 
     // Navigate after a few seconds

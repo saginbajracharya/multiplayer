@@ -187,7 +187,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                             AudioServices().pause();
                           }
                           else{
-                            AudioServices().play('assets/audio/theme_song.mp3');
+                            AudioServices().play(AudioFiles.themeSong);
                           }
                         },
                         icon: Icon(
@@ -201,8 +201,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                     // Settings Btn
                     IconButton(
                       onPressed: (){
-                        Navigator.restorablePushNamed(context, SettingsView.routeName);
-                        // Get.toNamed(SettingsView.routeName);
+                        Get.toNamed(SettingsView.routeName);
                       },
                       icon: const Icon(
                         Icons.settings,
