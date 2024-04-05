@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:multiplayer/src/common/audio_manager.dart';
+import 'package:multiplayer/src/services/audio_services.dart';
 import 'package:multiplayer/src/services/firestore_services.dart';
 import 'package:multiplayer/src/services/notification_services.dart';
 import 'src/app.dart';
@@ -28,7 +28,7 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   // Initialize Audio
-  AudioManager().init();
+  AudioServices().init();
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController();

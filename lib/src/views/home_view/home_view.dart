@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multiplayer/src/common/audio_manager.dart';
+import 'package:multiplayer/src/services/audio_services.dart';
 import 'package:multiplayer/src/common/constant.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
@@ -183,15 +183,15 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                     Obx(()=>
                       IconButton(
                         onPressed: (){
-                          if(AudioManager().isPlaying.value){
-                            AudioManager().pause();
+                          if(AudioServices().isPlaying.value){
+                            AudioServices().pause();
                           }
                           else{
-                            AudioManager().play('assets/audio/theme_song.mp3');
+                            AudioServices().play('assets/audio/theme_song.mp3');
                           }
                         },
                         icon: Icon(
-                          AudioManager().isPlaying.value
+                          AudioServices().isPlaying.value
                           ?Icons.music_note_outlined
                           :Icons.music_off,
                           color: white

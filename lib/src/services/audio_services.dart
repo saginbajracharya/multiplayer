@@ -2,14 +2,14 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/common/read_write_storage.dart';
 
-class AudioManager extends GetxController {
-  static final AudioManager _instance = AudioManager._internal();
+class AudioServices extends GetxController {
+  static final AudioServices _instance = AudioServices._internal();
 
-  factory AudioManager() {
+  factory AudioServices() {
     return _instance;
   }
 
-  AudioManager._internal();
+  AudioServices._internal();
   late AssetsAudioPlayer _assetsAudioPlayer;
   RxDouble currentVolume = 1.0.obs;
   RxBool isPlaying = false.obs;

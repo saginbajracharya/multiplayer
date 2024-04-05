@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
     // Handle notifications when the app is in the foreground
     getPushedNotification(context);
     return GetMaterialApp(
-      // popGesture: true,
-      // navigatorKey: navigatorKey,
-      // useInheritedMediaQuery: false,
+      popGesture: true,
+      navigatorKey: navigatorKey,
+      useInheritedMediaQuery: false,
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
       transitionDuration: const Duration(milliseconds: 200),
