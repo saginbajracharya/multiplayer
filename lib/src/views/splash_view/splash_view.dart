@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multiplayer/src/services/audio_services.dart';
-import 'package:multiplayer/src/common/read_write_storage.dart';
 import 'package:multiplayer/src/views/splash_view/splash_controller.dart';
 import 'package:multiplayer/src/widgets/logo_widget.dart';
 
@@ -21,11 +19,6 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     // splashCon.checkInitialConnectivity();
-    dynamic audioOn = read(StorageKeys.audioOnKey)==""?true:read(StorageKeys.audioOnKey);
-    if(audioOn){
-      AudioServices().play(AudioFiles.themeSong);
-    }
-
     // Navigate after a few seconds
     Future.delayed(const Duration(seconds: 3), () {
       splashCon.checkAndNavigate();

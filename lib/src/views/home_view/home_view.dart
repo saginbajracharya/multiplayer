@@ -114,7 +114,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                       AButtonWidget(
                         btnText: AppLocalizations.of(context)!.multiplayerMode, 
                         onPressed:() async{
-                          Get.toNamed(LobbyView.routeName);
+                          Get.toNamed(
+                            LobbyView.routeName,
+                          );
                         },
                       ),
                       //SOLO Play Button

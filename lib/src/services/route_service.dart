@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
 import 'package:multiplayer/src/views/level_view/level_1.dart';
 import 'package:multiplayer/src/views/lobby_view/lobby_detail_view/lobby_detail_view.dart';
@@ -10,38 +10,18 @@ import 'package:multiplayer/src/views/signup_view/signup_view.dart';
 import 'package:multiplayer/src/views/splash_view/splash_view.dart';
 import 'package:multiplayer/src/views/store_view/store_view.dart';
 
-class RouteManager extends StatelessWidget {
-  const RouteManager({
-    Key? key, 
-    required this.settings, 
-    required this.controller,
-  }) : super(key: key);
-
-  final RouteSettings settings;
-  final SettingsController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    switch (settings.name) {
-      case SettingsView.routeName:
-        return SettingsView(controller: controller);
-      case HomeView.routeName:
-        return const HomeView();
-      case LobbyView.routeName:
-        return const LobbyView();
-      case LobbyDetailView.routeName:
-        return const LobbyDetailView();
-      case LoginView.routeName:
-        return const LoginView();
-      case SignUpView.routeName:
-        return const SignUpView();
-      case Level1.routeName:
-        return const Level1();
-      case StoreView.routeName:
-        return const StoreView();
-      case SplashView.routeName:
-      default:
-        return const SplashView();
-    }
+class RouteManager {
+  static List<GetPage> getPages(SettingsController settingsController) {
+    return [
+      GetPage(name: SettingsView.routeName, page: () => SettingsView(controller: settingsController)),
+      GetPage(name: HomeView.routeName, page: () => const HomeView()),
+      GetPage(name: LobbyView.routeName, page: () => const LobbyView()),
+      GetPage(name: LobbyDetailView.routeName, page: () => const LobbyDetailView()),
+      GetPage(name: LoginView.routeName, page: () => const LoginView()),
+      GetPage(name: SignUpView.routeName, page: () => const SignUpView()),
+      GetPage(name: Level1.routeName, page: () => const Level1()),
+      GetPage(name: StoreView.routeName, page: () => const StoreView()),
+      GetPage(name: SplashView.routeName, page: () => const SplashView()),
+    ];
   }
 }
