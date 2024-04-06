@@ -62,155 +62,167 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
               debugDisplayAlways     : false,
               durationUntilAlertAgain: Duration.zero,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
+            child: Stack(
+              alignment: Alignment.topCenter,
               children: [
-                const SizedBox(width: double.infinity),
-                const SizedBox(width: double.infinity),
                 // Title
-                const LogoWidget(seconds: 1),
-                const SizedBox(width: double.infinity),
-                // Profile
-                Column(
-                  children: [
-                    const Center(
-                      child: CircleAvatar(
-                        radius: 50.0,
-                        backgroundColor: gold,
-                        child: CircleAvatar(
-                          radius: 46.0,
-                          backgroundColor: grey,
-                          backgroundImage: NetworkImage(profilePlaceHolder),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical:10),
-                      child: Obx(()=>
-                        Text(
-                          homeCon.username.value!=""?homeCon.username.value:AppLocalizations.of(context)!.player1,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: white
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+                const Positioned(
+                  top: kToolbarHeight+50,
+                  child: LogoWidget(seconds: 1)
                 ),
-                const SizedBox(width: double.infinity),
-                // Play/Login Buttons
-                Obx(()=> 
-                  homeCon.isUserLoggedIn.value
-                  ? Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
-                      //MULTIPLAYER Play Button
-                      AButtonWidget(
-                        btnText: AppLocalizations.of(context)!.multiplayerMode, 
-                        onPressed:() async{
-                          Get.toNamed(
-                            LobbyView.routeName,
-                          );
-                        },
+                      const SizedBox(height: kToolbarHeight+150),
+                      // Profile
+                      Column(
+                        children: [
+                          const Center(
+                            child: CircleAvatar(
+                              radius: 50.0,
+                              backgroundColor: gold,
+                              child: CircleAvatar(
+                                radius: 46.0,
+                                backgroundColor: grey,
+                                backgroundImage: NetworkImage(profilePlaceHolder),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical:20),
+                            child: Obx(()=>
+                              Text(
+                                homeCon.username.value!=""?homeCon.username.value:AppLocalizations.of(context)!.player1,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: white
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-                      //SOLO Play Button
-                      AButtonWidget(
-                        btnText: AppLocalizations.of(context)!.soloMode, 
-                        onPressed:() async{
-                          Get.toNamed(Level1.routeName);
-                        },
-                      ),
-                      //Shop Button
-                      AButtonWidget(
-                        btnText: AppLocalizations.of(context)!.store, 
-                        onPressed:() async{
-                          Get.toNamed(StoreView.routeName);
-                        },
-                      ),
-                      // LOGOUT
-                      GetBuilder(
-                        init: LoginoutController(),
-                        builder: (_) {
-                          return AButtonWidget(
-                            btnText: AppLocalizations.of(context)!.logout, 
-                            onPressed:() async{
-                              if(loginoutCon.isProcessingLogout.value==false){
-                                loginoutCon.logout();
+                      const SizedBox(height: 20),
+                      // Play/Login Buttons
+                      Obx(()=> 
+                        homeCon.isUserLoggedIn.value
+                        ? Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            //MULTIPLAYER Play Button
+                            AButtonWidget(
+                              btnText: AppLocalizations.of(context)!.multiplayerMode, 
+                              onPressed:() async{
+                                Get.toNamed(
+                                  LobbyView.routeName,
+                                );
+                              },
+                            ),
+                            //SOLO Play Button
+                            AButtonWidget(
+                              btnText: AppLocalizations.of(context)!.soloMode, 
+                              onPressed:() async{
+                                Get.toNamed(Level1.routeName);
+                              },
+                            ),
+                            //Shop Button
+                            AButtonWidget(
+                              btnText: AppLocalizations.of(context)!.store, 
+                              onPressed:() async{
+                                Get.toNamed(StoreView.routeName);
+                              },
+                            ),
+                            // LOGOUT
+                            GetBuilder(
+                              init: LoginoutController(),
+                              builder: (_) {
+                                return AButtonWidget(
+                                  btnText: AppLocalizations.of(context)!.logout, 
+                                  onPressed:() async{
+                                    if(loginoutCon.isProcessingLogout.value==false){
+                                      loginoutCon.logout();
+                                    }
+                                  },
+                                  child: loginoutCon.isProcessingLogout.value 
+                                  ?const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator()
+                                  )
+                                  :Text(AppLocalizations.of(context)!.logout,style: const TextStyle(color: white)),
+                                );
                               }
-                            },
-                            child: loginoutCon.isProcessingLogout.value 
-                            ?const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator()
-                            )
-                            :Text(AppLocalizations.of(context)!.logout,style: const TextStyle(color: white)),
-                          );
-                        }
-                      ),
-                    ],
-                  )
-                  : Column(
-                    children: [
-                      // Login
-                      AButtonWidget(
-                        btnText: AppLocalizations.of(context)!.login, 
-                        onPressed:() async{
-                          Get.toNamed(LoginView.routeName);
-                        },
-                      ),
-                      // Signup / Register
-                      AButtonWidget(
-                        btnText: AppLocalizations.of(context)!.signup, 
-                        onPressed:() async{
-                          Get.toNamed(SignUpView.routeName);
-                        },
+                            ),
+                          ],
+                        )
+                        : Column(
+                          children: [
+                            // Login
+                            AButtonWidget(
+                              btnText: AppLocalizations.of(context)!.login, 
+                              onPressed:() async{
+                                Get.toNamed(LoginView.routeName);
+                              },
+                            ),
+                            // Signup / Register
+                            AButtonWidget(
+                              btnText: AppLocalizations.of(context)!.signup, 
+                              onPressed:() async{
+                                Get.toNamed(SignUpView.routeName);
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: double.infinity),
                 //Audio On/Off Icon_Button && settings
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Audio On/Off
-                    Obx(()=>
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Audio On/Off
+                      Obx(()=>
+                        IconButton(
+                          onPressed: (){
+                            if(AudioServices().isPlaying.value){
+                              AudioServices().pause();
+                            }
+                            else{
+                              AudioServices().play(AudioFiles.themeSong);
+                            }
+                          },
+                          icon: Icon(
+                            AudioServices().isPlaying.value
+                            ?Icons.music_note_outlined
+                            :Icons.music_off,
+                            color: white
+                          ),
+                        ),
+                      ),
+                      // Settings Btn
                       IconButton(
                         onPressed: (){
-                          if(AudioServices().isPlaying.value){
-                            AudioServices().pause();
-                          }
-                          else{
-                            AudioServices().play(AudioFiles.themeSong);
-                          }
+                          Get.toNamed(SettingsView.routeName);
                         },
-                        icon: Icon(
-                          AudioServices().isPlaying.value
-                          ?Icons.music_note_outlined
-                          :Icons.music_off,
+                        icon: const Icon(
+                          Icons.settings,
                           color: white
                         ),
                       ),
-                    ),
-                    // Settings Btn
-                    IconButton(
-                      onPressed: (){
-                        Get.toNamed(SettingsView.routeName);
-                      },
-                      icon: const Icon(
-                        Icons.settings,
-                        color: white
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
