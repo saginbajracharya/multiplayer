@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:multiplayer/src/common/read_write_storage.dart';
 
 class SettingsController extends GetxController {
-  late ThemeMode _themeMode;
-  ThemeMode get themeMode => _themeMode;
+  final _themeMode = Rx<ThemeMode>(ThemeMode.system);
+  ThemeMode get themeMode => _themeMode.value;
 
   Locale _currentLocale = const Locale('en', '');
   Locale get currentLocale => _currentLocale;
@@ -18,14 +18,15 @@ class SettingsController extends GetxController {
   }
 
   Future<void> loadSettings() async {
-    _themeMode = await readThemeMode();
+    _themeMode.value = await readThemeMode();
     _currentLocale = await readLocale();
     update();
   }
 
   Future<void> updateThemeMode(ThemeMode newThemeMode) async {
     if (newThemeMode == _themeMode) return;
-    _themeMode = newThemeMode;
+    _themeMode.value = newThemeMode;
+    update();
     await write(StorageKeys.currentThemeKey, newThemeMode.toString().split('.').last);
     if(_themeMode==ThemeMode.system){
       if (Get.isPlatformDarkMode) {

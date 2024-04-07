@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/views/hidden_view/hidden_view.dart';
 import 'package:multiplayer/src/widgets/animated_bg.dart';
@@ -70,38 +71,40 @@ class SettingsView extends StatelessWidget {
                   borderRadius : BorderRadius.all(Radius.circular(10.0)),
                 ),
               ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                  style: normalTextStyle,
-                  alignment : AlignmentDirectional.center,
-                  isExpanded: true,
-                  isDense : true,
-                  borderRadius:BorderRadius.circular(10.0),
-                  dropdownColor: black.withOpacity(0.9),
-                  icon: const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: white,
+              child: Obx(()=>
+                DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    style: normalTextStyle,
+                    alignment : AlignmentDirectional.center,
+                    isExpanded: true,
+                    isDense : true,
+                    borderRadius:BorderRadius.circular(10.0),
+                    dropdownColor: black.withOpacity(0.9),
+                    icon: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: white,
+                    ),
+                    // Read the selected themeMode from the controller
+                    value: controller.themeMode,
+                    // Call the updateThemeMode method any time the user selects a theme.
+                    onChanged: (value)async{
+                      controller.updateThemeMode(value!);
+                    },
+                    items: [
+                      DropdownMenuItem(
+                        value: ThemeMode.system,
+                        child: Text(AppLocalizations.of(context)!.systemTheme,style:normalTextStyle),
+                      ),
+                      DropdownMenuItem(
+                        value: ThemeMode.light,
+                        child: Text(AppLocalizations.of(context)!.lightTheme,style:normalTextStyle),
+                      ),
+                      DropdownMenuItem(
+                        value: ThemeMode.dark,
+                        child: Text(AppLocalizations.of(context)!.darkTheme,style:normalTextStyle),
+                      )
+                    ],
                   ),
-                  // Read the selected themeMode from the controller
-                  value: controller.themeMode,
-                  // Call the updateThemeMode method any time the user selects a theme.
-                  onChanged: (value)async{
-                    controller.updateThemeMode(value!);
-                  },
-                  items: [
-                    DropdownMenuItem(
-                      value: ThemeMode.system,
-                      child: Text(AppLocalizations.of(context)!.systemTheme,style:normalTextStyle),
-                    ),
-                    DropdownMenuItem(
-                      value: ThemeMode.light,
-                      child: Text(AppLocalizations.of(context)!.lightTheme,style:normalTextStyle),
-                    ),
-                    DropdownMenuItem(
-                      value: ThemeMode.dark,
-                      child: Text(AppLocalizations.of(context)!.darkTheme,style:normalTextStyle),
-                    )
-                  ],
                 ),
               ),
             ),

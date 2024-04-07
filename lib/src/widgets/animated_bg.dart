@@ -48,9 +48,10 @@ class _AnimatedBgState extends State<AnimatedBg> with TickerProviderStateMixin{
 // RacingLinesBehaviour
 
 class BackgroundScaffold extends StatefulWidget {
-  const BackgroundScaffold({super.key, required this.child});
+  const BackgroundScaffold({super.key, required this.child,this.appbar});
 
   final Widget child;
+  final PreferredSizeWidget? appbar; 
 
   @override
   State<BackgroundScaffold> createState() => _BackgroundScaffoldState();
@@ -63,6 +64,7 @@ class _BackgroundScaffoldState extends State<BackgroundScaffold> with TickerProv
       backgroundColor: backgroundColor,
       extendBody: true,
       extendBodyBehindAppBar: true,
+      appBar: widget.appbar,
       body: Container(
         width: double.infinity,
         height: double.infinity,

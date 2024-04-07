@@ -9,6 +9,7 @@ import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/common/styles.dart';
+import 'package:multiplayer/src/widgets/animated_bg.dart';
 import 'consumable_store.dart';
 
 // Auto-consume must be true on iOS.
@@ -166,8 +167,8 @@ class _StoreViewState extends State<StoreView> {
         ),
       );
     }
-    return Scaffold(
-      appBar: AppBar(
+    return BackgroundScaffold(
+      appbar: AppBar(
         automaticallyImplyLeading: true,
         backgroundColor: transparent,
         elevation: 0,
@@ -175,8 +176,7 @@ class _StoreViewState extends State<StoreView> {
         centerTitle: true,
         title: Text(AppLocalizations.of(context)!.store,style: const TextStyle(color:white)),
       ),
-      extendBodyBehindAppBar: true,
-      body: Stack(
+      child: Stack(
         children: stack,
       ),
     );
