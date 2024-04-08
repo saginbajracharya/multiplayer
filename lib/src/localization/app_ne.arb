@@ -25,5 +25,8 @@
   "shareApp"              : "शेयर अनुप्रयोग",
   "version"               : "संस्करण",
   "lobby"                 : "लबी",
-  "store"                 : "पासल"
+  "store"                 : "पासल",
+  "yes"                   : "Yes",
+  "no"                    : "No",
+  "exitAppDialogText"     : "Are You Sure You Want To Exit?"
 }

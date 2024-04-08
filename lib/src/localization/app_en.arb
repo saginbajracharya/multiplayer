@@ -25,5 +25,8 @@
   "shareApp"              : "Share App",
   "version"               : "Version",
   "lobby"                 : "Lobby",
-  "store"                 : "STORE"
+  "store"                 : "STORE",
+  "yes"                   : "Yes",
+  "no"                    : "No",
+  "exitAppDialogText"     : "Are You Sure You Want To Exit?"
 }

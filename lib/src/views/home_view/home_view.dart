@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/services/audio_services.dart';
@@ -15,6 +18,7 @@ import 'package:multiplayer/src/views/store_view/store_view.dart';
 import 'package:multiplayer/src/widgets/a_button_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/widgets/animated_bg.dart';
+import 'package:multiplayer/src/widgets/exit_dialog.dart';
 import 'package:multiplayer/src/widgets/logo_widget.dart';
 import 'package:upgrader/upgrader.dart';
 
@@ -48,6 +52,20 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
+      onPopInvoked: (bool didPop){
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => ExitDialog(
+            okCallback: () { 
+              if (Platform.isAndroid) {
+                SystemNavigator.pop();
+              } else if (Platform.isIOS) {
+                exit(0);
+              }
+            },
+          )
+        );
+      },
       child: UpgradeAlert(
         upgrader: Upgrader(
           countryCode            : 'en',
