@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/views/signup_view/signup_controller.dart';
 import 'package:multiplayer/src/widgets/a_button_widget.dart';
 import 'package:multiplayer/src/widgets/animated_bg.dart';
-import 'package:multiplayer/src/widgets/logo_widget.dart';
 import '../../common/styles.dart';
 
 class SignUpView extends StatefulWidget {
@@ -32,6 +31,14 @@ class _SignUpViewState extends State<SignUpView> {
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: BackgroundScaffold(
+          appbar:AppBar(
+            automaticallyImplyLeading: true,
+            backgroundColor: transparent,
+            elevation: 0,
+            iconTheme: const IconThemeData(color: white),
+            centerTitle: true,
+            title: Text(AppLocalizations.of(context)!.signup,style: const TextStyle(color:white)),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
@@ -43,9 +50,6 @@ class _SignUpViewState extends State<SignUpView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      SizedBox(height: MediaQuery.of(context).size.width/5),
-                      const LogoWidget(seconds: 0),
-                      const SizedBox(height: 50.0),
                       //name
                       TextFormField(
                         controller: signUpCon.name,
@@ -56,7 +60,10 @@ class _SignUpViewState extends State<SignUpView> {
                         decoration: InputDecoration(
                           fillColor: black.withOpacity(0.8),
                           filled: true,
-                          errorStyle: const TextStyle(fontSize: 0.01),
+                          errorStyle: const TextStyle(
+                            fontSize: 0,
+                            height: 0
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(color: white)
@@ -99,7 +106,10 @@ class _SignUpViewState extends State<SignUpView> {
                         decoration: InputDecoration(
                           fillColor: black.withOpacity(0.8),
                           filled: true,
-                          errorStyle: const TextStyle(fontSize: 0.01),
+                          errorStyle: const TextStyle(
+                            fontSize: 0,
+                            height: 0
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(color: white)
@@ -142,7 +152,10 @@ class _SignUpViewState extends State<SignUpView> {
                         decoration: InputDecoration(
                           fillColor: black.withOpacity(0.8),
                           filled: true,
-                          errorStyle: const TextStyle(fontSize: 0.01),
+                          errorStyle: const TextStyle(
+                            fontSize: 0,
+                            height: 0
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(color: white)

@@ -69,6 +69,7 @@ class LoginoutController extends GetxController{
         write(StorageKeys.emailKey, '');
         write(StorageKeys.currentApiToken, '');
         homeCon.username.value="";
+        homeCon.isUserLoggedIn.value = false;
         homeCon.checkLoginToken();
         Get.toNamed(HomeView.routeName);
       }

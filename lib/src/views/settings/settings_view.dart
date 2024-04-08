@@ -33,6 +33,14 @@ class SettingsView extends StatelessWidget {
     String versionText = '';
     int tapCount = 1;
     return BackgroundScaffold(
+      appbar:AppBar(
+        automaticallyImplyLeading: true,
+        backgroundColor: transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: white),
+        centerTitle: true,
+        title: Text(AppLocalizations.of(context)!.settings,style: const TextStyle(color:white)),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal:20.0),
         child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/services/audio_services.dart';
 import 'package:multiplayer/src/common/constant.dart';
@@ -63,11 +64,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
               durationUntilAlertAgain: Duration.zero,
             ),
             child: Stack(
-              alignment: Alignment.topCenter,
+              alignment: Alignment.center,
               children: [
                 // Title
                 const Positioned(
-                  top: kToolbarHeight+50,
+                  top: kToolbarHeight+20,
                   child: LogoWidget(seconds: 1)
                 ),
                 SingleChildScrollView(
@@ -76,114 +77,150 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      const SizedBox(height: kToolbarHeight+150),
                       // Profile
-                      Column(
-                        children: [
-                          const Center(
-                            child: CircleAvatar(
-                              radius: 50.0,
-                              backgroundColor: gold,
-                              child: CircleAvatar(
-                                radius: 46.0,
-                                backgroundColor: grey,
-                                backgroundImage: NetworkImage(profilePlaceHolder),
-                              ),
+                      const Center(
+                        child: CircleAvatar(
+                          radius: 50.0,
+                          backgroundColor: gold,
+                          child: CircleAvatar(
+                            radius: 46.0,
+                            backgroundColor: grey,
+                            backgroundImage: NetworkImage(profilePlaceHolder),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical:20),
+                        child: Obx(()=>
+                          Text(
+                            homeCon.username.value!=""?homeCon.username.value:AppLocalizations.of(context)!.player1,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: white
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical:20),
-                            child: Obx(()=>
-                              Text(
-                                homeCon.username.value!=""?homeCon.username.value:AppLocalizations.of(context)!.player1,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: white
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
+                        ),
                       ),
-                      const SizedBox(height: 20),
-                      // Play/Login Buttons
-                      Obx(()=> 
+                      Obx(()=>
                         homeCon.isUserLoggedIn.value
                         ? Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            //MULTIPLAYER Play Button
-                            AButtonWidget(
-                              btnText: AppLocalizations.of(context)!.multiplayerMode, 
-                              onPressed:() async{
-                                Get.toNamed(
-                                  LobbyView.routeName,
-                                );
-                              },
+                            //Coin
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  width: 40,
+                                  height: 40,
+                                  'assets/images/coin.svg',
+                                ),
+                                const SizedBox(width: 5.0),
+                                Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      height: 30,
+                                      'assets/images/Coin_Display_UI.svg',
+                                    ),
+                                    Text('0',style: normalTextStyleBlack),
+                                  ],
+                                )
+                              ],
                             ),
-                            //SOLO Play Button
-                            AButtonWidget(
-                              btnText: AppLocalizations.of(context)!.soloMode, 
-                              onPressed:() async{
-                                Get.toNamed(Level1.routeName);
-                              },
-                            ),
-                            //Shop Button
-                            AButtonWidget(
-                              btnText: AppLocalizations.of(context)!.store, 
-                              onPressed:() async{
-                                Get.toNamed(StoreView.routeName);
-                              },
-                            ),
-                            // LOGOUT
-                            GetBuilder(
-                              init: LoginoutController(),
-                              builder: (_) {
-                                return AButtonWidget(
-                                  btnText: AppLocalizations.of(context)!.logout, 
-                                  onPressed:() async{
-                                    if(loginoutCon.isProcessingLogout.value==false){
-                                      loginoutCon.logout();
-                                    }
-                                  },
-                                  child: loginoutCon.isProcessingLogout.value 
-                                  ?const SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: CircularProgressIndicator()
-                                  )
-                                  :Text(AppLocalizations.of(context)!.logout,style: const TextStyle(color: white)),
-                                );
-                              }
+                            const SizedBox(height: 10.0),
+                            //Gem
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  width: 40,
+                                  height: 40,
+                                  'assets/images/gem.svg',
+                                ),
+                                const SizedBox(width: 5.0),
+                                Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      height: 30,
+                                      'assets/images/Gem_Display_UI.svg',
+                                    ),
+                                    Text('0',style: normalTextStyleBlack),
+                                  ],
+                                )
+                              ],
                             ),
                           ],
                         )
-                        : Column(
-                          children: [
-                            // Login
-                            AButtonWidget(
-                              btnText: AppLocalizations.of(context)!.login, 
-                              onPressed:() async{
-                                Get.toNamed(LoginView.routeName);
-                              },
-                            ),
-                            // Signup / Register
-                            AButtonWidget(
-                              btnText: AppLocalizations.of(context)!.signup, 
-                              onPressed:() async{
-                                Get.toNamed(SignUpView.routeName);
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
+                        :const SizedBox(),
+                      )
                     ],
                   ),
                 ),
-                //Audio On/Off Icon_Button && settings
+                // Play/Login Buttons
+                Positioned(
+                  bottom: kBottomNavigationBarHeight,
+                  left: 0,
+                  right: 0,
+                  child: Obx(()=> 
+                    homeCon.isUserLoggedIn.value
+                    ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        //MULTIPLAYER Play Button
+                        GestureDetector(
+                          onTap:() async{
+                            Get.toNamed(
+                              LobbyView.routeName,
+                            );
+                          },
+                          child: Container(
+                            color: red.withOpacity(0.5),
+                            width: MediaQuery.of(context).size.width/2,
+                            height: 50,
+                            alignment: Alignment.center,
+                            child: Text(AppLocalizations.of(context)!.multiplayerMode,style:normalTextStyle)
+                          )
+                        ),
+                        //SOLO Play Button
+                        GestureDetector(
+                          onTap:() async{
+                            Get.toNamed(Level1.routeName);
+                          },
+                          child: Container(
+                            color: blue.withOpacity(0.5),
+                            width: MediaQuery.of(context).size.width/2,
+                            height: 50,
+                            alignment: Alignment.center,
+                            child: Text(AppLocalizations.of(context)!.soloMode,style:normalTextStyle),
+                          )
+                        ),
+                      ],
+                    )
+                    : Column(
+                      children: [
+                        // Login
+                        AButtonWidget(
+                          btnText: AppLocalizations.of(context)!.login, 
+                          onPressed:() async{
+                            Get.toNamed(LoginView.routeName);
+                          },
+                        ),
+                        // Signup / Register
+                        AButtonWidget(
+                          btnText: AppLocalizations.of(context)!.signup, 
+                          onPressed:() async{
+                            Get.toNamed(SignUpView.routeName);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                //Audio On/Off Icon_Button,settings,logout,store
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -192,6 +229,19 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      GetBuilder(
+                        init: LoginoutController(),
+                        builder: (_) {
+                          return homeCon.isUserLoggedIn.value
+                          ?IconButton(
+                            icon: const Icon(Icons.store), 
+                            onPressed:() async{
+                              Get.toNamed(StoreView.routeName);
+                            },
+                          )
+                          :const SizedBox();
+                        }
+                      ),
                       // Audio On/Off
                       Obx(()=>
                         IconButton(
@@ -221,6 +271,18 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                           color: white
                         ),
                       ),
+                      //Logout
+                      Obx(()=> homeCon.isUserLoggedIn.value
+                        ?IconButton(
+                          icon: const Icon(Icons.power_settings_new), 
+                          onPressed:() async{
+                            if(loginoutCon.isProcessingLogout.value==false){
+                              loginoutCon.logout();
+                            }
+                          },
+                        )
+                        :const SizedBox(),
+                      )
                     ],
                   ),
                 ),

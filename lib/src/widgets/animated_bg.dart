@@ -64,6 +64,7 @@ class _BackgroundScaffoldState extends State<BackgroundScaffold> with TickerProv
       backgroundColor: backgroundColor,
       extendBody: true,
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: true,
       appBar: widget.appbar,
       body: Container(
         width: double.infinity,

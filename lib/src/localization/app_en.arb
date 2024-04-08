@@ -11,6 +11,7 @@
   "email"                 : "Email",
   "password"              : "Password",
   "home"                  : "HOME",
+  "settings"              : "SETTINGS",
   "theme"                 : "Theme",
   "language"              : "Language",
   "lightTheme"            : "Light Theme",
@@ -24,5 +25,5 @@
   "shareApp"              : "Share App",
   "version"               : "Version",
   "lobby"                 : "Lobby",
-  "store"                 : "Store"
+  "store"                 : "STORE"
 }

@@ -19,7 +19,7 @@ class _AButtonWidgetState extends State<AButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width,
+      width: widget.width??250.0,
       height: widget.height,
       padding: widget.padding??const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
       child: ElevatedButton(

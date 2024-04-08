@@ -33,6 +33,21 @@ TextStyle normalTextStyle = const TextStyle(
   fontSize: 16.0,
 );
 
+TextStyle normalTextStyleBlack = const TextStyle(
+  color: black,
+  fontSize: 16.0,
+);
+
+TextStyle headingTextStyle = const TextStyle(
+  color: white,
+  fontSize: 30.0,
+);
+
+TextStyle headingTextStyleBlack = const TextStyle(
+  color: black,
+  fontSize: 30.0,
+);
+
 // App Themes //
 ThemeData lightTheme = ThemeData(
   useMaterial3:true,

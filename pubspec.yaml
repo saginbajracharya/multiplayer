@@ -54,8 +54,12 @@ dependencies:
   # Package info
   package_info_plus: ^4.1.0
   
-  # Design
+  # Design Particles Background
   animated_background: ^2.0.0
+
+  # SVG Image
+  flutter_svg: ^2.0.10+1
+
 
 
 dev_dependencies:

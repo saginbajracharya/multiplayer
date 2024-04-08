@@ -24,22 +24,22 @@ class SettingsController extends GetxController {
   }
 
   Future<void> updateThemeMode(ThemeMode newThemeMode) async {
-    if (newThemeMode == _themeMode) return;
+    if (newThemeMode == _themeMode.value) return;
     _themeMode.value = newThemeMode;
     update();
     await write(StorageKeys.currentThemeKey, newThemeMode.toString().split('.').last);
-    if(_themeMode==ThemeMode.system){
+    if(_themeMode.value==ThemeMode.system){
       if (Get.isPlatformDarkMode) {
         Get.changeTheme(ThemeData.dark());
       } else {
         Get.changeTheme(ThemeData.light());
       }
     }
-    else if(_themeMode == ThemeMode.light)
+    else if(_themeMode.value == ThemeMode.light)
     {
       Get.changeTheme(ThemeData.light());
     }
-    else if(_themeMode == ThemeMode.dark){
+    else if(_themeMode.value == ThemeMode.dark){
       Get.changeTheme(ThemeData.dark());
     }
     update();
