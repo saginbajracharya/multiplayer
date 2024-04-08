@@ -6,9 +6,15 @@ import 'package:multiplayer/src/common/read_write_storage.dart';
 class HomeController extends GetxController{
   RxBool isUserLoggedIn = false.obs;
   RxString username = "".obs;
+  RxString userProfilePic = "".obs;
 
   getUserName()async{
     username.value = await read(StorageKeys.usernameKey);
+    update();
+  }
+
+  getProfilePic()async{
+    userProfilePic.value = await read(StorageKeys.profilePictureKey);
     update();
   }
 

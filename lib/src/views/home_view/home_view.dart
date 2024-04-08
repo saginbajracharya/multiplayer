@@ -39,6 +39,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
   void initState() {
     super.initState();
     homeCon.getUserName();
+    homeCon.getProfilePic();
     // Start the animation
     homeCon.checkLoginToken();
     Future.delayed(const Duration(seconds: 1), () {
@@ -96,14 +97,28 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       // Profile
-                      const Center(
-                        child: CircleAvatar(
-                          radius: 50.0,
-                          backgroundColor: gold,
+                      Obx(()=> 
+                        homeCon.isUserLoggedIn.value
+                        ?Center(
                           child: CircleAvatar(
-                            radius: 46.0,
-                            backgroundColor: grey,
-                            backgroundImage: NetworkImage(profilePlaceHolder),
+                            radius: 50.0,
+                            backgroundColor: gold,
+                            child: CircleAvatar(
+                              radius: 46.0,
+                              backgroundColor: grey,
+                              backgroundImage: NetworkImage(homeCon.userProfilePic.value!=""?"$baseUploadsImageUrl${homeCon.userProfilePic.value}":profilePlaceHolder),
+                            ),
+                          ),
+                        )
+                        :const Center(
+                          child: CircleAvatar(
+                            radius: 50.0,
+                            backgroundColor: gold,
+                            child: CircleAvatar(
+                              radius: 46.0,
+                              backgroundColor: grey,
+                              backgroundImage: NetworkImage(profilePlaceHolder),
+                            ),
                           ),
                         ),
                       ),

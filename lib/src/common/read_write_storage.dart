@@ -11,6 +11,7 @@ class StorageKeys {
   static const String currentThemeKey    = 'currentTheme';
   static const String currentApiToken    = 'currentApiToken';
   static const String fcmTokenKey        = 'fcmToken';
+  static const String profilePictureKey  = 'profilePicture';
 }
 
 read(String storageName){

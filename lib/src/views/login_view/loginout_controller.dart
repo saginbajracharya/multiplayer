@@ -35,9 +35,10 @@ class LoginoutController extends GetxController{
         );
         if(response!=null){
           FirestoreServices.updateUserStatus(true,email.text.trim(),false);
-          await write(StorageKeys.usernameKey, response['user']['email']);
-          await write(StorageKeys.emailKey, response['user']['email']);
+          await write(StorageKeys.usernameKey, response['user']['name']); // Username Save
+          await write(StorageKeys.emailKey, response['user']['email']); // Email Save
           await write(StorageKeys.currentApiToken, response['token']); // API TOkEN Save 
+          await write(StorageKeys.profilePictureKey, response['user']['profile_picture']); // Profile Picture Save 
           Get.toNamed(HomeView.routeName);
         }
         else{
@@ -65,9 +66,10 @@ class LoginoutController extends GetxController{
         //Reset All on Logout
         final HomeController homeCon = Get.find();
         FirestoreServices.updateUserStatus(false,email.text.trim(),false);
-        write(StorageKeys.usernameKey, '');
-        write(StorageKeys.emailKey, '');
-        write(StorageKeys.currentApiToken, '');
+        write(StorageKeys.usernameKey, ''); // Username Reset
+        write(StorageKeys.emailKey, ''); // Email Reset
+        write(StorageKeys.currentApiToken, ''); // Current Api Token Reset
+        write(StorageKeys.profilePictureKey,''); // Profile Picture Reset 
         homeCon.username.value="";
         homeCon.isUserLoggedIn.value = false;
         homeCon.checkLoginToken();
