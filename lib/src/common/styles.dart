@@ -111,3 +111,5 @@ List<Color> getRandomGradientColors() {
   final Random random = Random();
   return _gradientColors[random.nextInt(_gradientColors.length)];
 }
+
+double defaultPagePadding = 10.0;

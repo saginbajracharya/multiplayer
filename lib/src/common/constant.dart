@@ -5,3 +5,6 @@ const String noImagePlaceHolder  = "$baseImageUrl/placeholder/noImage_placeholde
 const String profilePlaceHolder  = "$baseImageUrl/placeholder/profile_placeholder.png";
 
 
+class AssetImages{
+  static const backgroundImage = "assets/images/background.jpg";
+}

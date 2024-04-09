@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
+import 'package:multiplayer/src/common/constant.dart';
 import 'package:multiplayer/src/common/styles.dart';
 
 class AnimatedBg extends StatefulWidget {
@@ -48,10 +49,11 @@ class _AnimatedBgState extends State<AnimatedBg> with TickerProviderStateMixin{
 // RacingLinesBehaviour
 
 class BackgroundScaffold extends StatefulWidget {
-  const BackgroundScaffold({super.key, required this.child,this.appbar});
+  const BackgroundScaffold({super.key, required this.child,this.appbar, this.padding});
 
   final Widget child;
   final PreferredSizeWidget? appbar; 
+  final EdgeInsets? padding;
 
   @override
   State<BackgroundScaffold> createState() => _BackgroundScaffoldState();
@@ -71,7 +73,7 @@ class _BackgroundScaffoldState extends State<BackgroundScaffold> with TickerProv
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/background.jpg'),
+            image: AssetImage(AssetImages.backgroundImage),
             fit: BoxFit.cover, // Optional: You can set the fit as needed
           ),
         ),
@@ -95,6 +97,12 @@ class _BackgroundScaffoldState extends State<BackgroundScaffold> with TickerProv
             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), // Adjust the sigmaX and sigmaY values as needed
             child: Container(
               color: black.withOpacity(0.5), // Adjust the opacity as needed
+              padding: widget.padding??EdgeInsets.only(
+                left: defaultPagePadding,
+                right: defaultPagePadding,
+                bottom: defaultPagePadding,
+                top: kToolbarHeight
+              ),
               child: widget.child,
             ),
           ),

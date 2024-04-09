@@ -77,6 +77,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
           minAppVersion          : '0.0.0'
         ),
         child: BackgroundScaffold( 
+          padding: const EdgeInsets.only(
+            top: kToolbarHeight
+          ),
           child: UpgradeAlert(
             upgrader: Upgrader(
               debugDisplayAlways     : false,

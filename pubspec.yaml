@@ -1,5 +1,5 @@
 name: multiplayer
-description: "multiplayer Flutter SDK 3.16.2 || Dart SDK 3.2.2"
+description: "multiplayer Flutter SDK 3.16.2 || Dart SDK 3.2.2 now Flutter SDK 3.19.5 || Dart SDK 3.3.3"
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+    
   # STATE MGMT
   get: ^4.6.6
   # API 
@@ -22,16 +23,6 @@ dependencies:
   get_storage: ^2.1.1
   # flutter toast
   fluttertoast: ^8.2.4
-
-  # Firebase
-  firebase_core: ^2.25.4
-  firebase_auth: ^4.17.4
-  cloud_firestore: ^4.15.5
-  firebase_storage: ^11.1.0
-  firebase_messaging: ^14.7.16
-  firebase_analytics: ^10.8.6
-  flutter_local_notifications: ^17.0.0
-  firebase_in_app_messaging: ^0.7.4+17
 
   # Audio
   assets_audio_player: ^3.1.1
@@ -60,7 +51,18 @@ dependencies:
   # SVG Image
   flutter_svg: ^2.0.10+1
 
+  # Image Picker
+  image_picker: ^1.0.7
 
+  # Firebase
+  firebase_core: ^2.25.4
+  firebase_auth: ^4.17.4
+  cloud_firestore: ^4.15.5
+  firebase_storage: ^11.1.0
+  firebase_messaging: ^14.7.16
+  firebase_analytics: ^10.8.6
+  flutter_local_notifications: ^17.0.0
+  firebase_in_app_messaging: ^0.7.4+17
 
 dev_dependencies:
   flutter_test:

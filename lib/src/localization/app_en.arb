@@ -28,5 +28,7 @@
   "store"                 : "STORE",
   "yes"                   : "Yes",
   "no"                    : "No",
+  "save"                  : "Save",
+  "editProfile"           : "Edit Profile",
   "exitAppDialogText"     : "Are You Sure You Want To Exit?"
 }
