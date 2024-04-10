@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/views/hidden_view/hidden_view.dart';
+import 'package:multiplayer/src/views/home_view/home_controller.dart';
 import 'package:multiplayer/src/views/settings/profile_edit_view/profile_edit_view.dart';
 import 'package:multiplayer/src/widgets/animated_bg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,6 +31,7 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeController homeCon = Get.put(HomeController());
     final InAppReview inAppReview = InAppReview.instance;
     String versionText = '';
     int tapCount = 1;
@@ -48,7 +50,8 @@ class SettingsView extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           //Profile Edit
-          GestureDetector(
+          homeCon.isUserLoggedIn.value
+          ?GestureDetector(
             onTap: ()async{
               Get.toNamed(ProfileEditView.routeName);
             },
@@ -68,7 +71,8 @@ class SettingsView extends StatelessWidget {
                 style: normalTextStyle
               ),
             ),
-          ),
+          )
+          :const SizedBox(),
           const SizedBox(height: 20),
           //Theme
           InputDecorator(

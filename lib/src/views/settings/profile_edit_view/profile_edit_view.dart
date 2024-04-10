@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/common/constant.dart';
@@ -23,6 +25,12 @@ class _ProfileEditViewState extends State<ProfileEditView> {
   final profileEditKey                       = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    profileEditCon.getCurrentUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -33,7 +41,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
           elevation: 0,
           iconTheme: const IconThemeData(color: white),
           centerTitle: true,
-          title: Text(AppLocalizations.of(context)!.login,style: const TextStyle(color:white)),
+          title: Text(AppLocalizations.of(context)!.editProfile,style: const TextStyle(color:white)),
         ),
         child: SingleChildScrollView(
           child: Form(
@@ -43,38 +51,37 @@ class _ProfileEditViewState extends State<ProfileEditView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
+                const SizedBox(height: kBottomNavigationBarHeight),
                 //Profile Pic
                 InkWell(
-                  onTap: (){
-                    if(profileEditCon.isProcessingSave.value==false) {
+                  onTap: () {
+                    if (!profileEditCon.isProcessingSave.value) {
                       profileEditCon.pickProfileImages();
                     }
                   },
-                  child: Center(
-                    child: CircleAvatar(
-                      radius: 50.0,
-                      backgroundColor: gold,
-                      child: Obx(()=> 
-                        profileEditCon.selectedProfileImage!=null
-                        ? CircleAvatar(
-                          radius: 46.0,
-                          backgroundColor: grey,
-                          backgroundImage: NetworkImage(
-                            homeCon.userProfilePic.value!=""
-                            ?"$baseUploadsImageUrl${homeCon.userProfilePic.value}"
-                            :profilePlaceHolder
-                          ),
-                        )
-                        :const CircleAvatar(
-                          radius: 46.0,
-                          backgroundColor: grey,
-                          backgroundImage: NetworkImage(profilePlaceHolder),
+                  child: Obx(() => ClipOval(
+                    child: Container(
+                      height: 100.0,
+                      width: 100.0,
+                      color: gold,
+                      child: profileEditCon.selectedProfileImage.value != null
+                      ? Image.file(
+                        File(profileEditCon.selectedProfileImage.value!.path),
+                        fit: BoxFit.cover,
+                      )
+                      : CircleAvatar(
+                        radius: 46.0,
+                        backgroundColor: grey,
+                        backgroundImage: NetworkImage(
+                          homeCon.userProfilePic.value != ""
+                          ? "$baseUploadsImageUrl${homeCon.userProfilePic.value}"
+                          : profilePlaceHolder,
                         ),
                       ),
                     ),
-                  )
+                  )),
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 20.0),
                 //name
                 TextFormField(
                   controller: profileEditCon.name,
@@ -175,7 +182,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
                       btnText: AppLocalizations.of(context)!.yes, 
                       onPressed: (){
                         if(profileEditKey.currentState!.validate()){
-                          // profileEditCon.signup();
+                          profileEditCon.editProfile();
                         }
                       },
                       child: profileEditCon.isProcessingSave.value 
