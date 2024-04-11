@@ -12,6 +12,8 @@ class StorageKeys {
   static const String currentApiToken    = 'currentApiToken';
   static const String fcmTokenKey        = 'fcmToken';
   static const String profilePictureKey  = 'profilePicture';
+  static const String totalGemKey        = 'gem';
+  static const String totalCoinKey       = 'coin';
 }
 
 read(String storageName){

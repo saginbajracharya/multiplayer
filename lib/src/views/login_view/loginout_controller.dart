@@ -38,6 +38,8 @@ class LoginoutController extends GetxController{
           await write(StorageKeys.usernameKey, response['user']['name']); // Username Save
           await write(StorageKeys.emailKey, response['user']['email']); // Email Save
           await write(StorageKeys.currentApiToken, response['token']); // API TOkEN Save 
+          await write(StorageKeys.totalGemKey, response['user']['gem']);
+          await write(StorageKeys.totalCoinKey, response['user']['coin']);
           await write(StorageKeys.profilePictureKey, response['user']['profile_picture']); // Profile Picture Save 
           Get.toNamed(HomeView.routeName);
         }

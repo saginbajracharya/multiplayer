@@ -7,6 +7,8 @@ class HomeController extends GetxController{
   RxBool isUserLoggedIn = false.obs;
   RxString username = "".obs;
   RxString userProfilePic = "".obs;
+  RxString userTotalGem = "".obs;
+  RxString userTotalCoin = "".obs;
 
   getUserName()async{
     username.value = await read(StorageKeys.usernameKey);
@@ -15,6 +17,16 @@ class HomeController extends GetxController{
 
   getProfilePic()async{
     userProfilePic.value = await read(StorageKeys.profilePictureKey);
+    update();
+  }
+
+  getUserTotalGem()async{
+    userTotalGem.value = await read(StorageKeys.totalGemKey);
+    update();
+  }
+  
+  getUserTotalCoin()async{
+    userTotalCoin.value = await read(StorageKeys.totalCoinKey);
     update();
   }
 

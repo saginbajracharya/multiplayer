@@ -40,6 +40,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
     super.initState();
     homeCon.getUserName();
     homeCon.getProfilePic();
+    homeCon.getUserTotalCoin();
+    homeCon.getUserTotalGem();
     // Start the animation
     homeCon.checkLoginToken();
     Future.delayed(const Duration(seconds: 1), () {
@@ -164,7 +166,12 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                                       height: 30,
                                       'assets/images/Coin_Display_UI.svg',
                                     ),
-                                    Text('0',style: normalTextStyleBlack),
+                                    Text(
+                                      homeCon.userTotalCoin.value!=""
+                                      ?homeCon.userTotalCoin.value
+                                      :'0',
+                                      style: normalTextStyleBlack
+                                    ),
                                   ],
                                 )
                               ],
@@ -187,7 +194,12 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                                       height: 30,
                                       'assets/images/Gem_Display_UI.svg',
                                     ),
-                                    Text('0',style: normalTextStyleBlack),
+                                    Text(
+                                      homeCon.userTotalGem.value!=""
+                                      ?homeCon.userTotalGem.value
+                                      :'0',
+                                      style: normalTextStyleBlack
+                                    ),
                                   ],
                                 )
                               ],
