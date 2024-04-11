@@ -93,6 +93,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                   top: kToolbarHeight+20,
                   child: LogoWidget(seconds: 1)
                 ),
+                // Center User Details
                 SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -125,11 +126,14 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                           ),
                         ),
                       ),
+                      // Name
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical:20),
                         child: Obx(()=>
                           Text(
-                            homeCon.username.value!=""?homeCon.username.value:AppLocalizations.of(context)!.player1,
+                            homeCon.username.value!="" && homeCon.isUserLoggedIn.value
+                            ?homeCon.username.value
+                            :AppLocalizations.of(context)!.player1,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -138,6 +142,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                           ),
                         ),
                       ),
+                      // Coin & Gems
                       Obx(()=>
                         homeCon.isUserLoggedIn.value
                         ? Column(
@@ -214,10 +219,21 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                             );
                           },
                           child: Container(
-                            color: red.withOpacity(0.5),
                             width: MediaQuery.of(context).size.width/2,
-                            height: 50,
+                            height: 60,
                             alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [red.withOpacity(0.5), red.withOpacity(0.8)],
+                              ),
+                              border: Border(
+                                top: BorderSide(color: red.withOpacity(0.8), width: 2),
+                                bottom: BorderSide(color: red.withOpacity(0.8), width: 2),
+                              ),
+                              borderRadius: BorderRadius.circular(0),
+                            ),
                             child: Text(AppLocalizations.of(context)!.multiplayerMode,style:normalTextStyle)
                           )
                         ),
@@ -227,10 +243,21 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                             Get.toNamed(Level1.routeName);
                           },
                           child: Container(
-                            color: blue.withOpacity(0.5),
                             width: MediaQuery.of(context).size.width/2,
-                            height: 50,
+                            height: 60,
                             alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [blue.withOpacity(0.5), blue.withOpacity(0.8)],
+                              ),
+                              border: Border(
+                                top: BorderSide(color: blue.withOpacity(0.8), width: 2),
+                                bottom: BorderSide(color: blue.withOpacity(0.8), width: 2),
+                              ),
+                              borderRadius: BorderRadius.circular(0),
+                            ),
                             child: Text(AppLocalizations.of(context)!.soloMode,style:normalTextStyle),
                           )
                         ),

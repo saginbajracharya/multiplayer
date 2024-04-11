@@ -35,7 +35,7 @@ class ProfileEditController extends GetxController{
         isProcessingSave.value = true;
         update();
         var response = await ApiServices.apiPost(
-          'api/update-profile',
+          'api/updateProfile',
           {
             "name": name.text.trim(),
             "email": email.text.trim(),
@@ -48,7 +48,6 @@ class ProfileEditController extends GetxController{
           final HomeController homeCon = Get.put(HomeController());
           await write(StorageKeys.usernameKey, response['user']['name']); // Username Save
           await write(StorageKeys.emailKey, response['user']['email']); // Email Save
-          await write(StorageKeys.currentApiToken, response['token']); // API TOkEN Save 
           await write(StorageKeys.profilePictureKey, response['user']['profile_picture']); // Profile Picture Save 
           homeCon.getUserName();
           homeCon.getProfilePic();
