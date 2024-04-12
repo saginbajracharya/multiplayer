@@ -5,7 +5,7 @@ import 'package:multiplayer/src/common/read_write_storage.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/models/lobby_model.dart';
 import 'package:multiplayer/src/models/user_model.dart';
-import 'package:multiplayer/src/views/level_view/level_1.dart';
+import 'package:multiplayer/src/views/level_view/level.dart';
 import 'package:multiplayer/src/views/lobby_view/lobby_detail_view/lobby_detail_controller.dart';
 
 class LobbyDetailView extends StatefulWidget {
@@ -179,7 +179,7 @@ class _LobbyDetailViewState extends State<LobbyDetailView> {
                               padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:10.0),
                               child: ElevatedButton(
                                 onPressed: () async{
-                                  Get.to(()=>const Level1());
+                                  Get.to(()=>const Level());
                                 },
                                 style: ButtonStyle(
                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(

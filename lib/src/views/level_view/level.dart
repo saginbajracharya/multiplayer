@@ -1,64 +1,79 @@
 import 'dart:async';
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
 
-class Level1 extends StatefulWidget {
-  const Level1({Key? key}) : super(key: key);
+class Enemy {
+  double x;
+  double y;
 
-  static const routeName = '/level_1';
-
-  @override
-  State<Level1> createState() => _Level1State();
+  Enemy(this.x, this.y);
 }
 
-class _Level1State extends State<Level1> {
+class Level extends StatefulWidget {
+  const Level({Key? key}) : super(key: key);
+
+  static const routeName = '/level';
+
+  @override
+  State<Level> createState() => _LevelState();
+}
+
+class _LevelState extends State<Level> {
   final HomeController homeCon = Get.put(HomeController());
   double player1X = 250;
   double player1Y = 255;
-  double player2X = 25;
-  double player2Y = 25;
-  int coins = 0;
-  int gems = 0;
+  List<Enemy> enemies = [];
   bool paused = false;
   bool gameOver = false;
   late Timer timer;
+  late Timer enemySpawnTimer;
 
   @override
   void initState() {
     super.initState();
     timer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
       if (!paused && !gameOver) {
-        // Update player 2 position to follow player 1
-        if (player2X < player1X) {
-          player2X += 1;
-        } else {
-          player2X -= 1;
-        }
-        if (player2Y < player1Y) {
-          player2Y += 1;
-        } else {
-          player2Y -= 1;
-        }
+        setState(() {
+          // Update enemy positions to follow player
+          for (var enemy in enemies) {
+            if (enemy.x < player1X) {
+              enemy.x += 1;
+            } else {
+              enemy.x -= 1;
+            }
+            if (enemy.y < player1Y) {
+              enemy.y += 1;
+            } else {
+              enemy.y -= 1;
+            }
 
-        // Check if player 2 caught player 1
-        if ((player1X - player2X).abs() < 50 && (player1Y - player2Y).abs() < 50) {
-          setState(() {
-            gameOver = true;
-          });
-          timer.cancel();
-        }
-
-        setState(() {});
+            // Check if an enemy caught the player
+            if ((player1X - enemy.x).abs() < 50 && (player1Y - enemy.y).abs() < 50) {
+              gameOver = true;
+              timer.cancel();
+              enemySpawnTimer.cancel();
+            }
+          }
+        });
       }
+    });
+
+    // Spawn enemies every 5 seconds
+    enemySpawnTimer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      setState(() {
+        // Spawn a new enemy
+        enemies.add(Enemy(25, 25));
+      });
     });
   }
 
   @override
   void dispose() {
     timer.cancel();
+    enemySpawnTimer.cancel();
     super.dispose();
   }
 
@@ -106,22 +121,22 @@ class _Level1State extends State<Level1> {
                 ),
               ),
             ),
-            // Player 2 (enemy)
-            Positioned(
-              left: player2X,
-              top: player2Y,
-              child: Container(
-                width: 50,
-                height: 50,
-                color: Colors.green,
-                child: const Center(
-                  child: Text(
-                    'Enemy',
-                    style: TextStyle(color: Colors.white),
+            // Enemies
+            ...enemies.map((enemy) => Positioned(
+                  left: enemy.x,
+                  top: enemy.y,
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    color: Colors.green,
+                    child: const Center(
+                      child: Text(
+                        'Enemy',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
+                )).toList(),
             // Coins
             Positioned(
               top: 40,
@@ -244,30 +259,31 @@ class _Level1State extends State<Level1> {
                             gameOver = false;
                             player1X = 250;
                             player1Y = 255;
-                            player2X = 25;
-                            player2Y = 25;
+                            enemies.clear();
                           });
                           timer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
                             if (!paused && !gameOver) {
-                              if (player2X < player1X) {
-                                player2X += 1;
-                              } else {
-                                player2X -= 1;
-                              }
-                              if (player2Y < player1Y) {
-                                player2Y += 1;
-                              } else {
-                                player2Y -= 1;
-                              }
+                              setState(() {
+                                for (var enemy in enemies) {
+                                  if (enemy.x < player1X) {
+                                    enemy.x += 1;
+                                  } else {
+                                    enemy.x -= 1;
+                                  }
+                                  if (enemy.y < player1Y) {
+                                    enemy.y += 1;
+                                  } else {
+                                    enemy.y -= 1;
+                                  }
 
-                              if ((player1X - player2X).abs() < 50 && (player1Y - player2Y).abs() < 50) {
-                                setState(() {
-                                  gameOver = true;
-                                });
-                                timer.cancel();
-                              }
-
-                              setState(() {});
+                                  if ((player1X - enemy.x).abs() < 50 &&
+                                      (player1Y - enemy.y).abs() < 50) {
+                                    gameOver = true;
+                                    timer.cancel();
+                                    enemySpawnTimer.cancel();
+                                  }
+                                }
+                              });
                             }
                           });
                         },
@@ -288,5 +304,4 @@ class _Level1State extends State<Level1> {
       ),
     );
   }
-
 }

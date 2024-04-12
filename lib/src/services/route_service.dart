@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
-import 'package:multiplayer/src/views/level_view/level_1.dart';
+import 'package:multiplayer/src/views/level_view/level.dart';
 import 'package:multiplayer/src/views/store_view/store_view.dart';
 import 'package:multiplayer/src/views/lobby_view/lobby_view.dart';
 import 'package:multiplayer/src/views/login_view/login_view.dart';
@@ -20,7 +20,7 @@ class RouteManager {
       GetPage(name: LobbyDetailView.routeName, page: () => const LobbyDetailView()),
       GetPage(name: LoginView.routeName, page: () => const LoginView()),
       GetPage(name: SignUpView.routeName, page: () => const SignUpView()),
-      GetPage(name: Level1.routeName, page: () => const Level1()),
+      GetPage(name: Level.routeName, page: () => const Level()),
       GetPage(name: StoreView.routeName, page: () => const StoreView()),
       GetPage(name: SplashView.routeName, page: () => const SplashView()),
       GetPage(name: ProfileEditView.routeName, page: () => const ProfileEditView()),
