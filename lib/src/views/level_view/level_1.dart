@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:multiplayer/src/common/styles.dart';
+import 'package:multiplayer/src/views/home_view/home_controller.dart';
 
 class Level1 extends StatefulWidget {
   const Level1({Key? key}) : super(key: key);
@@ -13,6 +15,7 @@ class Level1 extends StatefulWidget {
 }
 
 class _Level1State extends State<Level1> {
+  final HomeController homeCon = Get.put(HomeController());
   double player1X = 250;
   double player1Y = 255;
   double player2X = 25;
@@ -131,7 +134,14 @@ class _Level1State extends State<Level1> {
                     'assets/images/coin.svg',
                   ),
                   const SizedBox(width: 4),
-                  Text('$coins'),
+                  Obx(()=>
+                    Text(
+                      homeCon.userTotalCoin.value!=""
+                      ?homeCon.userTotalCoin.value
+                      :'0',
+                      style: normalTextStyleBlack
+                    ),
+                  )
                 ],
               ),
             ),
@@ -147,7 +157,14 @@ class _Level1State extends State<Level1> {
                     'assets/images/gem.svg',
                   ),
                   const SizedBox(width: 4),
-                  Text('$gems'),
+                  Obx(()=>
+                    Text(
+                      homeCon.userTotalGem.value!=""
+                      ?homeCon.userTotalGem.value
+                      :'0',
+                      style: normalTextStyleBlack
+                    ),
+                  )
                 ],
               ),
             ),
