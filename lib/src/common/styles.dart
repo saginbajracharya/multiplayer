@@ -28,6 +28,17 @@ Color? grey900                 = Colors.grey[900];
 const backgroundColor          = Colors.black;
 
 // App Styles //
+TextStyle smallTextStyle = const TextStyle(
+  color: white,
+  fontSize: 12.0,
+);
+
+TextStyle smallTextStyleBlack = const TextStyle(
+  color: black,
+  fontSize: 12.0,
+);
+
+// App Styles //
 TextStyle normalTextStyle = const TextStyle(
   color: white,
   fontSize: 16.0,

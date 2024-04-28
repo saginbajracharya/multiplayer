@@ -69,8 +69,8 @@ class _BackgroundScaffoldState extends State<BackgroundScaffold> with TickerProv
       resizeToAvoidBottomInset: true,
       appBar: widget.appbar,
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AssetImages.backgroundImage),
