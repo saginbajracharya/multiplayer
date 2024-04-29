@@ -28,7 +28,7 @@ class _ExitDialogState extends State<ExitDialog> {
         AppLocalizations.of(context)!.exitAppDialogText,
         style: const TextStyle(fontSize: 20.0,color: black,fontWeight: FontWeight.bold)
       ),
-      titlePadding: const EdgeInsets.only(left: 20,top: 20),
+      titlePadding: const EdgeInsets.only(left: 10,right: 10,top: 20),
       backgroundColor: white,
       shape:  const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4.0))),
       content: Column(
@@ -43,6 +43,20 @@ class _ExitDialogState extends State<ExitDialog> {
             children: [
               Expanded(
                 child: OutlinedButton(
+                  onPressed: widget.okCallback,
+                  style: TextButton.styleFrom(
+                    backgroundColor: white,
+                    side: const BorderSide(color: white, width: 1), // Border properties
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6), // Adjust the radius as needed
+                    ),
+                  ),
+                  child: Text(AppLocalizations.of(context)!.yes,style: const TextStyle(color: black,fontSize: 14))
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: OutlinedButton(
                   onPressed: () async{
                     Navigator.of(context).pop();
                   },
@@ -55,20 +69,6 @@ class _ExitDialogState extends State<ExitDialog> {
                   ),
                   child: Text(AppLocalizations.of(context)!.no,style: const TextStyle(color: black,fontSize: 14),
                   ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: widget.okCallback,
-                  style: TextButton.styleFrom(
-                    backgroundColor: white,
-                    side: const BorderSide(color: white, width: 1), // Border properties
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6), // Adjust the radius as needed
-                    ),
-                  ),
-                  child: Text(AppLocalizations.of(context)!.yes,style: const TextStyle(color: black,fontSize: 14))
                 ),
               ),
             ],

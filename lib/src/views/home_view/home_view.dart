@@ -33,6 +33,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
   final HomeController homeCon = Get.put(HomeController());
   final LoginoutController loginoutCon = Get.put(LoginoutController());
+  bool isExitDialogShown = false;
   double opacity = 0.0;
 
   @override
@@ -58,6 +59,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
       onPopInvoked: (bool didPop){
         showDialog(
           context: context,
+          barrierDismissible: false,
+          useRootNavigator: true,
           builder: (BuildContext context) => ExitDialog(
             okCallback: () { 
               if (Platform.isAndroid) {

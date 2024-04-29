@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     // Handle notifications when the app is in the foreground
     getPushedNotification(context);
     return GetMaterialApp(
-      popGesture: true,
+      popGesture: false,
       navigatorKey: navigatorKey,
       navigatorObservers: [
         audioNavigatorObserver, // Use audioNavigatorObserver here
