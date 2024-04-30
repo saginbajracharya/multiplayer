@@ -10,6 +10,7 @@ class AudioFiles {
 
 class AudioServices extends GetxController {
   static final AudioServices _instance = AudioServices._internal();
+  bool audioInitilized = false;
 
   factory AudioServices() {
     return _instance;
@@ -21,18 +22,21 @@ class AudioServices extends GetxController {
   RxBool isPlaying = false.obs;
 
   void init() {
-    _assetsAudioPlayer = AssetsAudioPlayer();
-    _assetsAudioPlayer.current.listen((Playing? playing) {
-      if (playing != null) {
-        isPlaying.value = true;
-        write(StorageKeys.audioOnKey, true);
-        update();
-      } else {
-        isPlaying.value = false;
-        write(StorageKeys.audioOnKey, false);
-        update();
-      }
-    });
+    if(audioInitilized==false){
+      audioInitilized = true;
+      _assetsAudioPlayer = AssetsAudioPlayer();
+      _assetsAudioPlayer.current.listen((Playing? playing) {
+        if (playing != null) {
+          isPlaying.value = true;
+          write(StorageKeys.audioOnKey, true);
+          update();
+        } else {
+          isPlaying.value = false;
+          write(StorageKeys.audioOnKey, false);
+          update();
+        }
+      });
+    }
   }
 
   Future<void> play(String audioPath) async {

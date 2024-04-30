@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/services/api_services.dart';
@@ -7,6 +9,7 @@ import 'package:multiplayer/src/common/read_write_storage.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
 import 'package:multiplayer/src/widgets/toast_message_widget.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginoutController extends GetxController{
   final apiendpoint         = ApiServices();
@@ -87,6 +90,34 @@ class LoginoutController extends GetxController{
     finally{
       isProcessingLogout.value = false;
       update();
+    }
+  }
+
+  Future<dynamic> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('exception->$e');
+      }
+    }
+  }
+
+  Future<bool> signOutFromGoogle() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return true;
+    } on Exception catch (_) {
+      return false;
     }
   }
 }

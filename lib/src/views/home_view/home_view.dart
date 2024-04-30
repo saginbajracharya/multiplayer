@@ -30,6 +30,7 @@ class HomeView extends StatefulWidget {
   @override
   State<HomeView> createState() => _HomeViewState();
 }
+
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
   final HomeController homeCon = Get.put(HomeController());
   final LoginoutController loginoutCon = Get.put(LoginoutController());

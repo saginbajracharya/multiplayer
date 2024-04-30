@@ -38,7 +38,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
             iconTheme: const IconThemeData(color: white),
             centerTitle: true,
             title: Text(
-              AppLocalizations.of(context)!.login,
+              AppLocalizations.of(context)!.resetPassword,
               style: const TextStyle(color: white),
             ),
           ),

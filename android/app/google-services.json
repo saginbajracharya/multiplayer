@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "594742519958",
+    "firebase_url": "https://multiplayer-50f58-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "multiplayer-50f58",
     "storage_bucket": "multiplayer-50f58.appspot.com"
   },
@@ -12,7 +13,28 @@
           "package_name": "com.dlofistudio.multiplayer"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "594742519958-1kilkn97jshce3h7q8vj8blf6i2jrqkp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dlofistudio.multiplayer",
+            "certificate_hash": "3c6fd61c9c7648c83cce14d27c041beaef400455"
+          }
+        },
+        {
+          "client_id": "594742519958-sl972ac1jt1r78vuiadvoeoo7hclaaua.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dlofistudio.multiplayer",
+            "certificate_hash": "e0b4a7334b25308cebad5777f32ec4c342163eb1"
+          }
+        },
+        {
+          "client_id": "594742519958-0i538ehrhojiska1gefrddqn5qi99c25.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDgJqchyjleg3AsydhgokAIAHmhrFxYZME"
@@ -20,7 +42,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594742519958-0i538ehrhojiska1gefrddqn5qi99c25.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

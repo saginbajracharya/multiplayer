@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/common/styles.dart';
@@ -20,6 +21,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final LoginoutController loginCon = Get.put(LoginoutController());
   final loginformKey                = GlobalKey<FormState>();
+  dynamic userCredential            = ''.obs;
   
   @override
   void initState() {
@@ -185,6 +187,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                     const SizedBox(height: 20.0),
+                    // login with Google or Facebook
                     Text(AppLocalizations.of(context)!.login),
                     const SizedBox(height: 10.0),
                     Row(
@@ -194,7 +197,13 @@ class _LoginViewState extends State<LoginView> {
                         //Login with Google
                         Flexible(
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async{
+                              userCredential.value = await loginCon.signInWithGoogle();
+                              if (userCredential.value != null){
+                                if (kDebugMode) {
+                                  print(userCredential.value.user!.email);
+                                }
+                              }
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -216,7 +225,7 @@ class _LoginViewState extends State<LoginView> {
                         //Login with Facebook
                         Flexible(
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async{
                             },
                             child: Container(
                               decoration: BoxDecoration(
