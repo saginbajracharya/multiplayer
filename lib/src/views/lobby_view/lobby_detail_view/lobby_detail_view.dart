@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multiplayer/src/common/constant.dart';
 import 'package:multiplayer/src/services/firestore_services.dart';
 import 'package:multiplayer/src/common/read_write_storage.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/models/lobby_model.dart';
 import 'package:multiplayer/src/models/user_model.dart';
 import 'package:multiplayer/src/views/level_view/level.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:multiplayer/src/views/lobby_view/lobby_detail_view/lobby_detail_controller.dart';
 
 class LobbyDetailView extends StatefulWidget {
@@ -59,7 +61,7 @@ class _LobbyDetailViewState extends State<LobbyDetailView> {
                     return const SizedBox();
                   }
                   if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
+                    return Center(child: Text('${AppLocalizations.of(context)!.error}: ${snapshot.error}'));
                   }
                   else{
                     final lobbyUsers = snapshot.data;
@@ -92,7 +94,7 @@ class _LobbyDetailViewState extends State<LobbyDetailView> {
                                   children: [
                                     //Player Image
                                     Image.network(
-                                      'https://picsum.photos/200?random=${100}',
+                                      AppDefaultValues.ramndomImage,
                                       fit: BoxFit.fill,
                                     ),
                                     //Email
@@ -105,7 +107,7 @@ class _LobbyDetailViewState extends State<LobbyDetailView> {
                                       child: Text(user.email),
                                     ),
                                     currentUserEmail==user.email
-                                    ?const Text('YOU')
+                                    ?Text(AppLocalizations.of(context)!.you)
                                     :const SizedBox(),
                                     //Ready Indicator
                                     Positioned(
@@ -118,7 +120,7 @@ class _LobbyDetailViewState extends State<LobbyDetailView> {
                                           borderRadius: BorderRadius.circular(5.0),
                                         ),
                                         child: Text(
-                                          user.readyStatus?'Ready':'Not Ready',
+                                          user.readyStatus?AppLocalizations.of(context)!.ready:AppLocalizations.of(context)!.notReady,
                                           style: const TextStyle(color: white),
                                         ),
                                       ),
@@ -170,7 +172,7 @@ class _LobbyDetailViewState extends State<LobbyDetailView> {
                                     child: CircularProgressIndicator()
                                   )
                                 )
-                                :const Text('Ready'),
+                                :Text(AppLocalizations.of(context)!.ready),
                               ),
                             ),
                             //Play Button
@@ -205,7 +207,7 @@ class _LobbyDetailViewState extends State<LobbyDetailView> {
                                     child: CircularProgressIndicator()
                                   )
                                 )
-                                :const Text('Play'),
+                                :Text(AppLocalizations.of(context)!.play),
                               ),
                             ),
                             //Leave Button

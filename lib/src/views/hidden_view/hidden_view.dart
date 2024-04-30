@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
+import 'package:flutter/material.dart';
+import 'package:multiplayer/src/common/constant.dart';
 import 'package:multiplayer/src/common/styles.dart';
 
 class HiddenView extends StatefulWidget {
@@ -89,7 +89,7 @@ class _HiddenViewState extends State<HiddenView> with TickerProviderStateMixin {
               BlendMode.srcATop,
             ),
             child: Image.asset(
-              'assets/images/logo.png', // Replace with your actual logo asset path
+              AssetImages.logoImage, // Replace with your actual logo asset path
               width: 270,
               height: 270,
             ),

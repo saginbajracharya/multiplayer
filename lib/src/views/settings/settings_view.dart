@@ -1,6 +1,6 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multiplayer/src/common/constant.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/views/hidden_view/hidden_view.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
@@ -12,10 +12,6 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:share_plus/share_plus.dart';
 import 'settings_controller.dart';
 
-/// Displays the various settings that can be customized by the user.
-///
-/// When a user changes a setting, the SettingsController is updated and
-/// Widgets that listen to the SettingsController are rebuilt.
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key, required this.controller});
 
@@ -205,7 +201,7 @@ class SettingsView extends StatelessWidget {
           //Rate Us
           GestureDetector(
             onTap: ()async{
-              inAppReview.openStoreListing(appStoreId: 'com.dlofistudio.multiplayer');
+              inAppReview.openStoreListing(appStoreId: AppDefaultValues.appPackageName);
             },
             child: Container(
               decoration:BoxDecoration(
@@ -228,8 +224,8 @@ class SettingsView extends StatelessWidget {
           //Share App
           GestureDetector(
             onTap: (){
-              const appStoreLink = 'https://play.google.com/store/apps/details?id=com.dlofistudio.wallpapergallery';
-              Share.share('Check out this awesome app!\n$appStoreLink');
+              const appStoreLink = AppDefaultValues.appAppStoreLink;
+              Share.share('${AppLocalizations.of(context)!.shareAppMsg}\n$appStoreLink');
             },
             child: Container(
               decoration:BoxDecoration(
@@ -254,7 +250,6 @@ class SettingsView extends StatelessWidget {
             onTap: (){
               tapCount++;
               if(tapCount==10){
-                log('Unlocked Hidden Page');
                 tapCount = 0;
                 showModalBottomSheet(
                   context: context,

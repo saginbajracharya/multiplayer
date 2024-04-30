@@ -2,8 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:multiplayer/src/common/constant.dart';
 import 'package:multiplayer/src/common/styles.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Enemy {
   double x;
@@ -99,8 +101,8 @@ class _LevelState extends State<Level> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.blue,
-                    Colors.green,
+                    blue,
+                    green,
                   ],
                 ),
               ),
@@ -112,11 +114,11 @@ class _LevelState extends State<Level> {
               child: Container(
                 width: 50,
                 height: 50,
-                color: Colors.red,
+                color: red,
                 child: const Center(
                   child: Text(
                     'Player 1',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: white),
                   ),
                 ),
               ),
@@ -128,11 +130,11 @@ class _LevelState extends State<Level> {
                   child: Container(
                     width: 50,
                     height: 50,
-                    color: Colors.green,
-                    child: const Center(
+                    color: green,
+                    child: Center(
                       child: Text(
-                        'Enemy',
-                        style: TextStyle(color: Colors.white),
+                        AppLocalizations.of(context)!.enemy,
+                        style: const TextStyle(color: white),
                       ),
                     ),
                   ),
@@ -146,7 +148,7 @@ class _LevelState extends State<Level> {
                   SvgPicture.asset(
                     width: 20,
                     height: 20,
-                    'assets/images/coin.svg',
+                    AssetImages.coinIconImage,
                   ),
                   const SizedBox(width: 4),
                   Obx(()=>
@@ -169,7 +171,7 @@ class _LevelState extends State<Level> {
                   SvgPicture.asset(
                     width: 20,
                     height: 20,
-                    'assets/images/gem.svg',
+                    AssetImages.gemIconImage,
                   ),
                   const SizedBox(width: 4),
                   Obx(()=>
@@ -198,12 +200,12 @@ class _LevelState extends State<Level> {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.7),
+                    color: black.withOpacity(0.7),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.pause,
-                    color: Colors.white,
+                    color: white,
                   ),
                 ),
               ),
@@ -211,14 +213,14 @@ class _LevelState extends State<Level> {
             // Pause overlay
             if (paused && !gameOver)
               Container(
-                color: Colors.black.withOpacity(0.7),
+                color: black.withOpacity(0.7),
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Paused',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                      Text(
+                        AppLocalizations.of(context)!.pause,
+                        style: const TextStyle(color: white, fontSize: 24),
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
@@ -227,14 +229,14 @@ class _LevelState extends State<Level> {
                             paused = false;
                           });
                         },
-                        child: const Text('Resume'),
+                        child: Text(AppLocalizations.of(context)!.resume),
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
                           Get.back();
                         },
-                        child: const Text('Exit'),
+                        child: Text(AppLocalizations.of(context)!.exit),
                       ),
                     ],
                   ),
@@ -243,14 +245,14 @@ class _LevelState extends State<Level> {
             // Game over screen
             if (gameOver && !paused)
               Container(
-                color: Colors.black.withOpacity(0.7),
+                color: black.withOpacity(0.7),
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Game Over',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                      Text(
+                        AppLocalizations.of(context)!.gameover,
+                        style: const TextStyle(color: white, fontSize: 24),
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
@@ -287,13 +289,13 @@ class _LevelState extends State<Level> {
                             }
                           });
                         },
-                        child: const Text('Retry'),
+                        child: Text(AppLocalizations.of(context)!.retry),
                       ),
                       ElevatedButton(
                         onPressed: () {
                           Get.back();
                         },
-                        child: const Text('Exit'),
+                        child: Text(AppLocalizations.of(context)!.exit),
                       ),
                     ],
                   ),

@@ -158,7 +158,7 @@ class _StoreViewState extends State<StoreView> {
           children: <Widget>[
             Opacity(
               opacity: 0.3,
-              child: ModalBarrier(dismissible: false, color: Colors.grey),
+              child: ModalBarrier(dismissible: false, color: grey),
             ),
             Center(
               child: CircularProgressIndicator(),
@@ -190,7 +190,7 @@ class _StoreViewState extends State<StoreView> {
   //     leading: Icon(
   //       _isAvailable ? Icons.check : Icons.block,
   //       color: _isAvailable
-  //       ? Colors.green
+  //       ? green
   //       : ThemeData.light().colorScheme.error
   //     ),
   //     title: Text('The store is ${_isAvailable ? 'available' : 'unavailable'}.'),
@@ -254,12 +254,13 @@ class _StoreViewState extends State<StoreView> {
           ),
           trailing: previousPurchase != null && Platform.isIOS
           ? IconButton(
-              onPressed: () => confirmPriceChange(context),
-              icon: const Icon(Icons.upgrade))
+            onPressed: () => confirmPriceChange(context),
+            icon: const Icon(Icons.upgrade)
+          )
           : TextButton(
             style: TextButton.styleFrom(
-              backgroundColor: Colors.green[800],
-              foregroundColor: Colors.white,
+              backgroundColor: grey800,
+              foregroundColor: white,
             ),
             onPressed: () {
               late PurchaseParam purchaseParam;
@@ -322,9 +323,9 @@ class _StoreViewState extends State<StoreView> {
   //         icon: const Icon(
   //           Icons.stars,
   //           size: 42.0,
-  //           color: Colors.orange,
+  //           color: orange,
   //         ),
-  //         splashColor: Colors.yellowAccent,
+  //         splashColor: yellowAccent,
   //         onPressed: () => consume(id),
   //       ),
   //     );
@@ -357,7 +358,7 @@ class _StoreViewState extends State<StoreView> {
   //         TextButton(
   //           style: TextButton.styleFrom(
   //             backgroundColor: Theme.of(context).primaryColor,
-  //             foregroundColor: Colors.white,
+  //             foregroundColor: white,
   //           ),
   //           onPressed: () => _inAppPurchase.restorePurchases(),
   //           child: const Text('Restore purchases'),

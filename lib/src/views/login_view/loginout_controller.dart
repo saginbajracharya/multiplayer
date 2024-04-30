@@ -96,9 +96,9 @@ class LoginoutController extends GetxController{
   Future<dynamic> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
+      log('User==>$googleUser');
       final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
+      log('GoogleAuth==>$googleAuth');
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,

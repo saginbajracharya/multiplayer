@@ -228,7 +228,7 @@ class _SignUpViewState extends State<SignUpView> {
                           }
                         ),
                         const SizedBox(height: 20.0),
-                        const Text('Signup With'),
+                        Text(AppLocalizations.of(context)!.signupwith),
                         const SizedBox(height: 10.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -290,7 +290,7 @@ class _SignUpViewState extends State<SignUpView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text('Already have an Account?'),
+                      Text(AppLocalizations.of(context)!.haveAccount),
                       const SizedBox(height: 10.0),
                       //Login button
                       GestureDetector(

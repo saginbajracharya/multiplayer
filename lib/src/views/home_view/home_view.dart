@@ -75,12 +75,12 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
       },
       child: UpgradeAlert(
         upgrader: Upgrader(
-          countryCode            : 'en',
+          countryCode            : AppDefaultValues.upgraderCountryCode,
           debugDisplayAlways     : false,
           debugDisplayOnce       : false,
           debugLogging           : false,
           durationUntilAlertAgain: Duration.zero,
-          minAppVersion          : '0.0.0'
+          minAppVersion          : AppDefaultValues.upgradeMinAppVersion
         ),
         child: BackgroundScaffold( 
           padding: const EdgeInsets.only(
@@ -160,7 +160,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                                 SvgPicture.asset(
                                   width: 40,
                                   height: 40,
-                                  'assets/images/coin.svg',
+                                  AssetImages.coinIconImage,
                                 ),
                                 const SizedBox(width: 5.0),
                                 Stack(
@@ -168,7 +168,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                                   children: [
                                     SvgPicture.asset(
                                       height: 30,
-                                      'assets/images/Coin_Display_UI.svg',
+                                      AssetImages.coinUIContainer,
                                     ),
                                     Text(
                                       homeCon.userTotalCoin.value!=""
@@ -188,7 +188,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                                 SvgPicture.asset(
                                   width: 40,
                                   height: 40,
-                                  'assets/images/gem.svg',
+                                  AssetImages.gemIconImage,
                                 ),
                                 const SizedBox(width: 5.0),
                                 Stack(
@@ -196,7 +196,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                                   children: [
                                     SvgPicture.asset(
                                       height: 30,
-                                      'assets/images/Gem_Display_UI.svg',
+                                      AssetImages.gemUIContainer,
                                     ),
                                     Text(
                                       homeCon.userTotalGem.value!=""

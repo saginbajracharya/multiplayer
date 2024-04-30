@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:multiplayer/src/services/firestore_services.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
 import 'package:multiplayer/src/widgets/a_button_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LobbyForm extends StatefulWidget {
   const LobbyForm({super.key});
@@ -30,8 +31,8 @@ class _LobbyFormState extends State<LobbyForm> {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: true,
-          title: const Text(
-            'Create Lobby',
+          title: Text(
+            AppLocalizations.of(context)!.createLobby,
           )
         ),
         body: SingleChildScrollView(
@@ -46,10 +47,10 @@ class _LobbyFormState extends State<LobbyForm> {
                 children: <Widget>[
                   //Lobby Name
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Lobby Name'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context)!.lobbyName),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter a lobby name';
+                        return AppLocalizations.of(context)!.lobbyNameEmptyError;
                       }
                       return null;
                     },
@@ -60,18 +61,18 @@ class _LobbyFormState extends State<LobbyForm> {
                   //Max Players
                   DropdownButtonFormField<int>(
                     value: _maxPlayers,
-                    items: const <DropdownMenuItem<int>>[
+                    items: <DropdownMenuItem<int>>[
                       DropdownMenuItem<int>(
                         value: 2,
-                        child: Text('2 Players'),
+                        child: Text(AppLocalizations.of(context)!.max2player),
                       ),
                       DropdownMenuItem<int>(
                         value: 4,
-                        child: Text('4 Players'),
+                        child: Text(AppLocalizations.of(context)!.max4player),
                       ),
                       DropdownMenuItem<int>(
                         value: 6,
-                        child: Text('6 Players'),
+                        child: Text(AppLocalizations.of(context)!.max6player),
                       ),
                     ],
                     onChanged: (value) {
@@ -79,19 +80,19 @@ class _LobbyFormState extends State<LobbyForm> {
                         _maxPlayers = value!;
                       });
                     },
-                    decoration: const InputDecoration(labelText: 'Max Players'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context)!.maxPlayers),
                   ),
                   //Game Mode
                   DropdownButtonFormField<String>(
                     value: _gameMode,
-                    items: const <DropdownMenuItem<String>>[
+                    items: <DropdownMenuItem<String>>[
                       DropdownMenuItem<String>(
-                        value: 'Team Deathmatch',
-                        child: Text('Team Deathmatch'),
+                        value: AppLocalizations.of(context)!.deathMode,
+                        child: Text(AppLocalizations.of(context)!.deathMode),
                       ),
                       DropdownMenuItem<String>(
-                        value: 'Brawl',
-                        child: Text('Brawl'),
+                        value: AppLocalizations.of(context)!.brawlMode,
+                        child: Text(AppLocalizations.of(context)!.brawlMode),
                       ),
                     ],
                     onChanged: (value) {
@@ -99,31 +100,31 @@ class _LobbyFormState extends State<LobbyForm> {
                         _gameMode = value!;
                       });
                     },
-                    decoration: const InputDecoration(labelText: 'Game Mode'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context)!.gameMode),
                   ),
                   //Game Map
                   DropdownButtonFormField<String>(
                     value: _gameMap,
-                    items: const <DropdownMenuItem<String>>[
+                    items: <DropdownMenuItem<String>>[
                       DropdownMenuItem<String>(
-                        value: 'Map 1',
-                        child: Text('Map 1'),
+                        value: AppLocalizations.of(context)!.map1,
+                        child: Text(AppLocalizations.of(context)!.map1),
                       ),
                       DropdownMenuItem<String>(
-                        value: 'Map 2',
-                        child: Text('Map 2'),
+                        value: AppLocalizations.of(context)!.map2,
+                        child: Text(AppLocalizations.of(context)!.map2),
                       ),
                       DropdownMenuItem<String>(
-                        value: 'Map 3',
-                        child: Text('Map 3'),
+                        value: AppLocalizations.of(context)!.map3,
+                        child: Text(AppLocalizations.of(context)!.map3),
                       ),
                       DropdownMenuItem<String>(
-                        value: 'Map 4',
-                        child: Text('Map 4'),
+                        value: AppLocalizations.of(context)!.map4,
+                        child: Text(AppLocalizations.of(context)!.map4),
                       ),
                       DropdownMenuItem<String>(
-                        value: 'Map 5',
-                        child: Text('Map 5'),
+                        value: AppLocalizations.of(context)!.map5,
+                        child: Text(AppLocalizations.of(context)!.map5),
                       ),
                     ],
                     onChanged: (value) {
@@ -131,19 +132,19 @@ class _LobbyFormState extends State<LobbyForm> {
                         _gameMap = value!;
                       });
                     },
-                    decoration: const InputDecoration(labelText: 'Game Map'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context)!.gameMap),
                   ),
                   //Privacy/lobby Type
                   DropdownButtonFormField<String>(
                     value: _lobbyType,
-                    items: const <DropdownMenuItem<String>>[
+                    items: <DropdownMenuItem<String>>[
                       DropdownMenuItem<String>(
-                        value: 'Public',
-                        child: Text('Public'),
+                        value: AppLocalizations.of(context)!.publicMode,
+                        child: Text(AppLocalizations.of(context)!.publicMode),
                       ),
                       DropdownMenuItem<String>(
-                        value: 'Private',
-                        child: Text('Private'),
+                        value: AppLocalizations.of(context)!.privateMode,
+                        child: Text(AppLocalizations.of(context)!.privateMode),
                       ),
                     ],
                     onChanged: (value) {
@@ -151,11 +152,11 @@ class _LobbyFormState extends State<LobbyForm> {
                         _lobbyType = value!;
                       });
                     },
-                    decoration: const InputDecoration(labelText: 'Lobby Type'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context)!.lobbyType),
                   ),
                   const SizedBox(height: 50),
                   AButtonWidget(
-                    btnText: 'Submit', 
+                    btnText: AppLocalizations.of(context)!.submitBtnText, 
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();

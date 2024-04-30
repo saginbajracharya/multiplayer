@@ -160,7 +160,7 @@ class _LoginViewState extends State<LoginView> {
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Text(
-                          'Forgot Password ?',
+                          AppLocalizations.of(context)!.forgotPassword,
                           textAlign: TextAlign.right,
                           style: smallTextStyle,
                         )
@@ -254,7 +254,7 @@ class _LoginViewState extends State<LoginView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text('Dont have an Account?'),
+                      Text(AppLocalizations.of(context)!.dontHaveAccount),
                       const SizedBox(height: 10.0),
                       //Signup button
                       GestureDetector(

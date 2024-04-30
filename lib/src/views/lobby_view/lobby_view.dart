@@ -7,6 +7,7 @@ import 'package:multiplayer/src/views/lobby_view/lobby_controller.dart';
 import 'package:multiplayer/src/views/lobby_view/lobby_detail_view/lobby_detail_view.dart';
 import 'package:multiplayer/src/views/lobby_view/lobby_form_view/lobby_form_view.dart';
 import 'package:multiplayer/src/widgets/a_button_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LobbyView extends StatefulWidget {
   const LobbyView({super.key});
@@ -45,7 +46,7 @@ class _LobbyViewState extends State<LobbyView> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 AButtonWidget(
-                  btnText: 'CREATE', 
+                  btnText: AppLocalizations.of(context)!.create, 
                   onPressed: () {  
                     Get.to(()=>const LobbyForm());
                   },
@@ -91,7 +92,7 @@ class _LobbyViewState extends State<LobbyView> {
                                             style: const TextStyle(color: white, fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            'Players: ${lobby.currentPlayers}/${lobby.maxPlayers}',
+                                            '${AppLocalizations.of(context)!.player}: ${lobby.currentPlayers}/${lobby.maxPlayers}',
                                             style: const TextStyle(color: white),
                                           ),
                                         ],
@@ -99,7 +100,7 @@ class _LobbyViewState extends State<LobbyView> {
                                     ),
                                   ),
                                   AButtonWidget(
-                                    btnText: 'Join',
+                                    btnText: AppLocalizations.of(context)!.join,
                                     width: MediaQuery.of(context).size.width * 0.25,
                                     height: 100,
                                     padding: EdgeInsets.zero,
@@ -114,7 +115,7 @@ class _LobbyViewState extends State<LobbyView> {
                         },
                       );
                     } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
+                      return Text('${AppLocalizations.of(context)!.error} : ${snapshot.error}');
                     } else {
                       return const Center(
                         child: SizedBox(
