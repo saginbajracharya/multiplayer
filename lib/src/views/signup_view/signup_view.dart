@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,8 +18,9 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
-  final SignUpController signUpCon = Get.put(SignUpController());
-  final signupformKey       = GlobalKey<FormState>();
+  final SignUpController signUpCon  = Get.put(SignUpController());
+  final signupformKey               = GlobalKey<FormState>();
+  dynamic userCredential            = ''.obs;
 
   @override
   void initState() {
@@ -237,7 +239,13 @@ class _SignUpViewState extends State<SignUpView> {
                             //Login with Google
                             Flexible(
                               child: GestureDetector(
-                                onTap: () {
+                                onTap: () async{
+                                  userCredential.value = await signUpCon.signInWithGoogle();
+                                  if (userCredential.value != null){
+                                    if (kDebugMode) {
+                                      print(userCredential.value.user!.email);
+                                    }
+                                  }
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

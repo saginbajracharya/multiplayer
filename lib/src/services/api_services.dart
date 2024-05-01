@@ -20,7 +20,7 @@ class ApiServices{
         ));
       }
       var response = await dio.post(apiPath, data: formData ?? {});
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200||response.statusCode == 201) {
         if (kDebugMode) {
         }
         return response.data;

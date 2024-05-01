@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiplayer/src/services/api_services.dart';
@@ -93,31 +92,28 @@ class LoginoutController extends GetxController{
     }
   }
 
-  Future<dynamic> signInWithGoogle() async {
+  Future<dynamic> logInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      log('User==>$googleUser');
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-      log('GoogleAuth==>$googleAuth');
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-
-      return await FirebaseAuth.instance.signInWithCredential(credential);
-    } on Exception catch (e) {
-      if (kDebugMode) {
-        print('exception->$e');
+      if (googleUser == null) {
+        log('User canceled sign-in');
+        return;
       }
-    }
-  }
-
-  Future<bool> signOutFromGoogle() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      return true;
-    } on Exception catch (_) {
-      return false;
+      log('User: $googleUser');
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      log('GoogleAuth: $googleAuth');
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      // Extract user details from Google sign-in
+      email.text = (userCredential.user?.email??'').trim();
+      password.text = (userCredential.user?.uid??'').trim();
+      // Use the extracted user details to sign up the user
+      await login();
+    } catch (e) {
+      log('Exception: $e');
     }
   }
 }

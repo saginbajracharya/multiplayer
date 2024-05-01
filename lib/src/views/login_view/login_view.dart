@@ -198,7 +198,7 @@ class _LoginViewState extends State<LoginView> {
                         Flexible(
                           child: GestureDetector(
                             onTap: () async{
-                              userCredential.value = await loginCon.signInWithGoogle();
+                              userCredential.value = await loginCon.logInWithGoogle();
                               if (userCredential.value != null){
                                 if (kDebugMode) {
                                   print(userCredential.value.user!.email);

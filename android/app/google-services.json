@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "594742519958-1togpeiid33nvsgf03vg4e02uuimn6hp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dlofistudio.multiplayer",
+            "certificate_hash": "1377e76aa00eb3f2e06a9bd9ba230ad0cecc65dc"
+          }
+        },
+        {
           "client_id": "594742519958-sl972ac1jt1r78vuiadvoeoo7hclaaua.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

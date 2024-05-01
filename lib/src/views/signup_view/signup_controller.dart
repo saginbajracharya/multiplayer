@@ -1,7 +1,8 @@
 import 'dart:developer';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:multiplayer/src/common/read_write_storage.dart';
 import 'package:multiplayer/src/services/api_services.dart';
 import 'package:multiplayer/src/views/login_view/login_view.dart';
@@ -46,6 +47,32 @@ class SignUpController extends GetxController{
         isProcessingSignup.value = false;
         update();
       }
+    }
+  }
+
+  Future<dynamic> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) {
+        log('User canceled sign-in');
+        return;
+      }
+      log('User: $googleUser');
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      log('GoogleAuth: $googleAuth');
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      // Extract user details from Google sign-in
+      name.text  = userCredential.user?.displayName??'';
+      email.text = userCredential.user?.email??'';
+      password.text = userCredential.user?.uid??'';
+      // Use the extracted user details to sign up the user
+      await signup();
+    } catch (e) {
+      log('Exception: $e');
     }
   }
 }
