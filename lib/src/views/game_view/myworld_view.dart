@@ -1,8 +1,6 @@
 import 'dart:math' as math;
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/palette.dart';
-import 'package:flutter/material.dart';
 import 'package:multiplayer/src/common/styles.dart';
 
 class MyWorld extends World with TapCallbacks {
@@ -22,7 +20,7 @@ class MyWorld extends World with TapCallbacks {
 }
 
 class Square extends RectangleComponent with TapCallbacks {
-  static const speed = 3;
+  static const speed = 1;
   static const squareSize = 128.0;
   static const indicatorSize = 6.0;
 

@@ -1,0 +1,45 @@
+4 Elements of Game Mechanics
+
+1 quantity
+    [Mechanics that can be represented as a number] 
+    Examples:
+    [Resource: Health, Mana ,Energy,Rage]
+    [Currency: Gold,gems]
+    [Abstract: Time]
+2 spatial
+    [Mechanics that affect space]
+    Examples:
+    [World : Position and rotation of objects]
+    [Tangible : Collision,characters,props]
+    [Intangible : Inventory,storage]
+3 state 
+    [Mechanics that apply additional rules]
+    Examples:
+    [Player : Ground, airborne, swimming, alive, dead]
+    [Game : Victory, lobby, loading]
+    [Objects : On, off, open, closed]
+4 action
+    [Mechanics that drive change]
+    Examples:
+    [Resource : Health regen, shooting ammo]
+    [World : Running, jumping, teleporting]
+    [Object : Unlock door, open chest]
+
+
+Example (Mario)
+
+Big or small are state mechanics that 
+(1) apply to Mario, 
+(2) visually represent Mario’s health points (quantity), and 
+(3) affect how tall Mario is when he is standing (spatial). 
+    When Mario collides with another entity (spatial), 
+    that entity may change Mario’s health state to big, to small, or to dead (action).
+
+
+Using Bernstein’s layers as a guide, generative game design takes the perspective that all games can be understood within the following 4 layers:
+
+1. Game (Surface Structure) — the sensory form in which the game is experienced
+2. Prose (Deep Structure) — the underlying structure that configures player behavior
+3. Mechanics (Underlying strings) — the smallest units that have meaning
+4. Attributes (Chosen elements) — a discrete unit that distinguishes one interaction from another
+

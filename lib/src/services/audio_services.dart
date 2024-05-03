@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:multiplayer/src/common/read_write_storage.dart';
 
 class AudioFiles {
-  static const String themeSong = 'assets/audio/theme_song.mp3';
-  static const String lobbySong = 'assets/audio/lobby_song.mp3';
+  static const String themeSong = 'assets/audio/music/theme_song.mp3';
+  static const String lobbySong = 'assets/audio/music/lobby_song.mp3';
 }
 
 class AudioServices extends GetxController {
