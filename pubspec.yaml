@@ -66,6 +66,9 @@ dependencies:
   
   google_sign_in: ^6.2.1
 
+  # GDEV KIT
+  flame: ^1.17.0
+
 
 dev_dependencies:
   flutter_test:

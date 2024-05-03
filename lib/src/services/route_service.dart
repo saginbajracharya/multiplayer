@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:multiplayer/src/views/forgot_password_view/forgot_password.dart';
 import 'package:multiplayer/src/views/forgot_password_view/reset_password.dart';
+import 'package:multiplayer/src/views/game_view/level_01.dart';
 import 'package:multiplayer/src/views/home_view/home_view.dart';
 import 'package:multiplayer/src/views/level_view/level.dart';
 import 'package:multiplayer/src/views/store_view/store_view.dart';
@@ -28,6 +29,7 @@ class RouteManager {
       GetPage(name: ProfileEditView.routeName, page: () => const ProfileEditView()),
       GetPage(name: ForgotPasswordView.routeName, page: () => const ForgotPasswordView()),
       GetPage(name: ResetPasswordView.routeName, page: () => const ResetPasswordView()),
+      GetPage(name: Level01.routeName, page: () => const Level01()),
     ];
   }
 }

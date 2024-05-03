@@ -1,9 +1,9 @@
 import 'dart:math';
+import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 
 // App Colors //
-
 const Color white              = Colors.white;
 const Color black              = Colors.black;
 const Color blue               = Colors.blue;
@@ -26,6 +26,18 @@ Color? grey800                 = Colors.grey[800];
 Color? grey900                 = Colors.grey[900];
 
 const backgroundColor          = Colors.black;
+
+class FlameColors {
+  static final Paint red         = BasicPalette.red.paint();
+  static final Paint blue        = BasicPalette.blue.paint();
+  static final Paint white       = BasicPalette.white.paint();
+  static final Paint black       = BasicPalette.black.paint();
+  static final Paint yellow      = BasicPalette.yellow.paint();
+  static final Paint green       = BasicPalette.green.paint();
+  static final Paint transparent = BasicPalette.transparent.paint();
+  static final Paint orange      = BasicPalette.orange.paint();
+  static final Paint teal        = BasicPalette.teal.paint();
+}
 
 // App Styles //
 TextStyle smallTextStyle = const TextStyle(

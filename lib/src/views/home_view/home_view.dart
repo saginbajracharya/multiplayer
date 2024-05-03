@@ -7,8 +7,9 @@ import 'package:get/get.dart';
 import 'package:multiplayer/src/services/audio_services.dart';
 import 'package:multiplayer/src/common/constant.dart';
 import 'package:multiplayer/src/common/styles.dart';
+import 'package:multiplayer/src/views/game_view/level_01.dart';
 import 'package:multiplayer/src/views/home_view/home_controller.dart';
-import 'package:multiplayer/src/views/level_view/level.dart';
+// import 'package:multiplayer/src/views/level_view/level.dart';
 import 'package:multiplayer/src/views/lobby_view/lobby_view.dart';
 import 'package:multiplayer/src/views/login_view/login_view.dart';
 import 'package:multiplayer/src/views/login_view/loginout_controller.dart';
@@ -256,7 +257,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin{
                         //SOLO Play Button
                         GestureDetector(
                           onTap:() async{
-                            Get.toNamed(Level.routeName);
+                            Get.toNamed(Level01.routeName);
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width/2,
