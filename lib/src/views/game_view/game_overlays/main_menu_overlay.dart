@@ -1,11 +1,10 @@
-// Copyright 2022 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../settings/settings_view.dart';
+import 'package:get/get.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:multiplayer/src/views/game_view/doodle_dash.dart';
+import 'package:multiplayer/src/widgets/a_button_widget.dart';
+// import '../../settings/settings_view.dart';
 
 // Overlay that appears for the main menu
 class MainMenuOverlay extends StatefulWidget {
@@ -18,127 +17,78 @@ class MainMenuOverlay extends StatefulWidget {
 }
 
 class _MainMenuOverlayState extends State<MainMenuOverlay> {
-  // Character character = Character.dash;
+  Character character = Character.dash;
 
   @override
   Widget build(BuildContext context) {
-    // DoodleDash game = widget.game as DoodleDash;
-
-    return LayoutBuilder(builder: (context, constraints) {
-      // final characterWidth = constraints.maxWidth / 5;
-
-      final TextStyle titleStyle = (constraints.maxWidth > 830)
-      ? Theme.of(context).textTheme.displayLarge!
-      : Theme.of(context).textTheme.displaySmall!;
-
-      // 760 is the smallest height the browser can have until the
-      // layout is too large to fit.
+    DoodleDash game = widget.game as DoodleDash;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+      final characterWidth = constraints.maxWidth / 5;
       final bool screenHeightIsSmall = constraints.maxHeight < 760;
-
       return Material(
         color: Theme.of(context).colorScheme.background,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Center(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Stack(
-                children: [
-                  SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 100,
-                        ),
-                        // Title
-                        Text(
-                          AppLocalizations.of(context)!.appTitle,
-                          style: titleStyle.copyWith(
-                            height: .8,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const WhiteSpace(),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text('Select your character:',style: Theme.of(context).textTheme.headlineSmall!),
-                        ),
-                        if (!screenHeightIsSmall) const WhiteSpace(height: 30),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            // CharacterButton(
-                            //   character: Character.dash,
-                            //   selected: character == Character.dash,
-                            //   onSelectChar: () {
-                            //     setState(() {
-                            //       character = Character.dash;
-                            //     });
-                            //   },
-                            //   characterWidth: characterWidth,
-                            // ),
-                            // CharacterButton(
-                            //   character: Character.sparky,
-                            //   selected: character == Character.sparky,
-                            //   onSelectChar: () {
-                            //     setState(() {
-                            //       character = Character.sparky;
-                            //     });
-                            //   },
-                            //   characterWidth: characterWidth,
-                            // ),
-                          ],
-                        ),
-                        if (!screenHeightIsSmall) const WhiteSpace(height: 50),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Difficulty:',style: Theme.of(context).textTheme.bodyLarge!),
-                            // LevelPicker(
-                            //   level: game.levelManager.selectedLevel.toDouble(),
-                            //   label: game.levelManager.selectedLevel.toString(),
-                            //   onChanged: ((value) {
-                            //     setState(() {
-                            //       game.levelManager.selectLevel(value.toInt());
-                            //     });
-                            //   }),
-                            // ),
-                          ],
-                        ),
-                        if (!screenHeightIsSmall) const WhiteSpace(height: 50),
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              // game.gameManager.selectCharacter(character);
-                              // game.startGame();
-                            },
-                            style: ButtonStyle(
-                              minimumSize: MaterialStateProperty.all(
-                                const Size(250, 50),
-                              ),
-                              textStyle: MaterialStateProperty.all(Theme.of(context).textTheme.titleLarge),
-                            ),
-                            child: const Text('Start'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    top: 10,
-                    right: 0,
-                    child: IconButton(
-                      icon: const Icon(Icons.settings),
-                      onPressed: () {
-                        Navigator.restorablePushNamed(context, SettingsView.routeName);
-                      },
-                    ),
-                  ),
-                ],
-              ),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          padding: const EdgeInsets.all(20.0),
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                //Select Character
+                Text('Select your character:',style: Theme.of(context).textTheme.headlineSmall!),
+                if (!screenHeightIsSmall) const WhiteSpace(height: 30),
+                //Characters 
+                GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 2, // Number of columns
+                  mainAxisSpacing: 10.0, // Spacing between items along the main axis
+                  crossAxisSpacing: 10.0, // Spacing between items along the cross axis
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  children: [
+                    for (var char in [Character.dash, Character.sparky])
+                      CharacterButton(
+                        character: char,
+                        selected: character == char,
+                        onSelectChar: () {
+                          setState(() {
+                            character = char;
+                          });
+                        },
+                        characterWidth: characterWidth,
+                      ),
+                  ],
+                ),
+                if (!screenHeightIsSmall) const WhiteSpace(height: 50),
+                Text('Difficulty:',style: Theme.of(context).textTheme.bodyLarge!),
+                LevelPicker(
+                  level: game.levelManager.selectedLevel.toDouble(),
+                  label: game.levelManager.selectedLevel.toString(),
+                  onChanged: ((value) {
+                    setState(() {
+                      game.levelManager.selectLevel(value.toInt());
+                    });
+                  }),
+                ),
+                if (!screenHeightIsSmall) const WhiteSpace(height: 50),
+                AButtonWidget(
+                  btnText: 'Start', 
+                  onPressed:() async{
+                    game.gameManager.selectCharacter(character);
+                    game.startGame();
+                  },
+                ),
+                AButtonWidget(
+                  btnText: 'Back', 
+                  onPressed:() async{
+                    Get.back();
+                  },
+                ),
+              ],
             ),
           ),
         ),
@@ -161,15 +111,13 @@ class LevelPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Slider(
-        value: level,
-        max: 5,
-        min: 1,
-        divisions: 4,
-        label: label,
-        onChanged: onChanged,
-      )
+    return Slider(
+      value: level,
+      max: 5,
+      min: 1,
+      divisions: 4,
+      label: label,
+      onChanged: onChanged,
     );
   }
 }
@@ -178,13 +126,13 @@ class CharacterButton extends StatelessWidget {
   const CharacterButton(
   {
     super.key,
-    // required this.character,
+    required this.character,
     this.selected = false,
     required this.onSelectChar,
     required this.characterWidth
   });
 
-  // final Character character;
+  final Character character;
   final bool selected;
   final void Function() onSelectChar;
   final double characterWidth;
@@ -197,19 +145,18 @@ class CharacterButton extends StatelessWidget {
       : null,
       onPressed: onSelectChar,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             Image.asset(
-              // 'assets/images/game/${character.name}_center.png',
-              '',
+              'assets/images/game/${character.name}_center.png',
               height: characterWidth,
               width: characterWidth,
             ),
-            const WhiteSpace(height: 18),
-            const Text(
-              'character.name',
-              style: TextStyle(fontSize: 20),
+            const WhiteSpace(height: 10),
+            Text(
+              character.name,
+              style: const TextStyle(fontSize: 20),
             ),
           ],
         ),

@@ -1,11 +1,13 @@
-// Copyright 2022 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'dart:io' show Platform;
 import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:multiplayer/src/common/styles.dart';
+import 'package:multiplayer/src/managers/game_manager.dart';
+import 'package:multiplayer/src/views/game_view/doodle_dash.dart';
+import 'package:multiplayer/src/views/game_view/game_overlays/score_display.dart';
+import 'package:multiplayer/src/views/game_view/level_01.dart';
+// import 'package:multiplayer/src/views/game_view/level_01.dart';
 
 class GameOverlay extends StatefulWidget {
   const GameOverlay(this.game, {super.key});
@@ -17,46 +19,71 @@ class GameOverlay extends StatefulWidget {
 }
 
 class GameOverlayState extends State<GameOverlay> {
+  GameManager gameManager = GameManager();
   bool isPaused = false;
   final bool isMobile = !kIsWeb && (Platform.isAndroid || Platform.isIOS);
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
+      color: transparent,
       child: Stack(
         children: [
-          // Positioned(
-          //   top: 30,
-          //   left: 30,
-          //   child: ScoreDisplay(game: widget.game),
-          // ),
+          //Back Button
           Positioned(
-            top: 30,
-            right: 30,
-            child: ElevatedButton(
+            top: 40,
+            left: 20,
+            child: OutlinedButton(
+              style: const ButtonStyle(
+                padding: MaterialStatePropertyAll(EdgeInsets.zero),
+              ),
+              child: const Icon(
+                Icons.arrow_back,
+                size: 48,
+              ),
+              onPressed: () {
+                (game as DoodleDash).gotoMenu();
+              },
+            ),
+          ),
+          //Score Display
+          Positioned(
+            top: 50,
+            right: 0,
+            left: 0,
+            child: ScoreDisplay(game: widget.game),
+          ),
+          //Play/Pause Button
+          Positioned(
+            top: 40,
+            right: 20,
+            child: OutlinedButton(
+              style: const ButtonStyle(
+                padding: MaterialStatePropertyAll(EdgeInsets.zero),
+              ),
               child: isPaused
               ? const Icon(
-                  Icons.play_arrow,
-                  size: 48,
-                )
+                Icons.play_arrow,
+                size: 48,
+              )
               : const Icon(
                 Icons.pause,
                 size: 48,
               ),
               onPressed: () {
-                // (widget.game as DoodleDash).togglePauseState();
-                // setState(
-                //   () {
-                //     isPaused = !isPaused;
-                //   },
-                // );
+                (widget.game as DoodleDash).togglePauseState();
+                setState(
+                  () {
+                    isPaused = !isPaused;
+                  },
+                );
               },
             ),
           ),
+          //Controls
           if (isMobile)
             Positioned(
-              bottom: MediaQuery.of(context).size.height / 4,
+              bottom: 20,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
@@ -65,12 +92,12 @@ class GameOverlayState extends State<GameOverlay> {
                     Padding(
                       padding: const EdgeInsets.only(left: 24),
                       child: GestureDetector(
-                        // onTapDown: (details) {
-                        //   (widget.game as DoodleDash).player.moveLeft();
-                        // },
-                        // onTapUp: (details) {
-                        //   (widget.game as DoodleDash).player.resetDirection();
-                        // },
+                        onTapDown: (details) {
+                          (widget.game as DoodleDash).player.moveLeft();
+                        },
+                        onTapUp: (details) {
+                          (widget.game as DoodleDash).player.resetDirection();
+                        },
                         child: Material(
                           color: Colors.transparent,
                           elevation: 3.0,
@@ -82,12 +109,12 @@ class GameOverlayState extends State<GameOverlay> {
                     Padding(
                       padding: const EdgeInsets.only(right: 24),
                       child: GestureDetector(
-                        // onTapDown: (details) {
-                        //   (widget.game as DoodleDash).player.moveRight();
-                        // },
-                        // onTapUp: (details) {
-                        //   (widget.game as DoodleDash).player.resetDirection();
-                        // },
+                        onTapDown: (details) {
+                          (widget.game as DoodleDash).player.moveRight();
+                        },
+                        onTapUp: (details) {
+                          (widget.game as DoodleDash).player.resetDirection();
+                        },
                         child: Material(
                           color: Colors.transparent,
                           elevation: 3.0,
@@ -100,6 +127,7 @@ class GameOverlayState extends State<GameOverlay> {
                 ),
               ),
             ),
+          //Pause Icon
           if (isPaused)
             Positioned(
               top: MediaQuery.of(context).size.height / 2 - 72.0,

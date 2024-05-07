@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:multiplayer/src/services/audio_services.dart';
-// import 'package:multiplayer/src/services/firestore_services.dart';
 import 'package:multiplayer/src/services/notification_services.dart';
 import 'src/app.dart';
 import 'src/views/settings/settings_controller.dart';
@@ -13,8 +12,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(); // Initilize Firebase
   await GetStorage.init();
-  //Sign In to Firebase Anonymously
-  // FirestoreServices.logInAnonymously();
   // Notification Permission and Setups
   await requestPerm();
   if (!kIsWeb) {

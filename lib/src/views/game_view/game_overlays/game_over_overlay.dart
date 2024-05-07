@@ -1,9 +1,8 @@
-// Copyright 2022 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:multiplayer/src/views/game_view/doodle_dash.dart';
+import 'package:multiplayer/src/views/game_view/game_overlays/main_menu_overlay.dart';
+import 'package:multiplayer/src/views/game_view/game_overlays/score_display.dart';
 
 // Overlay that pops up when the game ends
 class GameOverOverlay extends StatelessWidget {
@@ -26,17 +25,17 @@ class GameOverOverlay extends StatelessWidget {
                 'Game Over',
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(),
               ),
-              // const WhiteSpace(height: 50),
-              // ScoreDisplay(
-              //   game: game,
-              //   isLight: true,
-              // ),
-              // const WhiteSpace(
-              //   height: 50,
-              // ),
+              const WhiteSpace(height: 50),
+              ScoreDisplay(
+                game: game,
+                isLight: true,
+              ),
+              const WhiteSpace(
+                height: 50,
+              ),
               ElevatedButton(
                 onPressed: () {
-                  // (game as DoodleDash).resetGame();
+                  (game as DoodleDash).resetGame();
                 },
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(
@@ -46,12 +45,12 @@ class GameOverOverlay extends StatelessWidget {
                 ),
                 child: const Text('Play Again'),
               ),
-              // const WhiteSpace(
-              //   height: 50,
-              // ),
+              const WhiteSpace(
+                height: 50,
+              ),
               ElevatedButton(
                 onPressed: () {
-                  // (game as DoodleDash).gotoMenu();
+                  (game as DoodleDash).gotoMenu();
                 },
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(

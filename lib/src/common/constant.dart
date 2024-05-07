@@ -6,12 +6,20 @@ const String profilePlaceHolder  = "$baseImageUrl/placeholder/profile_placeholde
 
 
 class AssetImages{
-  static const backgroundImage = "assets/images/background.jpg";
-  static const logoImage       = "assets/images/logo.png";
-  static const gemIconImage    = "assets/images/gem.svg";
-  static const coinIconImage   = "assets/images/icon.svg";
-  static const coinUIContainer = "assets/images/Coin_Display_UI.svg";
-  static const gemUIContainer  = "assets/images/Gem_Display_UI.svg";
+  static const backgroundImage       = "assets/images/background.jpg";
+  static const logoImage             = "assets/images/logo.png";
+  static const gemIconImage          = "assets/images/gem.svg";
+  static const coinIconImage         = "assets/images/coin.svg";
+  static const coinUIContainer       = "assets/images/Coin_Display_UI.svg";
+  static const gemUIContainer        = "assets/images/Gem_Display_UI.svg";
+  
+  static const parallexSolidBg       = "game/background/06_Background_Solid.png";
+  static const parallexSmallStarsBg  = "game/background/05_Background_Small_Stars.png";
+  static const parallexBigStarsBg    = "game/background/04_Background_Big_Stars.png";
+  static const parallexOrbsBg        = "game/background/02_Background_Orbs.png";
+  static const parallexBlockShapesBg = "game/background/03_Background_Block_Shapes.png";
+  static const parallexSquigglesBg   = "game/background/01_Background_Squiggles.png";
+  static const parallexBgImageTest   = "background.jpg";
 }
 
 class AppDefaultValues{
